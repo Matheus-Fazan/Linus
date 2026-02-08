@@ -24,7 +24,7 @@ public class Professor {
      * @throws SQLException Caso falha SQL
      */
     public Professor(ResultSet rs) throws SQLException {
-        this.id = rs.getLong("if");
+        this.id = rs.getLong("id");
         this.nome = rs.getString("nome");
         this.email = rs.getString("email");
         this.hashSenha = rs.getString("hash_senha");
