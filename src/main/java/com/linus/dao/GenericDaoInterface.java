@@ -13,11 +13,12 @@ public interface GenericDaoInterface<Model> {
     /**
      * Persiste uma nova entidade no banco de dados.
      *
+     * @return o mesmo objeto de modelo com o campo de 'id' preenchido
      * @param model entidade a ser salva
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    void save(Model model) throws SQLException, ClassNotFoundException;
+    Model save(Model model) throws SQLException, ClassNotFoundException;
 
     /**
      * Busca uma entidade por seu identificador.
@@ -45,7 +46,7 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    void update(Model model) throws SQLException, ClassNotFoundException;
+    boolean update(Model model) throws SQLException, ClassNotFoundException;
 
     /**
      * Remove uma entidade do banco de dados.
@@ -54,5 +55,5 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    void delete(long id) throws SQLException, ClassNotFoundException;
+    boolean delete(long id) throws SQLException, ClassNotFoundException;
 }
