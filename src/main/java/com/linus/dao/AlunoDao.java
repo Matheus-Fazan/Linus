@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
 import com.linus.model.Aluno;
 
@@ -17,7 +19,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     private String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
 
     @Override
-    public Aluno save(Aluno aluno) throws SQLException, ClassNotFoundException {
+    public Aluno save(Aluno aluno) throws SQLException, ConnectionException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_SAVE_COMMAND);
@@ -33,15 +35,14 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             if (queryResult.next()) {
                 aluno.setMatricula(queryResult.getLong("matricula"));
             }
-        } catch (Exception e) {
-            throw e;
+
         }
 
         return aluno;
     }
 
     @Override
-    public Aluno findById(long matricula) throws SQLException, ClassNotFoundException {
+    public Aluno findById(long matricula) throws SQLException, ConnectionException {
         Aluno aluno = null;
 
         try(Connection con = ConnectionManager.connect()) {
@@ -54,15 +55,13 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             if (queryResult.next()) {
                 aluno = new Aluno(queryResult);
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return aluno;
     }
 
     @Override
-    public List<Aluno> findAll() throws SQLException, ClassNotFoundException {
+    public List<Aluno> findAll() throws SQLException, ConnectionException {
         List<Aluno> alunos = new ArrayList<Aluno>();
 
         try(Connection con = ConnectionManager.connect()) {
@@ -73,16 +72,13 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             while (queryResult.next()) {
                 alunos.add(new Aluno(queryResult));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return alunos;
     }
 
     @Override
-    public boolean update(Aluno aluno) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void update(Aluno aluno) throws SQLException, ConnectionException, NoRegistersAlteredException{
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_UPDATE_COMMAND);
@@ -94,28 +90,26 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             ps.setLong(5, aluno.getId_turma());
             ps.setLong(6, aluno.getMatricula());
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
-        }
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
 
-        return success;
+        }
     }
 
     @Override
-    public boolean delete(long matricula) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void delete(long matricula) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, matricula);
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+
         }
 
-        return success;
     }
 }

@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
 import com.linus.model.Admin;
 
@@ -17,7 +19,7 @@ public class AdminDao implements GenericDaoInterface<Admin> {
     private String SQL_DELETE_COMMAND = "DELETE FROM admin WHERE id = ?";
 
     @Override
-    public Admin save(Admin admin) throws SQLException, ClassNotFoundException {
+    public Admin save(Admin admin) throws SQLException, ConnectionException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_SAVE_COMMAND);
@@ -30,15 +32,13 @@ public class AdminDao implements GenericDaoInterface<Admin> {
             if (queryResult.next()) {
                 admin.setId(queryResult.getLong("id"));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return admin;
     }
 
     @Override
-    public Admin findById(long id) throws SQLException, ClassNotFoundException {
+    public Admin findById(long id) throws SQLException, ConnectionException {
         Admin admin = null;
 
         try(Connection con = ConnectionManager.connect()) {
@@ -51,15 +51,13 @@ public class AdminDao implements GenericDaoInterface<Admin> {
             if (queryResult.next()) {
                 admin = new Admin(queryResult);
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return admin;
     }
 
     @Override
-    public List<Admin> findAll() throws SQLException, ClassNotFoundException {
+    public List<Admin> findAll() throws SQLException, ConnectionException {
         List<Admin> admins = new ArrayList<Admin>();
 
         try(Connection con = ConnectionManager.connect()) {
@@ -70,16 +68,13 @@ public class AdminDao implements GenericDaoInterface<Admin> {
             while (queryResult.next()) {
                 admins.add(new Admin(queryResult));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return admins;
     }
 
     @Override
-    public boolean update(Admin admin) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void update(Admin admin) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_UPDATE_COMMAND);
@@ -88,28 +83,25 @@ public class AdminDao implements GenericDaoInterface<Admin> {
             ps.setString(2, admin.getHashSenha());
             ps.setLong(3, admin.getId());
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
 
-        return success;
     }
 
     @Override
-    public boolean delete(long id) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, id);
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
 
-        return success;
     }
 }

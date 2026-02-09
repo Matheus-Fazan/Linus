@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
 import com.linus.model.Materia;
 
@@ -17,7 +19,7 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
     private String SQL_DELETE_COMMAND = "DELETE FROM materia WHERE id = ?";
 
     @Override
-    public Materia save(Materia materia) throws SQLException, ClassNotFoundException {
+    public Materia save(Materia materia) throws SQLException, ConnectionException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_SAVE_COMMAND);
@@ -29,15 +31,13 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
             if (queryResult.next()) {
                 materia.setId(queryResult.getLong("id"));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return materia;
     }
 
     @Override
-    public Materia findById(long id) throws SQLException, ClassNotFoundException {
+    public Materia findById(long id) throws SQLException, ConnectionException {
         Materia materia = null;
 
         try(Connection con = ConnectionManager.connect()) {
@@ -50,15 +50,13 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
             if (queryResult.next()) {
                 materia = new Materia(queryResult);
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return materia;
     }
 
     @Override
-    public List<Materia> findAll() throws SQLException, ClassNotFoundException {
+    public List<Materia> findAll() throws SQLException, ConnectionException {
         List<Materia> materias = new ArrayList<Materia>();
 
         try(Connection con = ConnectionManager.connect()) {
@@ -69,16 +67,13 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
             while (queryResult.next()) {
                 materias.add(new Materia(queryResult));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return materias;
     }
 
     @Override
-    public boolean update(Materia materia) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void update(Materia materia) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_UPDATE_COMMAND);
@@ -86,28 +81,23 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
             ps.setString(1, materia.getNome());
             ps.setLong(2, materia.getId());
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 
     @Override
-    public boolean delete(long id) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, id);
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 }
