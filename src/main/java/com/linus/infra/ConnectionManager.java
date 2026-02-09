@@ -1,5 +1,7 @@
 package com.linus.infra;
 
+import com.linus.exception.ConnectionException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,18 +19,21 @@ public class ConnectionManager {
      * Estabelece uma conexão com o banco de dados PostgreSQL.
      *
      * @return objeto {@code Connection} configurado com as credenciais do ambiente
-     * @throws ClassNotFoundException se o driver PostgreSQL não for encontrado
-     * @throws SQLException se houver falha ao conectar com o banco de dados
-     * @throws IllegalStateException se as variaveis de ambiente não estiverem configuradas
+     * @throws ConnectionException se houver algum erro de conexão.
      */
-    public static Connection connect() throws ClassNotFoundException, SQLException, IllegalStateException {
-        loadDriverClass();
+    public static Connection connect() throws ConnectionException {
+        try{
+            loadDriverClass();
 
-        Map<String, String> env = getEnvironmentVariables();
+            Map<String, String> env = getEnvironmentVariables();
 
-        Connection con = getConnection(env);
+            Connection con = getConnection(env);
 
-        return con;
+            return con;
+        } catch (Exception cause) {
+            throw new ConnectionException(cause);
+        }
+
     }
 
     /**
