@@ -1,5 +1,8 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
+
 import java.sql.SQLException;
 import java.util.List;
 
@@ -18,7 +21,7 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    Model save(Model model) throws SQLException, ClassNotFoundException;
+    Model save(Model model) throws SQLException, ConnectionException;
 
     /**
      * Busca uma entidade por seu identificador.
@@ -28,7 +31,7 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    Model findById(long id) throws SQLException, ClassNotFoundException;
+    Model findById(long id) throws SQLException, ConnectionException;
 
     /**
      * Retorna todas as entidades cadastradas.
@@ -37,7 +40,7 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    List<Model> findAll() throws SQLException, ClassNotFoundException;
+    List<Model> findAll() throws SQLException, ConnectionException;
 
     /**
      * Atualiza uma entidade existente no banco de dados.
@@ -46,7 +49,7 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    boolean update(Model model) throws SQLException, ClassNotFoundException;
+    void update(Model model) throws SQLException, ConnectionException, NoRegistersAlteredException;
 
     /**
      * Remove uma entidade do banco de dados.
@@ -55,5 +58,5 @@ public interface GenericDaoInterface<Model> {
      * @throws SQLException se houver erro na operação SQL
      * @throws ClassNotFoundException se o driver JDBC não for encontrado
      */
-    boolean delete(long id) throws SQLException, ClassNotFoundException;
+    void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException;
 }

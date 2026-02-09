@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
 import com.linus.model.Professor;
 
@@ -17,7 +19,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
     private String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
 
     @Override
-    public Professor save(Professor professor) throws SQLException, ClassNotFoundException {
+    public Professor save(Professor professor) throws SQLException, ConnectionException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_SAVE_COMMAND);
@@ -33,15 +35,13 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
             if (queryResult.next()) {
                 professor.setId(queryResult.getLong("id"));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return professor;
     }
 
     @Override
-    public Professor findById(long id) throws SQLException, ClassNotFoundException {
+    public Professor findById(long id) throws SQLException, ConnectionException {
         Professor professor = null;
 
         try(Connection con = ConnectionManager.connect()) {
@@ -54,15 +54,13 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
             if (queryResult.next()) {
                 professor = new Professor(queryResult);
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return professor;
     }
 
     @Override
-    public List<Professor> findAll() throws SQLException, ClassNotFoundException {
+    public List<Professor> findAll() throws SQLException, ConnectionException {
         List<Professor> professores = new ArrayList<Professor>();
 
         try(Connection con = ConnectionManager.connect()) {
@@ -73,16 +71,13 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
             while (queryResult.next()) {
                 professores.add(new Professor(queryResult));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return professores;
     }
 
     @Override
-    public boolean update(Professor professor) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void update(Professor professor) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_UPDATE_COMMAND);
@@ -94,28 +89,23 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
             ps.setLong(5, professor.getIdMateria());
             ps.setLong(6, professor.getId());
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 
     @Override
-    public boolean delete(long id) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, id);
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 }

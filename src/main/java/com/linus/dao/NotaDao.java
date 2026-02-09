@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.exception.ConnectionException;
+import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
 import com.linus.model.Nota;
 
@@ -17,7 +19,7 @@ public class NotaDao implements GenericDaoInterface<Nota> {
     private String SQL_DELETE_COMMAND = "DELETE FROM nota WHERE id = ?";
 
     @Override
-    public Nota save(Nota nota) throws SQLException, ClassNotFoundException {
+    public Nota save(Nota nota) throws SQLException, ConnectionException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_SAVE_COMMAND);
@@ -33,15 +35,13 @@ public class NotaDao implements GenericDaoInterface<Nota> {
             if (queryResult.next()) {
                 nota.setId(queryResult.getLong("id"));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return nota;
     }
 
     @Override
-    public Nota findById(long id) throws SQLException, ClassNotFoundException {
+    public Nota findById(long id) throws SQLException, ConnectionException {
         Nota nota = null;
 
         try(Connection con = ConnectionManager.connect()) {
@@ -54,15 +54,13 @@ public class NotaDao implements GenericDaoInterface<Nota> {
             if (queryResult.next()) {
                 nota = new Nota(queryResult);
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return nota;
     }
 
     @Override
-    public List<Nota> findAll() throws SQLException, ClassNotFoundException {
+    public List<Nota> findAll() throws SQLException, ConnectionException {
         List<Nota> notas = new ArrayList<Nota>();
 
         try(Connection con = ConnectionManager.connect()) {
@@ -73,16 +71,13 @@ public class NotaDao implements GenericDaoInterface<Nota> {
             while (queryResult.next()) {
                 notas.add(new Nota(queryResult));
             }
-        } catch (Exception e) {
-            throw e;
         }
 
         return notas;
     }
 
     @Override
-    public boolean update(Nota nota) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void update(Nota nota) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_UPDATE_COMMAND);
@@ -94,28 +89,23 @@ public class NotaDao implements GenericDaoInterface<Nota> {
             ps.setLong(5, nota.getIdAluno());
             ps.setLong(6, nota.getId());
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 
     @Override
-    public boolean delete(long id) throws SQLException, ClassNotFoundException {
-        boolean success = false;
+    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
 
         try(Connection con = ConnectionManager.connect()) {
             PreparedStatement ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, id);
 
-            success = ps.executeUpdate() > 0;
-        } catch (Exception e) {
-            throw e;
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         }
-
-        return success;
     }
 }
