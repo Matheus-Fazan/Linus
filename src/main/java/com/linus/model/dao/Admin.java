@@ -1,4 +1,4 @@
-package com.linus.model;
+package com.linus.model.dao;
 
 import lombok.Data;
 
@@ -6,13 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Classe modelo que abstrai registros da view {@code ACESSO}
+ * Classe modelo que abstrai registros da tabela {@code ADMIN}
  */
 @Data
-public class Acesso {
+public class Admin {
 
-    private long idOrigem;
-    private Cargo cargo;
+    private long id;
     private String email;
     private String hashSenha;
 
@@ -21,10 +20,9 @@ public class Acesso {
      * @param rs Objeto {@code ResultSet} resultante da consulta ao banco de dados.
      * @throws SQLException Caso falha SQL
      */
-    public Acesso(ResultSet rs) throws SQLException {
+    public Admin(ResultSet rs) throws SQLException {
+        this.id = rs.getLong("id");
         this.email = rs.getString("email");
         this.hashSenha = rs.getString("hash_senha");
-        this.cargo = Cargo.valueOf(rs.getString("cargo"));
-        this.idOrigem = rs.getLong("id_origem");
     }
 }
