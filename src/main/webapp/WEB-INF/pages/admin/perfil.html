@@ -4,43 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/main/webapp/style/perfil.css">
-    <link rel="stylesheet" href="/src/main/webapp/style/crud_geral.css">
-    <link rel="stylesheet" href="/src/main/webapp/style/style.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/style.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/crud_geral.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/perfil.css">
     <title>Perfil ADM</title>
 </head>
+
 <header>
-    <div id="imagem">
-        <img id="logo_colegio" src="/src/main/webapp/assets/logoColegio.png" alt="Logo colegio">
+    <div class="imagem">
+        <img id="logo_colegio" src="/src/main/webapp/WEB-INF/assets/imgs/logoColegio.png" alt="Logo colegio">
         <h3>Instituto de <br> Tecnologia</h3>
     </div>
 
-    <nav id="nav-header">
+    <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/index.jsp">Página inicial</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/usuarios">Observação</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/superadms">Perfil</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/planos">Logout</a>
+                <a href="index.html">Logout</a>
             </li>
         </ul>
     </nav>
 </header>
 
 <body>
-    <div id="topo">
+    <div class="topo">
         <div id="local">
             <h1>Perfil</h1>
             <p>Visualize suas informações e as edite.</p>
         </div>
     </div>
-    <div class="largest-container">
+    <div class="form-perfil">
         <div class="main-container">
             <form action="">
                 <div>
@@ -49,7 +50,7 @@
                     <label for="user">Email:</label>
                     <input type="email" name="email" placeholder="Digite seu email">
                     <label for="usuario">Usuário:</label>
-                    <input type="text" name="usuario" placeholder="Digite seu nickname">   
+                    <input type="text" name="usuario" placeholder="Digite seu nome de usuário">   
                 </div>
             </form>
         </div>

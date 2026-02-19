@@ -19,7 +19,7 @@
     height: auto;
 }
 
-#tabela_usuarios{
+.tabela_usuarios{
     overflow-x: auto;
     overflow-y: auto;
 }

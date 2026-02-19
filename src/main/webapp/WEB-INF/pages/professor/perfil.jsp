@@ -4,38 +4,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/main/webapp/style/perfil.css">
-    <link rel="stylesheet" href="/src/main/webapp/style/crud_geral.css">
-    <link rel="stylesheet" href="/src/main/webapp/style/style.css">
-    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="/src/main/webapp/WEB_INF/assets/style/perfil.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/style.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/crud_geral.css">
     <title>Perfil Professor</title>
 </head>
+
 <header>
-    <div id="imagem">
-        <img id="logo_colegio" src="/src/main/webapp/assets/logoColegio.png" alt="Logo colegio">
+    <div class="imagem">
+        <img id="logo_colegio" src="/src/main/webapp/WEB-INF/assets/imgs/logoColegio.png" alt="Logo colegio">
         <h3>Instituto de <br> Tecnologia</h3>
     </div>
 
-    <nav id="nav-header">
+    <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/index.jsp">Página inicial</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/usuarios">Observação</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/superadms">Perfil</a>
+                <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/planos">Logout</a>
+                <a href="index.html">Logout</a>
             </li>
         </ul>
     </nav>
+
 </header>
 
 <body>
-    <div id="topo">
+    <div iclass="topo">
         <div id="local">
             <h1>Perfil!</h1>
             <p>Visualize suas informações e as edite.</p>
