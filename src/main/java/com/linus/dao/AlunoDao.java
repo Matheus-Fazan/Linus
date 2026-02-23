@@ -116,7 +116,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
         PreparedStatement ps = null;
 
         try(Connection con = ConnectionManager.connect()) {
-            ps = con.prepareStatement(SQL_UPDATE_COMMAND);
+            ps = con.prepareStatement(SQL_UPDATE_WITHOUT_IDTURMA_COMMAND);
 
             ps.setString(1, aluno.getEmail());
             ps.setString(2, aluno.getNome());
