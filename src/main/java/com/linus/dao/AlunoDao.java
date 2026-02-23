@@ -17,6 +17,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
+    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
 
     @Override
@@ -102,6 +103,26 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             ps.setString(4, aluno.getHashSenha());
             ps.setLong(5, aluno.getId_turma());
             ps.setLong(6, aluno.getMatricula());
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateWithoutIdTurma(Aluno aluno) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try(Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_COMMAND);
+
+            ps.setString(1, aluno.getEmail());
+            ps.setString(2, aluno.getNome());
+            ps.setString(3, aluno.getCpf());
+            ps.setString(4, aluno.getHashSenha());
+            ps.setLong(5, aluno.getMatricula());
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
