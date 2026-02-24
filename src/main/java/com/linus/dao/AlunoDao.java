@@ -1,5 +1,6 @@
 package com.linus.dao;
 
+import com.linus.dto.FirstAccessParametersDto;
 import com.linus.exception.ConnectionException;
 import com.linus.exception.NoRegistersAlteredException;
 import com.linus.infra.ConnectionManager;
@@ -112,17 +113,17 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
         }
     }
 
-    public void updateWithoutIdTurma(Aluno aluno) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void updateWithoutIdTurma(FirstAccessParametersDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
         try(Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_WITHOUT_IDTURMA_COMMAND);
 
-            ps.setString(1, aluno.getEmail());
-            ps.setString(2, aluno.getNome());
-            ps.setString(3, aluno.getCpf());
-            ps.setString(4, aluno.getHashSenha());
-            ps.setLong(5, aluno.getMatricula());
+            ps.setString(1, dto.email);
+            ps.setString(2, dto.nome);
+            ps.setString(3, dto.cpf);
+            ps.setString(4, dto.hashSenha);
+            ps.setLong(5, dto.matricula);
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
