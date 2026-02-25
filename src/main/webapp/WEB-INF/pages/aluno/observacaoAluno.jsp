@@ -5,7 +5,7 @@
 <head>
     <title>Observações</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/css/observacoesProfessor.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/css/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
@@ -22,7 +22,7 @@
             </li>
             <li>
                 <a
-                        href="${pageContext.request.contextPath}/WEB-INF/pages/student/observacaoAluno.jsp">Observação</a>
+                        href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/WEB-INF/pages/student/perfil.jsp">Perfil</a>
@@ -34,15 +34,9 @@
     </nav>
 </header>
 <main>
-    <div class="topo">
-        <div class="subtitle">
-            <h2>Observações</h2>
-            <p>Visualize os comentários de seus professores</p>
-        </div>
-        <div class="buttons">
-            <button>Filtrar</button>
-            <a href="${pageContext.request.contextPath}/WEB-INF/pages/teacher/criarObservacao.html"><button>+ Criar Observação</button></a>
-        </div>
+    <div class="subtitle">
+        <h2>Observações</h2>
+        <p>Visualize os comentários de seus professores</p>
     </div>
     <%
         List<ObservacaoDTO> observacoes = (List<ObservacaoDTO>) request.getAttribute("observacoes");
@@ -69,9 +63,11 @@
         </div>
     </div>
 </main>
+
 <%
     }
 %>
+
 </body>
 
 </html>
