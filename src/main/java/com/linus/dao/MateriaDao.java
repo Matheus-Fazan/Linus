@@ -1,8 +1,8 @@
 package com.linus.dao;
 
-import com.linus.exception.ConnectionException;
-import com.linus.exception.NoRegistersAlteredException;
-import com.linus.infra.ConnectionManager;
+import com.linus.exception.dao.ConnectionException;
+import com.linus.exception.dao.NoRegistersAlteredException;
+import com.linus.infra.connection.ConnectionManager;
 import com.linus.model.dao.Materia;
 import com.linus.utils.DaoUtil;
 

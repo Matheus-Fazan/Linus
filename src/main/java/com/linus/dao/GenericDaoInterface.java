@@ -1,7 +1,7 @@
 package com.linus.dao;
 
-import com.linus.exception.ConnectionException;
-import com.linus.exception.NoRegistersAlteredException;
+import com.linus.exception.dao.ConnectionException;
+import com.linus.exception.dao.NoRegistersAlteredException;
 
 import java.sql.SQLException;
 import java.util.List;
