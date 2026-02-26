@@ -1,5 +1,6 @@
 package com.linus.dao;
 
+import com.linus.dto.ProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -10,9 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProfessorDao implements GenericDaoInterface<Professor> {
+public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, cpf, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM professor WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
@@ -20,23 +20,24 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
 
     @Override
-    public Professor save(Professor professor) throws SQLException, ConnectionException {
+    public Professor save(ProfessorDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, professor.getNome());
-            ps.setString(2, professor.getEmail());
-            ps.setString(3, professor.getHashSenha());
-            ps.setString(4, professor.getCpf());
-            ps.setLong(5, professor.getIdMateria());
+            ps.setString(1, dto.nome);
+            ps.setString(2, dto.email);
+            ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
+            ps.setString(4, dto.cpf);
+            ps.setLong(5, Long.parseLong(dto.idMateria));
 
             queryResult = ps.executeQuery();
 
+            Professor professor = null;
             if (queryResult.next()) {
-                professor.setId(queryResult.getLong("id"));
+                professor = new Professor(queryResult);
             }
 
             return professor;
@@ -46,18 +47,18 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
     }
 
     @Override
-    public Professor findById(long id) throws SQLException, ConnectionException {
-        Professor professor = null;
+    public Professor findById(ProfessorDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             queryResult = ps.executeQuery();
 
+            Professor professor = null;
             if (queryResult.next()) {
                 professor = new Professor(queryResult);
             }
@@ -74,7 +75,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -90,18 +91,18 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
     }
 
     @Override
-    public void update(Professor professor) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(ProfessorDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setString(1, professor.getNome());
-            ps.setString(2, professor.getEmail());
-            ps.setString(3, professor.getHashSenha());
-            ps.setString(4, professor.getCpf());
-            ps.setLong(5, professor.getIdMateria());
-            ps.setLong(6, professor.getId());
+            ps.setString(1, dto.nome);
+            ps.setString(2, dto.email);
+            ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
+            ps.setString(4, dto.cpf);
+            ps.setLong(5, Long.parseLong(dto.idMateria));
+            ps.setLong(6, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -112,13 +113,13 @@ public class ProfessorDao implements GenericDaoInterface<Professor> {
     }
 
     @Override
-    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(ProfessorDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

@@ -1,6 +1,6 @@
 package com.linus.dao;
 
-import com.linus.dto.FirstAccessParametersDto;
+import com.linus.dto.AlunoDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -11,34 +11,34 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AlunoDao implements GenericDaoInterface<Aluno> {
+public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
-    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ? AND senha = null";
+    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
 
     @Override
-    public Aluno save(Aluno aluno) throws SQLException, ConnectionException {
+    public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, aluno.getEmail());
-            ps.setString(2, aluno.getNome());
-            ps.setString(3, aluno.getCpf());
-            ps.setString(4, aluno.getHashSenha());
-            ps.setLong(5, aluno.getId_turma());
+            ps.setString(1, dto.email);
+            ps.setString(2, dto.nome);
+            ps.setString(3, dto.cpf);
+            ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
+            ps.setLong(5, Long.parseLong(dto.idTurma));
 
             queryResult = ps.executeQuery();
 
+            Aluno aluno = null;
             if (queryResult.next()) {
-                aluno.setMatricula(queryResult.getLong("matricula"));
+                aluno = new Aluno(queryResult);
             }
 
             return aluno;
@@ -48,18 +48,18 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     }
 
     @Override
-    public Aluno findById(long matricula) throws SQLException, ConnectionException {
-        Aluno aluno = null;
+    public Aluno findById(AlunoDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, matricula);
+            ps.setLong(1, Long.parseLong(dto.matricula));
 
             queryResult = ps.executeQuery();
 
+            Aluno aluno = null;
             if (queryResult.next()) {
                 aluno = new Aluno(queryResult);
             }
@@ -76,7 +76,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -92,18 +92,18 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     }
 
     @Override
-    public void update(Aluno aluno) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(AlunoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setString(1, aluno.getEmail());
-            ps.setString(2, aluno.getNome());
-            ps.setString(3, aluno.getCpf());
-            ps.setString(4, aluno.getHashSenha());
-            ps.setLong(5, aluno.getId_turma());
-            ps.setLong(6, aluno.getMatricula());
+            ps.setString(1, dto.email);
+            ps.setString(2, dto.nome);
+            ps.setString(3, dto.cpf);
+            ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
+            ps.setLong(5, Long.parseLong(dto.idTurma));
+            ps.setLong(6, Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -113,17 +113,17 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
         }
     }
 
-    public void updateWithoutIdTurma(FirstAccessParametersDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void updateWithoutIdTurma(AlunoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_WITHOUT_IDTURMA_COMMAND);
 
             ps.setString(1, dto.email);
             ps.setString(2, dto.nome);
             ps.setString(3, dto.cpf);
             ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
-            ps.setString(5, dto.matricula);
+            ps.setLong(5, Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -134,13 +134,13 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     }
 
     @Override
-    public void delete(long matricula) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(AlunoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, matricula);
+            ps.setLong(1, Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
