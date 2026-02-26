@@ -122,8 +122,8 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             ps.setString(1, dto.email);
             ps.setString(2, dto.nome);
             ps.setString(3, dto.cpf);
-            ps.setString(4, dto.hashSenha);
-            ps.setLong(5, dto.matricula);
+            ps.setString(4, dto.senha);
+            ps.setString(5, dto.matricula);
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
