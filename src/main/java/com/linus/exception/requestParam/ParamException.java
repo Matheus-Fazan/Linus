@@ -5,6 +5,7 @@ public sealed class ParamException extends RuntimeException permits
         OutOfBoundsParamException,
         OutOfPatternCpfException,
         OutOfPatternEmailException,
+        OutOfPatternMatriculaException,
         OutOfPatternPasswordException
 {
 
