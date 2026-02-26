@@ -1,6 +1,6 @@
-package com.linus.infra;
+package com.linus.infra.connection;
 
-import com.linus.exception.ConnectionException;
+import com.linus.exception.dao.ConnectionException;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

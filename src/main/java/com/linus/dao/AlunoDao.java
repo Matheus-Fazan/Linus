@@ -1,8 +1,9 @@
 package com.linus.dao;
 
-import com.linus.exception.ConnectionException;
-import com.linus.exception.NoRegistersAlteredException;
-import com.linus.infra.ConnectionManager;
+import com.linus.dto.FirstAccessParametersDto;
+import com.linus.exception.dao.ConnectionException;
+import com.linus.exception.dao.NoRegistersAlteredException;
+import com.linus.infra.connection.ConnectionManager;
 import com.linus.model.dao.Aluno;
 import com.linus.utils.DaoUtil;
 
@@ -17,6 +18,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
+    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ? AND senha = null";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
 
     @Override
@@ -102,6 +104,26 @@ public class AlunoDao implements GenericDaoInterface<Aluno> {
             ps.setString(4, aluno.getHashSenha());
             ps.setLong(5, aluno.getId_turma());
             ps.setLong(6, aluno.getMatricula());
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateWithoutIdTurma(FirstAccessParametersDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try(Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_WITHOUT_IDTURMA_COMMAND);
+
+            ps.setString(1, dto.email);
+            ps.setString(2, dto.nome);
+            ps.setString(3, dto.cpf);
+            ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
+            ps.setString(5, dto.matricula);
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
