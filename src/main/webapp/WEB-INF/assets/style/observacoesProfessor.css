@@ -77,6 +77,11 @@ main {
     font-size: 15px;
 }
 
+button:hover {
+    background-color: #bb86e9;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+}
 .subtitle {
     margin-top: 40px;
     margin-bottom: 20px;

@@ -4,16 +4,16 @@
 
 <head>
     <title>Observações</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/css/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/css/observacoes.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <body>
 <header>
     <div class="logo">
-        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png">
-        <h3> Instituto de <br> Tecnologia </h3>
+        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+        <h3> Instituto Linus</h3>
     </div>
     <nav class="nav-header">
         <ul>
@@ -25,10 +25,10 @@
                         href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/student/perfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
             </li>
             <li>
-                <!-- <%--                    <a href="${pageContext.request.contextPath}/WEB-INF/pages">Logout</a>--%> -->
+                <%--                    <a href="${pageContext.request.contextPath}/WEB-INF/pages">Logout</a>--%>
             </li>
         </ul>
     </nav>

@@ -1,186 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
 }
 
 body {
-    background-color: #ececec;
+    background-color: #F0FBFF;
+    height: 750px;
+    font-family: 'Montserrat';;
 }
 
-header {
-    background: #ffffff;
-    padding: 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-}
-
-.imagem {
+.voltar {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+    margin-left: 15px;
 }
 
-#logo_colegio {
-    width: 50px;
+.voltar img {
+    width: 3%;
+    margin-top: 30px;
 }
 
-.imagem h3 {
-    font-weight: 600;
-    font-size: 18px;
-    color: #333;
-}
-
-.nav-header ul {
+.largest-container {
     display: flex;
-    gap: 50px;
-    list-style: none;
+    flex-direction: column;
+    align-items: center;
+    height: 700px;
 }
 
-#filtroAluno {
+.title {
     display: flex;
-    justify-content: center; /* centraliza horizontalmente */
-}
-
-#valorAluno {
-    width: 100%; 
-    padding: 8px;
-    border-radius: 8px;
-    border-color: #b8b8b8;
-}
-
-.nav-header a {
-    text-decoration: none;
-    color: #444;
-    font-size: 15px;
-    font-weight: 500;
-}
-
-.nav-header a:hover {
-    color: #A25DDF;
-}
-
-/* FUNDO PRINCIPAL */
-
-.fundo_tela {
-    padding: 40px 80px;
-}
-
-/* TOPO */
-
-.topo {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 30px;
-}
-
-.topo h1 {
-    font-size: 46px;
-    color: #A25DDF;
-    font-weight: 700;
-    margin-top: 3px;
-}
-
-.topo p {
-    color: #363636;
-    font-size: 14px;
-}
-
-/* CARDS DE INFORMAÇÃO */
-
-#informacoes_gerais {
-    display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 15px;
-    margin-top: 10px;
+    gap: 30px;
+    margin-bottom: 24px;
 }
 
-#informacao {
-    background: #ffffff;
-    border: 1.5px solid #cfd8e3;
-    border-radius: 12px;
-    padding: 26px 60px ;
-    min-width: 220px;
+.title p {
+    font-size: 22px;
+    font-weight: bold;
 }
 
-#informacoes_aluno {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 10px;
+.title img {
+    width: 150px;
 }
 
-#informacao_aluno {
-    display: flex;
-    justify-content: space-around
-}
-
-#informacao p {
-    font-size: 18px;
-}
-
-/* CARD PRINCIPAL (TABELA) */
-
-.tela_principal {
-    margin: 2px auto;
-    width: 90%;
-    background: #ffffff;
-    border: 1.5px solid #bcd0ea;
-    border-radius: 15px;
-    padding: 30px;
-}
-
-/* TABELA */
-
-.tela_principal hr {
-    border: none;
-    height: 1px;
-    background-color: #a5a5a5;
-    margin-bottom: 20px;
-    margin: 2px;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
-}
-
-th {
-    color: #A25DDF;
-    font-weight: 600;
-    font-size: 18px;
-    padding: 15px 10px;
-    border-bottom: 1px solid #ddd;
+.main-container {
     text-align: left;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFF;
+    width: 50%;
+    max-width: 400px;
+    height: 50%;
+    border: 1px solid #A8BCC7;
+    font-size: larger;
+    border-radius: 20px;
+    padding: 30px 25px;
 }
 
-td {
-    padding: 15px 10px;
-    border-bottom: 1px solid #eee;
-    color: #444;
-}
-
-tr:hover {
-    background-color: #fafafa;
-}
-
-/* BOTÃO */
-
-button {
-    background: none;
+.main-container input {
     border: none;
-    color: #A25DDF;
-    font-weight: 600;
+    background-color: #F3F3F3;
+    /* outline: none; */
+    width: 100%;
+    padding: 10px 10px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.main-container label {
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.main-container button {
+    background-color: #C49EE6;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto 15px;
     cursor: pointer;
 }
 
-button:hover {
-    opacity: 0.7;
+.main-container button:hover {
+    background-color: #bb86e9;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+}
+
+p {
+    margin-top: 30px;
+    font-size: 17px;
+    text-align: center;
+}
+
+.main-container a {
+    text-decoration: underline;
 }

@@ -5,41 +5,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluno | Tela Inicial</title>
-    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/style.css">
-    <link rel="stylesheet" href="/src/main/webapp/WEB_INF/assets/style/crud_geral.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/pagPrincipal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/crud_geral.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
 
 </head>
 
 <body>
+    <header>
+        <div class="logo">
+            <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+            <h3>Instituto Linus</h3>
+        </div>
+
+        <nav class="nav-header">
+            <ul>
+                <li>
+                    <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
+                </li>
+                <li>
+                    <a href="index.html">Logout</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     <main>
-        <header>
-            <div class="imagem">
-                <img id="logo_colegio" src="/src/main/webapp/WEB-INF/assets/imgs/logoColegio.png" alt="Logo colegio">
-                <h3>Instituto de <br> Tecnologia</h3>
-            </div>
-
-            <nav class="nav-header">
-                <ul>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
-                    </li>
-                    <li>
-                        <a href="index.html">Logout</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
         <div class="fundo_tela">
 
             <div class="topo">
-                <div id="local">
+                <div>
                     <h1>Visualize os alunos!</h1>
                     <p>Acompanhe seus alunos, registre notas e faça observações.</p>
                 </div>
@@ -109,12 +109,12 @@
             <div class="tabela_usuarios">
                 <% Aluno aluno = (Aluno) request.getAttribute("aluno"); %>
 
-                <div id="informacoes_aluno">
-                    <div id="informacao_aluno">
+                <div class="informacoes_aluno">
+                    <div class="informacao_aluno">
                         <h3>Nome:</h3>
-                        <p> <%= aluno.Nome() % ></p>
+                        <p> <%= aluno.Nome() %></p>
                     </div>
-                    <div id="informacao_aluno">
+                    <div class="informacao_aluno">
                         <h3>Turma:</h3>
                         <p> <%= aluno.getTurma()%> </p>
                     </div>
@@ -131,7 +131,7 @@
                     <% for (AlunosDTO aluno : aluno) { %>
                         <tr>
                             <td>
-                                <%= aluno </td>
+                                <%= aluno %></td>
                             <td>
                                 <%= aluno.getMateria() %>
                             </td>
@@ -148,7 +148,7 @@
                                 <%= aluno.getObservacao() %>
                             </td>
                             <td>
-                                <form action="${pageContext.request.contextPath}/area-restrita/fabricas" method="get">
+                                <form action="">
                                     <input type="hidden" name="id" value="<%= f.getId() %>">
                                     <input type="hidden" name="action" value="update">
                                     <button id="editar" type="submit">Editar</button>
@@ -160,10 +160,8 @@
             </div>
 
         </div>
-        </div>
 
     </main>
-    <script src=""></script>
 </body>
 
 </html>

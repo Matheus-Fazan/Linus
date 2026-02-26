@@ -35,7 +35,6 @@
 .main-container input {
     border: none;
     background-color: #F3F3F3;
-    /* outline: none; */
     width: 100%;
     padding: 10px 10px;
     border-radius: 10px;
@@ -61,7 +60,7 @@
     cursor: pointer;
 }
 
-.main-container button:hover {
+button:hover {
     background-color: #bb86e9;
     transition: all 0.3s ease;
     transform: scale(1.05);
