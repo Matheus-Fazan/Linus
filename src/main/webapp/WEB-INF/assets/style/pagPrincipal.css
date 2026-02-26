@@ -96,14 +96,14 @@ header {
 
 /* CARDS DE INFORMAÇÃO */
 
-#informacoes_gerais {
+.informacoes_gerais {
     display: flex;
     justify-content: center;
     gap: 15px;
     margin-top: 10px;
 }
 
-#informacao {
+.informacao {
     background: #ffffff;
     border: 1.5px solid #cfd8e3;
     border-radius: 12px;
@@ -111,19 +111,19 @@ header {
     min-width: 220px;
 }
 
-#informacoes_aluno {
+.informacoes_aluno {
     display: flex;
     justify-content: space-between;
     gap: 15px;
     margin-top: 10px;
 }
 
-#informacao_aluno {
+.informacao_aluno {
     display: flex;
     justify-content: space-around
 }
 
-#informacao p {
+.informacao p {
     font-size: 18px;
 }
 
