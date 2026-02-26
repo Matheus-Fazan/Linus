@@ -1,7 +1,7 @@
 package com.linus.servlet.aluno;
 
 import com.linus.dao.AlunoDao;
-import com.linus.dto.FirstAccessParametersDto;
+import com.linus.dto.AlunoDto;
 
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
@@ -34,7 +34,7 @@ public class FirstAccessServlet extends HttpServlet {
         try {
             Validator.validateParams(requestParams);
 
-            FirstAccessParametersDto dto = new FirstAccessParametersDto(requestParams);
+            AlunoDto dto = new AlunoDto(requestParams);
 
             dao.updateWithoutIdTurma(dto);
 
