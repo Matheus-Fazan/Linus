@@ -9,35 +9,36 @@ import java.util.List;
 /**
  * Interface genérica para operações CRUD em banco de dados.
  *
- * @param <Model> tipo da entidade a ser manipulada
+ * @param <Model>    tipo da entidade de domínio retornada pelas operações
+ * @param <ModelDto> tipo do DTO utilizado como entrada nas operações
  */
-public interface GenericDaoInterface<Model> {
+public interface GenericDaoInterface<Model, ModelDto> {
 
     /**
      * Persiste uma nova entidade no banco de dados.
      *
-     * @param model entidade a ser salva
-     * @return o mesmo objeto de modelo com o campo de 'id' preenchido
-     * @throws SQLException se houver erro na operação SQL
+     * @param dto dados da entidade a ser salva
+     * @return entidade persistida com o campo de identificador preenchido
+     * @throws SQLException        se houver erro na operação SQL
      * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
      */
-    Model save(Model model) throws SQLException, ConnectionException;
+    Model save(ModelDto dto) throws SQLException, ConnectionException;
 
     /**
      * Busca uma entidade por seu identificador.
      *
-     * @param id identificador único da entidade
-     * @return entidade correspondente ao ID ou {@code null} se não encontrada
-     * @throws SQLException se houver erro na operação SQL
+     * @param dto DTO contendo o identificador único da entidade
+     * @return entidade correspondente ou {@code null} se não encontrada
+     * @throws SQLException        se houver erro na operação SQL
      * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
      */
-    Model findById(long id) throws SQLException, ConnectionException;
+    Model findById(ModelDto dto) throws SQLException, ConnectionException;
 
     /**
      * Retorna todas as entidades cadastradas.
      *
      * @return lista contendo todas as entidades ou lista vazia se não houver registros
-     * @throws SQLException se houver erro na operação SQL
+     * @throws SQLException        se houver erro na operação SQL
      * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
      */
     List<Model> findAll() throws SQLException, ConnectionException;
@@ -45,20 +46,20 @@ public interface GenericDaoInterface<Model> {
     /**
      * Atualiza uma entidade existente no banco de dados.
      *
-     * @param model entidade a ser atualizada com id para identificação e demais atributos atualizados
-     * @throws SQLException se houver erro na operação SQL
-     * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
-     * @throws NoRegistersAlteredException se nenhum registro foi alterado (ID inexistente)
+     * @param dto dados atualizados da entidade, incluindo seu identificador
+     * @throws SQLException               se houver erro na operação SQL
+     * @throws ConnectionException        se houver erro ao estabelecer conexão com o banco de dados
+     * @throws NoRegistersAlteredException se nenhum registro foi alterado (identificador inexistente)
      */
-    void update(Model model) throws SQLException, ConnectionException, NoRegistersAlteredException;
+    void update(ModelDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException;
 
     /**
      * Remove uma entidade do banco de dados.
      *
-     * @param id identificador da entidade a ser removida
-     * @throws SQLException se houver erro na operação SQL
-     * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
-     * @throws NoRegistersAlteredException se nenhum registro foi removido (ID inexistente)
+     * @param dto DTO contendo o identificador da entidade a ser removida
+     * @throws SQLException               se houver erro na operação SQL
+     * @throws ConnectionException        se houver erro ao estabelecer conexão com o banco de dados
+     * @throws NoRegistersAlteredException se nenhum registro foi removido (identificador inexistente)
      */
-    void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException;
+    void delete(ModelDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException;
 }

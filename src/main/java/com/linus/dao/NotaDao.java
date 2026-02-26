@@ -1,18 +1,19 @@
 package com.linus.dao;
 
+import com.linus.dto.NotaDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
 import com.linus.model.dao.Nota;
 import com.linus.utils.DaoUtil;
 
+import java.math.BigDecimal;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotaDao implements GenericDaoInterface<Nota> {
+public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO nota(n1, n2, media, id_professor, id_aluno) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM nota WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
@@ -20,23 +21,24 @@ public class NotaDao implements GenericDaoInterface<Nota> {
     private final String SQL_DELETE_COMMAND = "DELETE FROM nota WHERE id = ?";
 
     @Override
-    public Nota save(Nota nota) throws SQLException, ConnectionException {
+    public Nota save(NotaDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setBigDecimal(1, nota.getN1());
-            ps.setBigDecimal(2, nota.getN2());
-            ps.setBigDecimal(3, nota.getMedia());
-            ps.setLong(4, nota.getIdProfessor());
-            ps.setLong(5, nota.getIdAluno());
+            ps.setBigDecimal(1, new BigDecimal(dto.n1));
+            ps.setBigDecimal(2, new BigDecimal(dto.n2));
+            ps.setBigDecimal(3, new BigDecimal(dto.media));
+            ps.setLong(4, Long.parseLong(dto.idProfessor));
+            ps.setLong(5, Long.parseLong(dto.idAluno));
 
             queryResult = ps.executeQuery();
 
+            Nota nota = null;
             if (queryResult.next()) {
-                nota.setId(queryResult.getLong("id"));
+                nota = new Nota(queryResult);
             }
 
             return nota;
@@ -46,18 +48,18 @@ public class NotaDao implements GenericDaoInterface<Nota> {
     }
 
     @Override
-    public Nota findById(long id) throws SQLException, ConnectionException {
-        Nota nota = null;
+    public Nota findById(NotaDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             queryResult = ps.executeQuery();
 
+            Nota nota = null;
             if (queryResult.next()) {
                 nota = new Nota(queryResult);
             }
@@ -74,7 +76,7 @@ public class NotaDao implements GenericDaoInterface<Nota> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -90,18 +92,18 @@ public class NotaDao implements GenericDaoInterface<Nota> {
     }
 
     @Override
-    public void update(Nota nota) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(NotaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setBigDecimal(1, nota.getN1());
-            ps.setBigDecimal(2, nota.getN2());
-            ps.setBigDecimal(3, nota.getMedia());
-            ps.setLong(4, nota.getIdProfessor());
-            ps.setLong(5, nota.getIdAluno());
-            ps.setLong(6, nota.getId());
+            ps.setBigDecimal(1, new BigDecimal(dto.n1));
+            ps.setBigDecimal(2, new BigDecimal(dto.n2));
+            ps.setBigDecimal(3, new BigDecimal(dto.media));
+            ps.setLong(4, Long.parseLong(dto.idProfessor));
+            ps.setLong(5, Long.parseLong(dto.idAluno));
+            ps.setLong(6, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -112,13 +114,13 @@ public class NotaDao implements GenericDaoInterface<Nota> {
     }
 
     @Override
-    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(NotaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
