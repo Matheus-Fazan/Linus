@@ -17,11 +17,10 @@ public class ValidationUtil {
     /**
      * Metodo que valida se um objeto {@code String} é maior que uma quantidade maxima de caracteres
      * @param s objeto {@code String} a ser validado
-     * @param maxChar {@code int} quantidade maxima de caracteres que eh considerada valida
      * @return um boleano
      */
-    public static boolean isOutOfBoundString(String s, int maxChar){
-        return (s.length() > maxChar);
+    public static boolean isOutOfBoundString(String s){
+        return (s.length() > 255);
     }
 
     /**
