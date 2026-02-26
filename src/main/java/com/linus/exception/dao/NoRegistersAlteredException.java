@@ -1,4 +1,4 @@
-package com.linus.exception;
+package com.linus.exception.dao;
 
 public class NoRegistersAlteredException extends RuntimeException {
 
