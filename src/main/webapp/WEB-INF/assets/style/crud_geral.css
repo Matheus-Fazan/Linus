@@ -9,14 +9,13 @@
     height: 50px;
 }
 
-.imagem{
+.logo {
     width: 18px;
     height: 18px;
 }
 
-#logo_colegio{
+.logo img {
     width: 50px;
-    height: auto;
 }
 
 .tabela_usuarios{

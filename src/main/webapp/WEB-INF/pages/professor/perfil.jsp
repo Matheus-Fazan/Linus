@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/src/main/webapp/WEB_INF/assets/style/perfil.css">
-    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/style.css">
-    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/crud_geral.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/pagPrincipal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/crud_geral.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png"
+          type="image/x-icon">
     <title>Perfil Professor</title>
 </head>
 
+<body>
 <header>
-    <div class="imagem">
-        <img id="logo_colegio" src="/src/main/webapp/WEB-INF/assets/imgs/logoColegio.png" alt="Logo colegio">
-        <h3>Instituto de <br> Tecnologia</h3>
+    <div class="logo">
+        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+        <h3>Instituto Linus </h3>
     </div>
 
     <nav class="nav-header">
@@ -34,29 +37,22 @@
     </nav>
 
 </header>
-
-<body>
-    <div iclass="topo">
-        <div id="local">
-            <h1>Perfil!</h1>
-            <p>Visualize suas informações e as edite.</p>
-        </div>
+<div class="largest-container">
+    <div class="topo">
+        <h1>Perfil!</h1>
+        <p>Visualize suas informações e as edite.</p>
     </div>
-    <div class="largest-container">
-        <div class="main-container">
-            <form action="">
-                <div>
-                    <label for="user">Nome:</label>
-                    <input type="text" name="Nome" placeholder="Digite seu nome">
-                    <label for="senha">Email:</label>
-                    <input type="email" name="Email" placeholder="Digite seu email">
-                    <label for="user">Disciplina:</label>
-                    <input type="text" name="disciplina" placeholder="Digite sua disciplina">
-                </div>
-            </form>
-        </div>
+    <div class="main-container">
+        <form action="">
+            <label for="user">Nome:</label>
+            <input type="text" name="Nome" placeholder="Digite seu nome">
+            <label for="senha">Email:</label>
+            <input type="email" name="Email" placeholder="Digite seu email">
+            <label for="user">Disciplina:</label>
+            <input type="text" name="disciplina" placeholder="Digite sua disciplina">
+        </form>
     </div>
-    </div>
+</div>
 </body>
 
 </html>
