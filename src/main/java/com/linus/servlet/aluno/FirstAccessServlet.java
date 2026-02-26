@@ -2,11 +2,14 @@ package com.linus.servlet.aluno;
 
 import com.linus.dao.AlunoDao;
 import com.linus.dto.FirstAccessParametersDto;
+
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.exception.requestParam.ParamException;
 import com.linus.model.servlet.RequestReponse;
+
 import com.linus.validation.Validator;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -36,20 +39,18 @@ public class FirstAccessServlet extends HttpServlet {
             dao.updateWithoutIdTurma(dto);
 
             requestReponse.addRequestAttribute("success", "Cadastro realizado com sucesso! Agora você pode realizar o seu login na tela de inicio!");
-            requestReponse.forwardTo("/../primeiro-acesso.jsp");
 
         } catch (ParamException cause) {
             requestReponse.addRequestAttribute("error", cause.getMessage());
-            requestReponse.forwardTo("/../primeiro-acesso.jsp");
 
         } catch (SQLException | ConnectionException cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
-            requestReponse.forwardTo("/../primeiro-acesso.jsp");
 
         } catch (NoRegistersAlteredException cause) {
             requestReponse.addRequestAttribute("error", "Matricula não encontrada. Por favor, contate a escola para realizar o seu pré-cadastro.");
-            requestReponse.forwardTo("/../primeiro-acesso.jsp");
 
+        } finally {
+            requestReponse.forwardTo("/../primeiro-acesso.jsp");
         }
 
     }
