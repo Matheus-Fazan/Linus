@@ -6,6 +6,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class RequestReponse {
 
@@ -151,5 +153,17 @@ public class RequestReponse {
      */
     public boolean hasSessionAttribute(String name){
         return request.getSession().getAttribute(name) != null;
+    }
+
+    /**
+     * Obtém todos os parâmetros da requisição HTTP.
+     * @return {@code Map<String, String>} contendo todos os parâmetros da requisição, onde cada chave mapeia para seu primeiro valor
+     */
+    public Map<String, String> getAllRequestParameters() {
+        return request.getParameterMap().entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue()[0]
+                ));
     }
 }
