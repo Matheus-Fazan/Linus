@@ -36,19 +36,19 @@ public class FirstAccessServlet extends HttpServlet {
             dao.updateWithoutIdTurma(dto);
 
             requestReponse.addRequestAttribute("success", "Cadastro realizado com sucesso! Agora você pode realizar o seu login na tela de inicio!");
-            requestReponse.redirectTo("/escola/primeiro-acesso.jsp");
+            requestReponse.forwardTo("/escola/primeiro-acesso.jsp");
 
         } catch (ParamException cause) {
             requestReponse.addRequestAttribute("error", cause.getMessage());
-            requestReponse.redirectTo("/escola/primeiro-acesso.jsp");
+            requestReponse.forwardTo("/escola/primeiro-acesso.jsp");
 
         } catch (SQLException | ConnectionException cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
-            requestReponse.redirectTo("/escola/primeiro-acesso.jsp");
+            requestReponse.forwardTo("/escola/primeiro-acesso.jsp");
 
         } catch (NoRegistersAlteredException cause) {
             requestReponse.addRequestAttribute("error", "Matricula não encontrada. Por favor, contate a escola para realizar o seu pré-cadastro.");
-            requestReponse.redirectTo("/escola/primeiro-acesso.jsp");
+            requestReponse.forwardTo("/escola/primeiro-acesso.jsp");
 
         }
 
