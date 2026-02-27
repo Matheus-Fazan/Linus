@@ -3,7 +3,7 @@ package com.linus.dao;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.dao.Admin;
+import com.linus.model.Admin;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;
