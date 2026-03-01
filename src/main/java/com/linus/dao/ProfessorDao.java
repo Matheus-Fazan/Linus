@@ -4,7 +4,7 @@ import com.linus.dto.ProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.dao.Professor;
+import com.linus.model.Professor;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;

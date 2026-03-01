@@ -6,7 +6,7 @@ import com.linus.dto.AlunoDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.exception.requestParam.ParamException;
-import com.linus.model.servlet.RequestReponse;
+import com.linus.utils.servlet.RequestReponse;
 
 import com.linus.validation.Validator;
 
