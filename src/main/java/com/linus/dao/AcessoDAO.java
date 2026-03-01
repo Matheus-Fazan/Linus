@@ -62,7 +62,7 @@ public class AcessoDAO {
         };
 
         String colId = cargo.equalsIgnoreCase("aluno") ? "matricula" : "id";
-        String colName = cargo.equalsIgnoreCase("aluno") ? "email" : "nome";
+        String colName = "nome";
 
 
         String sql = String.format(SQL_FIND_NAME_BY_CARGO, colName, table, colId);
