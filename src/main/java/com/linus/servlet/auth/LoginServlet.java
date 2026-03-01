@@ -52,7 +52,7 @@ public class LoginServlet extends HttpServlet {
                 default          -> "/index.jsp";
             };
 
-            resposta.sendRedirect( requisicao.getContextPath()+"/professor/notas");
+            resposta.sendRedirect(requisicao.getContextPath() + urlRedirecionamento);
 
         } catch (Exception e) {
             e.printStackTrace();
