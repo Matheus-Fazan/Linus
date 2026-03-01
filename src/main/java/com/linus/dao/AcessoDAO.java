@@ -30,7 +30,6 @@ public class AcessoDAO {
             }
 
             String hashSenha = queryResult.getString("hash_senha");
-            System.out.println(hashSenha);
 
             if (!org.mindrot.jbcrypt.BCrypt.checkpw(senha, hashSenha)) {
                 return null;
