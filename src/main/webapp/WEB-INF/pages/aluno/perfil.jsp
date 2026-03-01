@@ -1,13 +1,17 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.linus.dto.AlunoPerfilDto" %>
+<%
+    AlunoPerfilDto perfil = (AlunoPerfilDto) request.getAttribute("perfil");
+%>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/perfil.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/crud_geral.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png"
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
           type="image/x-icon">
     <title>Perfil Aluno</title>
 </head>
@@ -15,7 +19,7 @@
 <body>
 <header>
     <div class="logo">
-        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
         <h3>Instituto Linus</h3>
     </div>
 
@@ -35,30 +39,48 @@
             </li>
         </ul>
     </nav>
-
 </header>
-<div class="largest-container">
+
+<div class="container">
 
     <div class="topo">
-        <h1>Perfil</h1>
-        <p>Visualize suas informações e as edite.</p>
+        <h1>Veja seu Perfil</h1>
+        <p>Visualize suas informações.</p>
     </div>
+
+    <% if (request.getAttribute("error") != null) { %>
+    <p class="error-message"><%= request.getAttribute("error") %></p>
+    <% } else if (perfil != null) { %>
     <div class="main-container">
-        <form action="">
-            <label for="user">Matrícula:</label>
-            <input type="text" name="matricula">
-            <label for="senha">Nome:</label>
-            <input type="password" name="nome" placeholder="Digite seu nome">
-            <label for="user">Email:</label>
-            <input type="email" name="email" placeholder="Digite seu email">
-            <label for="cpf">CPF:</label>
-            <input type="text" name="cpf" placeholder="Digite seu cpf">
-            <label for="user">Situação:</label>
-            <input type="text" name="situacao">
-            <label for="senha">Turma:</label>
-            <input type="text" name="turma">
-        </form>
+        <div class="perfil-info">
+            <div class="perfil-campo">
+                <span class="perfil-label">Matrícula:</span>
+                <span class="perfil-valor"><%= perfil.getMatricula() %></span>
+            </div>
+            <div class="perfil-campo">
+                <span class="perfil-label">Nome:</span>
+                <span class="perfil-valor"><%= perfil.getNome() %></span>
+            </div>
+            <div class="perfil-campo">
+                <span class="perfil-label">Email:</span>
+                <span class="perfil-valor"><%= perfil.getEmail() %></span>
+            </div>
+            <div class="perfil-campo">
+                <span class="perfil-label">CPF:</span>
+                <span class="perfil-valor"><%= perfil.getCpf() %></span>
+            </div>
+            <div class="perfil-campo">
+                <span class="perfil-label">Situação:</span>
+                <span class="perfil-valor"><%= perfil.getSituacao() %></span>
+            </div>
+            <div class="perfil-campo">
+                <span class="perfil-label">Turma:</span>
+                <span class="perfil-valor"><%= perfil.getTurma() %></span>
+            </div>
+        </div>
     </div>
+    <% } %>
+
 </div>
 </body>
 
