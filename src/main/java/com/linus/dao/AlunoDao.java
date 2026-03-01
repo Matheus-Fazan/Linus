@@ -6,6 +6,7 @@ import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
 import com.linus.model.Aluno;
+import com.linus.model.enums.Situacao;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;
@@ -20,16 +21,16 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
-    private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = """
+    private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = String.format("""
                 SELECT
                     a.matricula,
                     a.nome,
                     a.email,
                     a.cpf,
                     CASE
-                        WHEN AVG(n.media) IS NULL  THEN 'Em processo'
-                        WHEN AVG(n.media) >= 7      THEN 'Aprovado'
-                        ELSE                             'Reprovado'
+                        WHEN AVG(n.media) IS NULL  THEN '%s'
+                        WHEN AVG(n.media) >= 7      THEN '%s'
+                        ELSE                             '%s'
                     END AS situacao,
                     COALESCE(t.nome, 'Sem turma') AS turma
                 FROM aluno a
@@ -37,7 +38,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
                 LEFT JOIN nota  n ON n.id_aluno = a.matricula
                 WHERE a.matricula = ?
                 GROUP BY a.matricula, a.nome, a.email, a.cpf, t.nome;
-                """;
+                """, Situacao.EM_PROCESSO, Situacao.APROVADO, Situacao.REPROVADO);
 
     @Override
     public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
