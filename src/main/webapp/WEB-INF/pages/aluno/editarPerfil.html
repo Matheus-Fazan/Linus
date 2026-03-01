@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/style.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/crud_geral.css">
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/perfil.css">
+    <title>Perfil ADM</title>
+</head>
+
+<header>
+    <div class="imagem">
+        <img id="logo_colegio" src="/src/main/webapp/WEB-INF/assets/imgs/logoColegio.png" alt="Logo colegio">
+        <h3>Instituto de <br> Tecnologia</h3>
+    </div>
+
+    <nav class="nav-header">
+        <ul>
+            <li>
+                <a href="${pageContext.request.contextPath}/area-restrita/pagPrincipal.jsp">Página inicial</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/area-restrita/observacao.jsp">Observação</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/area-restrita/erfil.jsp">Perfil</a>
+            </li>
+            <li>
+                <a href="index.html">Logout</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+
+<body>
+    <div class="topo">
+        <div id="local">
+            <h1>Perfil</h1>
+            <p>Visualize suas informações e as edite.</p>
+        </div>
+    </div>
+    <form action="${pageContext.request.contextPath}/area-restrita/usuarios" method="post">
+        <div id="divisao">
+            <div id="coluna">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="id" value="<%= aluno.getId() %>">
+
+                <label for="nome">Nome:</label>
+                <input name="nome" id="nome" value="<%= aluno.getNome() %>"
+                       type="text"
+                       placeholder="Novo nome"
+                       maxlength="100"
+                       required
+                >
+
+                <label for="email">Email:</label>
+                <input name="email" id="email" value="<%= aluno.getEmail() %>"
+                       type="text"
+                       placeholder="Novo email"
+                       title="Email inválido"
+                       maxlength="100"
+                       required
+                >
+
+                <label for="cpf">CPF:</label>
+                <input name="cpf" id="cargo" value="<%= aluno.getCPF() %>"
+                       type="text"
+                       placeholder="cpf"
+                       maxlength="50"
+                       required
+                >
+
+                <label for="situacao">Situação:</label>
+                <select name="situacao" id="situacao">
+                    <% String situacao = usuario.getSituacao(); %>
+                    <option value="" <%= situacao == null || emailGerente.isBlank() ? "selected" : "" %>>
+                        Situação ainda não divulgada
+                    </option>
+                </select>
+
+                <label for="cpf">CPF:</label>
+                <input name="cpf" id="cargo" value="<%= aluno.getCPF() %>"
+                       type="text"
+                       placeholder="cpf"
+                       maxlength="50"
+                       required
+                >                  
+            </div>
+</body>
+
+</html>

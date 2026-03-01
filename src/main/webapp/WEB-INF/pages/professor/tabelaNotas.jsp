@@ -1,33 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="java.util.List" %>
+<%@ page import="seu.pacote.NotasDTO" %>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aluno | Tela Inicial</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/crud_geral.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
-
+    <title>Visualização dos Alunos</title>
+    <link rel="stylesheet" href="/src/main/webapp/WEB-INF/assets/style/pagPrincipal.css">
 </head>
 
 <body>
+
     <header>
         <div class="logo">
-            <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
-            <h3>Instituto Linus</h3>
+            <img src="${pageContext.request.contextPath}/assets/imgs/logo.png">
+            <h3>Instituto de Tecnologia</h3>
         </div>
-
         <nav class="nav-header">
             <ul>
                 <li>
-                    <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
+                    <a href="${pageContext.request.contextPath}/professor/pagPrincipal.jsp">Página inicial</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
+                    <a href="${pageContext.request.contextPath}/professor/observacoesProfessor.jsp">Observação</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
+                    <a href="${pageContext.request.contextPath}/professor/perfil.jsp">Perfil</a>
                 </li>
                 <li>
                     <a href="index.html">Logout</a>
@@ -35,131 +33,111 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        <div class="fundo_tela">
 
-            <div class="topo">
-                <div>
-                    <h1>Visualize os alunos!</h1>
-                    <p>Acompanhe seus alunos, registre notas e faça observações.</p>
-                </div>
+        <section class="topo">
+            <h1>Visualização dos alunos</h1>
+            <p>Acompanhe seus alunos, registre notas e faça observações</p>
 
-                <div class="filtro-card">
-                    <form action="${pageContext.request.contextPath}/area-restrita/fabricas" method="get">
-                        <input type="hidden" name="action" value="read">
+            <input type="text" class="search" placeholder="Pesquise o aluno pelo número de matrícula:">
+        </section>
 
-                        <div class="filtragem">
-                            <label>
-                                Campo de Filtragem:
-                                <select id="campoFiltro" name="campo_filtro" onchange="tipoCampoFabrica()">
-                                    <option value="" selected>Nenhum selecionado</option>
-                                    <option value="turma" data-type="text">Turma:</option>
-                                    <option value="matricula" data-type="text">Matrícula:</option>
-                                </select>
-                            </label>
-                        </div>
+        <% Boolean encontrado=(Boolean) request.getAttribute("encontrado"); %>
 
-                        <div class="filtragem" id="filtroGeral">
-                            <label for="valorFiltro">Digite o valor:</label>
-                            <input type="text" id="valorFiltro" name="valor_filtro">
-                        </div>
+            <% if(encontrado !=null && encontrado){ %>
 
-                        <div class="filtragem" style="display: none">
-                            <label for="valorPlano">Valor Filtrado:</label>
-                            <select name="valor_plano" id="valorPlano">
-                                <option value="">--- SELECIONE ---</option>
-                                <% for (String plano : planos.values()) {%>
-                                    <option value="<%=plano%>">
-                                        <%=plano%>
-                                    </option>
-                                    <% } %>
-                            </select>
-                        </div>
+                <% Aluno aluno=(Aluno) request.getAttribute("aluno"); List<NotasDTO> notas = (List<NotasDTO>)
+                        request.getAttribute("notas");
+                        %>
 
-                        <div id="cabecalho">
+                        <section class="card-tabela">
 
-                            <form action="${pageContext.request.contextPath}/area-restrita/fabricas" method="get">
-                                <input type="hidden" name="action" value="read">
-                                <button id="limpaFiltro" type="submit">Limpar Filtros</button>
-                            </form>
+                            <div class="info-aluno">
+                                <span><strong>Aluno:</strong>
+                                    <%= aluno.getNome() %>
+                                </span>
+                                <span><strong>Turma:</strong>
+                                    <%= aluno.getTurma() %>
+                                </span>
+                            </div>
 
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Matéria</th>
+                                        <th>Nota1</th>
+                                        <th>Nota2</th>
+                                        <th>Média</th>
+                                        <th>Observações</th>
+                                    </tr>
+                                </thead>
 
-                            <input type="submit" value="Filtrar" id="filtrar">
-                        </div>
-                    </form>
-                </div>
-            </div>
+                                <tbody>
+                                    <% for(NotasDTO n : notas){ %>
+                                        <tr>
+                                            <td>
+                                                <%= n.getMateria() %>
+                                            </td>
+                                            <td>
+                                                <%= n.getNota1() %>
+                                            </td>
+                                            <td>
+                                                <%= n.getNota2() %>
+                                            </td>
+                                            <td>
+                                                <%= n.getMedia() %>
+                                            </td>
+                                            <td>
+                                                <%= n.getObservacao() %>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+                                </tbody>
+                            </table>
 
-            <div id="procurar-card">
-                <form action="${pageContext.request.contextPath}/area-restrita/fabricas" method="get">
-                    <input type="hidden" name="action" value="read">
-
-                    <div class="filtragem" id="filtroALuno">
-                        <input placeholder="Digite o número de matrícula do aluno" type="text" id="valorAluno"
-                            name="valor_filtro">
-                    </div>
-                </form>
-            </div>
-
-        </div>
+                        </section>
 
 
-        <div class="tela_principal">
+                        <section class="grid-inferior">
 
-            <div class="tabela_usuarios">
-                <% Aluno aluno = (Aluno) request.getAttribute("aluno"); %>
+                            <div class="card-form">
+                                <h2>Definir nota do aluno:</h2>
+                                <p><strong>Nome do aluno:</strong>
+                                    <%= aluno.getNome() %>
+                                </p>
+                                <p><strong>Matéria:</strong> Matemática</p>
 
-                <div class="informacoes_aluno">
-                    <div class="informacao_aluno">
-                        <h3>Nome:</h3>
-                        <p> <%= aluno.Nome() %></p>
-                    </div>
-                    <div class="informacao_aluno">
-                        <h3>Turma:</h3>
-                        <p> <%= aluno.getTurma()%> </p>
-                    </div>
-                </div>
-                <hr>
-                <table border="0">
-                    <tr id="titulo_tabela">
-                        <th>Matéria</th>
-                        <th>Nota 1</th>
-                        <th>Nota 2</th>
-                        <th>Média </th>
-                        <th>Observações</th>
-                    </tr>
-                    <% for (AlunosDTO aluno : aluno) { %>
-                        <tr>
-                            <td>
-                                <%= aluno %></td>
-                            <td>
-                                <%= aluno.getMateria() %>
-                            </td>
-                            <td>
-                                <%= aluno.getNota1() %>
-                            </td>
-                            <td>
-                                <%= aluno.getNota2() %>
-                            </td>
-                            <td>
-                                <%= aluno.getMedia() %>
-                            </td>
-                            <td>
-                                <%= aluno.getObservacao() %>
-                            </td>
-                            <td>
-                                <form action="">
-                                    <input type="hidden" name="id" value="<%= f.getId() %>">
-                                    <input type="hidden" name="action" value="update">
-                                    <button id="editar" type="submit">Editar</button>
+                                <form action="${pageContext.request.contextPath}/nota" method="post">
+                                    <input type="hidden" name="alunoId" value="<%= aluno.getId() %>">
+
+                                    <label>Nota 1:</label>
+                                    <input type="number" step="0.1" name="nota1" placeholder="Digite a nota">
+
+                                    <label>Nota 2:</label>
+                                    <input type="number" step="0.1" name="nota2" placeholder="Digite a nota">
+
+                                    <button type="submit" class="btn-roxo">Salvar nota</button>
                                 </form>
-                            </td>
-                        </tr>
-                        <% } %>
-                </table>
-            </div>
+                            </div>
 
-        </div>
+                            <div class="card-acoes">
+                                <h3>Ações rápidas</h3>
+                                <a href="${pageContext.request.contextPath}/boletim"><button>Gerar boletim</button></a>
+                                <a href="${pageContext.request.contextPath}/pages/professor/observacoesProfessor.jsp"><button>Fazer comentário</button></a>
+                                <a href="${pageContext.request.contextPath}/pages/professor/perfil.jsp"><button>Ir para página de perfil</button></a>                               
+                            </div>
+
+                        </section>
+
+                        <% } else if(encontrado !=null && !encontrado){ %>
+
+                            <div class="nao-encontrado">
+                                <img src="/src/main/webapp/WEB-INF/assets/imgs/aluno-nao-achado.jpg" width="200">
+                                <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado</h2>
+                            </div>
+
+                            <% } %>
 
     </main>
 </body>
