@@ -12,6 +12,6 @@ import java.io.IOException;
 public class NotaServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/pages/tabelaNotas.html").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/professor/tabelaNotas.jsp").forward(req, resp);
     }
 }
