@@ -1,18 +1,18 @@
 package com.linus.dao;
 
+import com.linus.dto.MateriaDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.dao.Materia;
+import com.linus.model.Materia;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MateriaDao implements GenericDaoInterface<Materia> {
+public class MateriaDao implements GenericDaoInterface<Materia, MateriaDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO materia(nome) VALUES(?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM materia WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM materia";
@@ -20,19 +20,20 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
     private final String SQL_DELETE_COMMAND = "DELETE FROM materia WHERE id = ?";
 
     @Override
-    public Materia save(Materia materia) throws SQLException, ConnectionException {
+    public Materia save(MateriaDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, materia.getNome());
+            ps.setString(1, dto.nome);
 
             queryResult = ps.executeQuery();
 
+            Materia materia = null;
             if (queryResult.next()) {
-                materia.setId(queryResult.getLong("id"));
+                materia = new Materia(queryResult);
             }
 
             return materia;
@@ -42,18 +43,18 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
     }
 
     @Override
-    public Materia findById(long id) throws SQLException, ConnectionException {
-        Materia materia = null;
+    public Materia findById(MateriaDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             queryResult = ps.executeQuery();
 
+            Materia materia = null;
             if (queryResult.next()) {
                 materia = new Materia(queryResult);
             }
@@ -70,7 +71,7 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -86,14 +87,14 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
     }
 
     @Override
-    public void update(Materia materia) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(MateriaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setString(1, materia.getNome());
-            ps.setLong(2, materia.getId());
+            ps.setString(1, dto.nome);
+            ps.setLong(2, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -104,13 +105,13 @@ public class MateriaDao implements GenericDaoInterface<Materia> {
     }
 
     @Override
-    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(MateriaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

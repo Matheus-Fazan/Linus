@@ -1,18 +1,18 @@
 package com.linus.dao;
 
+import com.linus.dto.ObservacaoDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.dao.Observacao;
+import com.linus.model.Observacao;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ObservacaoDao implements GenericDaoInterface<Observacao> {
+public class ObservacaoDao implements GenericDaoInterface<Observacao, ObservacaoDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO observacao(observacao, id_professor, id_aluno) VALUES(?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM observacao WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM observacao";
@@ -20,21 +20,22 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao> {
     private final String SQL_DELETE_COMMAND = "DELETE FROM observacao WHERE id = ?";
 
     @Override
-    public Observacao save(Observacao observacao) throws SQLException, ConnectionException {
+    public Observacao save(ObservacaoDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, observacao.getObservacao());
-            ps.setLong(2, observacao.getIdProfessor());
-            ps.setLong(3, observacao.getIdAluno());
+            ps.setString(1, dto.observacao);
+            ps.setLong(2, Long.parseLong(dto.idProfessor));
+            ps.setLong(3, Long.parseLong(dto.idAluno));
 
             queryResult = ps.executeQuery();
 
+            Observacao observacao = null;
             if (queryResult.next()) {
-                observacao.setId(queryResult.getLong("id"));
+                observacao = new Observacao(queryResult);
             }
 
             return observacao;
@@ -44,18 +45,18 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao> {
     }
 
     @Override
-    public Observacao findById(long id) throws SQLException, ConnectionException {
-        Observacao observacao = null;
+    public Observacao findById(ObservacaoDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             queryResult = ps.executeQuery();
 
+            Observacao observacao = null;
             if (queryResult.next()) {
                 observacao = new Observacao(queryResult);
             }
@@ -72,7 +73,7 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -88,16 +89,16 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao> {
     }
 
     @Override
-    public void update(Observacao observacao) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(ObservacaoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setString(1, observacao.getObservacao());
-            ps.setLong(2, observacao.getIdProfessor());
-            ps.setLong(3, observacao.getIdAluno());
-            ps.setLong(4, observacao.getId());
+            ps.setString(1, dto.observacao);
+            ps.setLong(2, Long.parseLong(dto.idProfessor));
+            ps.setLong(3, Long.parseLong(dto.idAluno));
+            ps.setLong(4, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -108,13 +109,13 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao> {
     }
 
     @Override
-    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(ObservacaoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

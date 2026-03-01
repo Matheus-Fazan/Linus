@@ -1,4 +1,4 @@
-package com.linus.model.servlet;
+package com.linus.utils.servlet;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
