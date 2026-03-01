@@ -4,30 +4,30 @@
 
 <head>
     <title>Observações</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/observacoesProfessor.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <body>
 <header>
     <div class="logo">
-        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
         <h3> Instituto Linus </h3>
     </div>
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/index.html">Página inicial</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/tabelaNotas.jsp">Página inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/observacoesProfessor.jsp">Observação</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages">Logout</a>
+                <a href="">Logout</a>
             </li>
         </ul>
     </nav>

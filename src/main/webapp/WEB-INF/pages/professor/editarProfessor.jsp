@@ -5,34 +5,32 @@
 
 <head>
   <title>Editar Professor</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/perfil.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/edicao.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/observacoesProfessor.css">
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
+  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <body>
 <header>
   <div class="logo">
-    <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+    <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
     <h3>Instituto linus</h3>
   </div>
 
   <nav class="nav-header">
     <ul>
       <li>
-        <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página
-          inicial</a>
+        <a href="">Página inicial</a>
       </li>
       <li>
-        <a
-                href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
+        <a href="">Criar Acesso</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
+        <a href="">Perfil</a>
       </li>
       <li>
-        <a href="index.html">Logout</a>
+        <a href="">Logout</a>
       </li>
     </ul>
   </nav>
