@@ -1,4 +1,4 @@
-package com.linus.model.dao;
+package com.linus.model;
 
 import lombok.Data;
 
@@ -6,25 +6,29 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Classe modelo que abstrai registros da view {@code ACESSO}
+ * Classe modelo que abstrai registros da tabela {@code PROFESSOR}
  */
 @Data
-public class Acesso {
+public class Professor {
 
-    private long idOrigem;
-    private Cargo cargo;
+    private long id;
+    private String nome;
     private String email;
     private String hashSenha;
+    private String cpf;
+    private long idMateria;
 
     /**
      * Construtor da classe que utiliza diretamente objeto {@code ResultSet}.
      * @param rs Objeto {@code ResultSet} resultante da consulta ao banco de dados.
      * @throws SQLException Caso falha SQL
      */
-    public Acesso(ResultSet rs) throws SQLException {
+    public Professor(ResultSet rs) throws SQLException {
+        this.id = rs.getLong("id");
+        this.nome = rs.getString("nome");
         this.email = rs.getString("email");
         this.hashSenha = rs.getString("hash_senha");
-        this.cargo = Cargo.valueOf(rs.getString("cargo"));
-        this.idOrigem = rs.getLong("id_origem");
+        this.cpf = rs.getString("cpf");
+        this.idMateria = rs.getLong("id_materia");
     }
 }
