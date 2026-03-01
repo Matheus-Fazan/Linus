@@ -1,7 +1,7 @@
 package com.linus.servlet.auth;
 
 import com.linus.dao.AcessoDAO;
-import com.linus.model.Usuario;
+import com.linus.model.dao.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
