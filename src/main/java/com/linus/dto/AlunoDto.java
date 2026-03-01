@@ -13,6 +13,7 @@ public class AlunoDto {
     public String cpf;
     public String matricula;
     public String idTurma;
+    public TurmaDto turmaDto;
 
     public AlunoDto(Map<String, String> requestParams) {
         this.nome = requestParams.get("nome");

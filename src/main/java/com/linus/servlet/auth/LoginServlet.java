@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             String urlRedirecionamento = switch (usuario.getCargo().toLowerCase()) {
                 case "admin"     -> "/admin/dashboard";
                 case "professor" -> "/professor/notas";
-                case "aluno"     -> "/aluno/dashboard";
+                case "aluno"     -> "/aluno/perfil";
                 default          -> "/index.jsp";
             };
 
