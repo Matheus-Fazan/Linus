@@ -5,31 +5,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluno | Tela Inicial</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/WEB-INF/assets/style/crud_geral.css">
-    <link rel="shortcut icon" href="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <body>
 <header>
     <div class="logo">
-        <img src="${pageContext.request.contextPath}/WEB-INF/assets/imgs/logo.png" alt="logo colegio">
+        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
         <h3>Instituto Linus</h3>
     </div>
 
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/indexPagPrincipal.jsp">Página inicial</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/pagPrincipal.jsp">Página
+                    inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/indexObservacao.jsp">Observação</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/area-restrita/indexPerfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
             </li>
             <li>
-                <a href="index.html">Logout</a>
+                <a href="">Logout</a>
             </li>
         </ul>
     </nav>
