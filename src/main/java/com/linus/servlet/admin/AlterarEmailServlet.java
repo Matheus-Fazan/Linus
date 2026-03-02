@@ -47,7 +47,7 @@ public class AlterarEmailServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Nenhum registro foi alterado. Por favor, verifique a matrícula informada.");
 
         } finally {
-            requestReponse.forwardTo("/../criarAcesso.jsp");
+            requestReponse.forwardTo("/../editarAluno.jsp");
         }
     }
 }
