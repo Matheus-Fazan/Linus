@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.AlunoPerfilDto" %>
+    <%@ page import="com.linus.dto.AdminDto" %>
 
-        <% AlunoPerfilDto perfil=(AlunoPerfilDto) request.getAttribute("perfil"); %>
+        <% AdminDto perfil=(AdminDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -39,10 +39,7 @@
                                 <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
-                            </li>
-                            <li>
-                                <a href="">Logout</a>
+                                <a href="index.html">Logout</a>
                             </li>
                         </ul>
                     </nav>
@@ -70,44 +67,9 @@
                                     <h2>Perfil</h2>
 
                                     <div class="perfil-linha">
-                                        <span class="perfil-label">Matrícula</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getMatricula() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Nome</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getNome() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
                                         <span class="perfil-label">Email</span>
                                         <span class="perfil-valor">
                                             <%= perfil.getEmail() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">CPF</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getCpf() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Situação</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getSituacao() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Turma</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getTurma() %>
                                         </span>
                                     </div>
 
