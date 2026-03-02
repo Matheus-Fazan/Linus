@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.ProfessorDto" %>
+    <%@ page import="com.linus.dto.AlunoPerfilDto" %>
 
-        <% ProfessorDto perfil=(ProfessorDto) request.getAttribute("perfil"); %>
+        <% AlunoPerfilDto perfil=(AlunoPerfilDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -28,15 +28,18 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/pagPrincipal.jsp">Página
+                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/pagPrincipal.jsp">Página
                                     inicial</a>
                             </li>
                             <li>
                                 <a
-                                    href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
+                                    href="${pageContext.request.contextPath}/WEB-INF/pages/admin/criarAcesso.jsp">Observação</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
                             </li>
                             <li>
                                 <a href="">Logout</a>
