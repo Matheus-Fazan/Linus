@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-@WebServlet("/admin/adicionar-aluno")
+@WebServlet("/admin/alterar-email")
 public class AlterarEmailServlet extends HttpServlet {
 
     private static final AlunoDao dao = new AlunoDao();
