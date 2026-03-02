@@ -1,4 +1,4 @@
-package com.linus.model;
+package com.linus.model.dao;
 
 import lombok.Data;
 

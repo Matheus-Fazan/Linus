@@ -1,6 +1,6 @@
 package com.linus.servlet.auth;
 
-import com.linus.utils.servlet.RequestReponse;
+import com.linus.model.servlet.RequestReponse;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.http.HttpServletRequest;

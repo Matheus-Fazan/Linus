@@ -5,7 +5,7 @@ import com.linus.dto.AlunoPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.Aluno;
+import com.linus.model.dao.Aluno;
 import com.linus.model.enums.Situacao;
 import com.linus.utils.DaoUtil;
 

@@ -2,7 +2,7 @@ package com.linus.dao;
 
 import com.linus.exception.dao.ConnectionException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.Usuario;
+import com.linus.model.dao.Usuario;
 import com.linus.utils.DaoUtil;
 
 import java.sql.Connection;

@@ -4,7 +4,7 @@ import com.linus.dto.ObservacaoDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.Observacao;
+import com.linus.model.dao.Observacao;
 import com.linus.utils.DaoUtil;
 
 import java.sql.*;

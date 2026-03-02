@@ -4,7 +4,7 @@ import com.linus.dao.AlunoDao;
 import com.linus.dto.AlunoPerfilDto;
 
 import com.linus.exception.dao.ConnectionException;
-import com.linus.utils.servlet.RequestReponse;
+import com.linus.model.servlet.RequestReponse;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
