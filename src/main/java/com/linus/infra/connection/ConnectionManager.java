@@ -59,7 +59,7 @@ public class ConnectionManager {
         String dbUSER = System.getenv("DB_USER");
         String dbPASSWORD = System.getenv("DB_PASSWORD");
 
-        if (dbURL == null || dbUSER == null || dbPASSWORD == null) {
+        if (dbURL.isEmpty() || dbUSER.isEmpty() || dbPASSWORD.isEmpty()) {
             throw new IllegalStateException(
                     "Variáveis de ambiente obrigatórias não configuradas: DB_URL, DB_USER, DB_PASSWORD"
             );
