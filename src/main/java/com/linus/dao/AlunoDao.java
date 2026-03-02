@@ -21,6 +21,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
+    private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
     private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = String.format("""
                 SELECT
@@ -168,6 +169,25 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             ps.setString(3, dto.cpf);
             ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
             ps.setLong(5, Long.parseLong(dto.matricula));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateEmailByMatricula(AlunoDto dto)
+            throws SQLException, ConnectionException, NoRegistersAlteredException {
+
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND);
+
+            ps.setString(1, dto.email);
+            ps.setLong(2, Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
