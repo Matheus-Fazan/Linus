@@ -178,3 +178,15 @@ td{
     background:white;
     cursor:pointer;
 }
+
+.nao-encontrado img{
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+}
+.nao-encontrado h1 {
+    font-size: 40px;
+    margin-left: 60px;
+    text-align: left;
+}
