@@ -6,6 +6,7 @@ import com.linus.dto.EstatisticasBoletimDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.model.servlet.RequestReponse;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+@WebServlet("/aluno/boletim")
 public class BoletimServlet extends HttpServlet {
 
     private static final BoletimDao dao = new BoletimDao();
