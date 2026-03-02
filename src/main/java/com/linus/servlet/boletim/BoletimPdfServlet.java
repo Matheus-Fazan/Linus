@@ -4,9 +4,9 @@ import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.*;
 import com.itextpdf.text.pdf.draw.LineSeparator;
 import com.linus.dao.NotaDao;
-import com.linus.dto.BoletimDto;
+import com.linus.dto.GeraBoletimDto;
 import com.linus.exception.dao.ConnectionException;
-import com.linus.utils.servlet.RequestReponse;
+import com.linus.model.servlet.RequestReponse;
 
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -72,7 +72,7 @@ public class BoletimPdfServlet extends HttpServlet {
                 }
             }
 
-            List<BoletimDto> boletim = dao.findByMatricula(matricula);
+            List<GeraBoletimDto> boletim = dao.findByMatricula(matricula);
 
             if (boletim == null || boletim.isEmpty()) {
                 resp.sendError(HttpServletResponse.SC_NOT_FOUND, "Nenhuma nota encontrada para este aluno.");
@@ -96,18 +96,18 @@ public class BoletimPdfServlet extends HttpServlet {
     /**
      * Gera o PDF do boletim.
      *
-     * @param boletim lista de {@link BoletimDto} com os dados do aluno
+     * @param boletim lista de {@link GeraBoletimDto} com os dados do aluno
      * @param resp    objeto {@link HttpServletResponse} para escrita do PDF
      * @throws DocumentException caso ocorra erro na criação do documento iText
      * @throws IOException       caso ocorra erro de escrita na resposta
      */
-    private void gerarPdf(List<BoletimDto> boletim, HttpServletResponse resp) throws DocumentException, IOException {
+    private void gerarPdf(List<GeraBoletimDto> boletim, HttpServletResponse resp) throws DocumentException, IOException {
 
         Document document = new Document(PageSize.A4, 40, 40, 50, 50);
         PdfWriter.getInstance(document, resp.getOutputStream());
         document.open();
 
-        BoletimDto primeiro = boletim.iterator().next();
+        GeraBoletimDto primeiro = boletim.iterator().next();
 
         PdfPTable header = new PdfPTable(2);
         header.setWidthPercentage(100);
@@ -153,7 +153,7 @@ public class BoletimPdfServlet extends HttpServlet {
         adicionarCabecalhoTabela(tabela);
 
         for (int i = 0; i < boletim.size(); i++) {
-            BoletimDto dto = boletim.get(i);
+            GeraBoletimDto dto = boletim.get(i);
             BaseColor corLinha = (i % 2 == 0) ? COR_BRANCO : COR_LINHA_PAR;
 
             adicionarCelula(tabela, dto.getMateria(),                    corLinha, Element.ALIGN_LEFT);

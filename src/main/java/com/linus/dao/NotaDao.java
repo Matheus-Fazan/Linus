@@ -1,6 +1,7 @@
 package com.linus.dao;
 
 import com.linus.dto.BoletimDto;
+import com.linus.dto.GeraBoletimDto;
 import com.linus.dto.NotaDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
@@ -153,12 +154,12 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
         }
     }
 
-    public List<BoletimDto> findByMatricula(int matricula) throws ConnectionException, SQLException {
+    public List<GeraBoletimDto> findByMatricula(int matricula) throws ConnectionException, SQLException {
 
         Connection conn = ConnectionManager.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
-        List<BoletimDto> boletim = new ArrayList<>();
+        List<GeraBoletimDto> boletim = new ArrayList<>();
 
         try {
             ps = conn.prepareStatement(SQL_FIND_BY_MATRICULA);
@@ -167,7 +168,7 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                boletim.add(new BoletimDto(rs));
+                boletim.add(new GeraBoletimDto(rs));
             }
 
             return boletim;
