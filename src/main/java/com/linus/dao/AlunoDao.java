@@ -177,7 +177,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             DaoUtil.closeResources(ps);
         }
     }
-    @Override
+
     public void updateEmailByMatricula(AlunoDto dto)
             throws SQLException, ConnectionException, NoRegistersAlteredException {
 
