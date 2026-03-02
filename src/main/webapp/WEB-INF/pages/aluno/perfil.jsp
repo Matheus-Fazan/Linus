@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.ProfessorDto" %>
+<%@ page import="com.linus.dto.AlunoPerfilDto" %>
 
-        <% ProfessorDto perfil=(ProfessorDto) request.getAttribute("perfil"); %>
+    <%AlunoPerfilDto perfil=(AlunoPerfilDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -21,7 +21,7 @@
 
                 <header>
                     <div class="logo">
-                        <img src="/src/main/webapp/assets/imgs/logo.png" alt="logo colegio">
+                        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
                         <h3>Instituto Linus</h3>
                     </div>
 

@@ -1,5 +1,7 @@
 package com.linus.dao;
 
+import com.linus.dto.BoletimDto;
+import com.linus.dto.GeraBoletimDto;
 import com.linus.dto.NotaDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
@@ -19,6 +21,28 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
     private final String SQL_UPDATE_COMMAND = "UPDATE nota SET n1 = ?, n2 = ?, media = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM nota WHERE id = ?";
+    private final String SQL_FIND_BY_MATRICULA = """
+            SELECT
+                a.nome                                              AS nome_aluno,
+                COALESCE(t.nome, 'Sem turma')                      AS turma,
+                m.nome                                              AS materia,
+                n.n1,
+                n.n2,
+                n.media,
+                case
+                    WHEN (n.media) IS NULL  THEN 'Em processo'
+                    WHEN n.media >= 7 THEN 'Aprovado'
+                    ELSE                   'Reprovado'
+                END                                                 AS situacao,
+                COALESCE(n.observacao, '-')                         AS observacao
+            FROM nota n
+            JOIN aluno    a ON a.matricula  = n.id_aluno
+            JOIN professor p ON p.id        = n.id_professor
+            JOIN materia  m ON m.id         = p.id_materia
+            LEFT JOIN turma t ON t.id       = a.id_turma
+            WHERE n.id_aluno = ?
+            ORDER BY m.nome;
+            """;
 
     @Override
     public Nota save(NotaDto dto) throws SQLException, ConnectionException {
@@ -127,6 +151,30 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
             }
         } finally {
             DaoUtil.closeResources(ps);
+        }
+    }
+
+    public List<GeraBoletimDto> findByMatricula(int matricula) throws ConnectionException, SQLException {
+
+        Connection conn = ConnectionManager.connect();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<GeraBoletimDto> boletim = new ArrayList<>();
+
+        try {
+            ps = conn.prepareStatement(SQL_FIND_BY_MATRICULA);
+            ps.setLong(1, matricula);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                boletim.add(new GeraBoletimDto(rs));
+            }
+
+            return boletim;
+
+        } finally {
+            DaoUtil.closeResources(ps, rs);
         }
     }
 }

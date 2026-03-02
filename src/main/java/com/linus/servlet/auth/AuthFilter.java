@@ -59,7 +59,7 @@ public class AuthFilter implements Filter {
         if (perfilUsuario == null) return false;
 
         return switch (perfilUsuario.toLowerCase()) {
-            case "professor" -> caminho.startsWith("/professor/");
+            case "professor" -> caminho.startsWith("/professor/") || caminho.startsWith("/aluno/boletim/");
             case "aluno"     -> caminho.startsWith("/aluno/");
             case "admin"     -> true;
             default          -> false;

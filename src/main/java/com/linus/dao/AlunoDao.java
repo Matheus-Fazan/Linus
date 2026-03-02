@@ -23,24 +23,24 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
     private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
-    private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = String.format("""
-                SELECT
-                    a.matricula,
-                    a.nome,
-                    a.email,
-                    a.cpf,
-                    CASE
-                        WHEN AVG(n.media) IS NULL  THEN '%s'
-                        WHEN AVG(n.media) >= 7      THEN '%s'
-                        ELSE                             '%s'
-                    END AS situacao,
-                    COALESCE(t.nome, 'Sem turma') AS turma
-                FROM aluno a
-                LEFT JOIN turma t ON t.id  = a.id_turma
-                LEFT JOIN nota  n ON n.id_aluno = a.matricula
-                WHERE a.matricula = ?
-                GROUP BY a.matricula, a.nome, a.email, a.cpf, t.nome;
-                """, Situacao.EM_PROCESSO, Situacao.APROVADO, Situacao.REPROVADO);
+    private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = """
+                                SELECT
+                                 a.matricula,
+                                 a.nome,
+                                 a.email,
+                                 a.cpf,
+                                 CASE
+                                     WHEN avg(n.media) IS NULL  THEN 'Em processo'
+                                     WHEN avg(n.media) >= 7      THEN 'Aprovado'
+                                     ELSE                             'Reprovado'
+                                 END AS situacao,
+                                 COALESCE(t.nome, 'Sem turma') AS turma
+                             FROM aluno a
+                             LEFT JOIN turma t ON t.id  = a.id_turma
+                             LEFT JOIN nota  n ON n.id_aluno = a.matricula
+                             WHERE a.matricula = ?
+                             GROUP BY a.matricula, a.nome, a.email, a.cpf, t.nome;
+                """;
 
     @Override
     public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
