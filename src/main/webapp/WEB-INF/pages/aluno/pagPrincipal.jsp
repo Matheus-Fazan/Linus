@@ -2,9 +2,9 @@
 
     <html lang="pt-br">
 
-    <%  List<BoletimDTO> BoletimDTO = (List<Boletim>) request.getAttribute("boletimDTO");
-        EstatisticaBoletimDTO estatistica=(EstatisticaBoletim) request.getAttribute("estatistica");
-    %>
+    <% List<BoletimDTO> BoletimDTO = (List<Boletim>) request.getAttribute("boletimDTO");
+            EstatisticaBoletimDTO estatistica=(EstatisticaBoletim) request.getAttribute("estatistica");
+            %>
 
             <head>
                 <meta charset="UTF-8">
@@ -50,29 +50,29 @@
                             <p>Visualize suas notas e desempenho escolar.</p>
                         </div>
 
-                            <div id="informacoes_gerais">
+                        <div class="informacoes_gerais">
 
-                                <div class="informacao">
-                                    <h3><a href="">Gerar Boletim</a></h3>
-                                </div>
-
-                                <div class="informacao">
-                                    <h3>Notas baixas:</h3>
-                                    <% for (EstatisticaBoletimDTO estatistica : estatistica) { %>
-                                        <p>
-                                            <%= estatistica.getNotasBaixas()%>
-                                        </p>
-                                        <% } %>
-                                </div>
-
-                                <div class="informacao">
-                                    <h3>Melhor matéria:</h3>
-                                    <p>
-                                        <%= estatistica.getMelhorMateria() %>
-                                    </p>
-                                </div>
-
+                            <div class="informacao">
+                                <h3><a href="">Gerar Boletim</a></h3>
                             </div>
+
+                            <div class="informacao">
+                                <h3>Notas baixas:</h3>
+                                <% for (EstatisticaBoletimDTO estatistica : estatistica) { %>
+                                    <p>
+                                        <%= estatistica.getNotasBaixas()%>
+                                    </p>
+                                    <% } %>
+                            </div>
+
+                            <div class="informacao">
+                                <h3>Melhor matéria:</h3>
+                                <p>
+                                    <%= estatistica.getMelhorMateria() %>
+                                </p>
+                            </div>
+
+                        </div>
 
                     </div>
 
@@ -80,54 +80,47 @@
                     <div class="tela_principal">
 
                         <div class="tabela_usuarios">
-                            <h3>Disciplina</h3>
                             <hr>
-                            <table border="0">
-                                <tr id="titulo_tabela">
-                                    <th>Professor</th>
-                                    <th>Matéria</th>
-                                    <th>Nota 1</th>
-                                    <th>Nota 2</th>
-                                    <th>Média</th>
-                                    <th>Observações</th>
-                                </tr>
-                                <% for (BoletimDto nota : nota) { %>
-                                    <tr>
-                                        <td>
-                                            <%= nota.getProfessor() %>
-                                        </td>
-                                        <td>
-                                            <%= nota.getMateria() %>
-                                        </td>
-                                        <td>
-                                            <%= nota.getN1() %>
-                                        </td>
-                                        <td>
-                                            <%= nota.getN2() %>
-                                        </td>
-                                        <td>
-                                            <%= nota.getMedia() %>
-                                        </td>
-                                        <td>
-                                            <%= nota.getObservacao() %>
-                                        </td>
-                                        <td>
-                                            <form action="${pageContext.request.contextPath}/area-restrita/fabricas"
-                                                method="get">
-                                                <input type="hidden" name="id" value="<%= f.getId() %>">
-                                                <input type="hidden" name="action" value="update">
-                                                <button id="editar" type="submit">Editar</button>
-                                            </form>
-                                        </td>
+                            <section class="card-tabela">
+                                <table border="0">
+                                    <tr id="titulo_tabela">
+                                        <th>Professor</th>
+                                        <th>Matéria</th>
+                                        <th>Nota 1</th>
+                                        <th>Nota 2</th>
+                                        <th>Média</th>
+                                        <th>Observações</th>
                                     </tr>
-                                    <% } %>
-                            </table>
+
+                                    <% for (BoletimDto nota : nota) { %>
+                                        <tr>
+                                            <td>
+                                                <%= nota.getProfessor() %>
+                                            </td>
+                                            <td>
+                                                <%= nota.getMateria() %>
+                                            </td>
+                                            <td>
+                                                <%= nota.getN1() %>
+                                            </td>
+                                            <td>
+                                                <%= nota.getN2() %>
+                                            </td>
+                                            <td>
+                                                <%= nota.getMedia() %>
+                                            </td>
+                                            <td>
+                                                <%= nota.getObservacao() %>
+                                            </td>
+                                        </tr>
+                            </section>
+                            <% } %>
+                                </table>
                         </div>
 
                     </div>
 
                 </main>
-                <script src=""></script>
             </body>
 
     </html>

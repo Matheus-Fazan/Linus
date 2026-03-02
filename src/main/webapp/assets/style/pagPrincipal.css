@@ -78,6 +78,32 @@ header {
     border:1px solid #ccc;
 }
 
+/* CARDS DE INFORMAÇÃO */
+
+.informacoes_gerais {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.informacao {
+    background: #ffffff;
+    border: 1.5px solid #cfd8e3;
+    border-radius: 12px;
+    padding: 26px 60px ;
+    min-width: 220px;
+    }
+
+a {
+    text-decoration: none;
+    color: #000;
+}    
+
+.informacao p {
+    font-size: 18px;
+}
+
 /* TABELA CARD */
 
 .card-tabela{
@@ -112,6 +138,9 @@ td{
     border-bottom:1px solid #eee;
 }
 
+hr {
+    margin: 25px;
+}
 /* GRID INFERIOR */
 
 .grid-inferior{
