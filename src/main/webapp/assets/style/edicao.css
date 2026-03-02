@@ -1,0 +1,42 @@
+body {
+    background-color: #F1F1F1;
+}
+
+.subtitle {
+    margin-left: 30px;
+    margin-top: 0px;
+}
+
+.subtitle p {
+    text-align: left;
+}
+
+.search-bar {
+    outline: none;
+    width: 1200px;
+    margin: 0 auto;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #5588A3;
+    margin-bottom: 10px;
+}
+
+.largest-container {
+    align-items: flex-start;
+}
+
+.main-container {
+    margin: 0 auto 15px;
+}
+
+.form-perfil {
+    align-items: flex-start;
+}
+
+#s1 {
+    margin-top: 20px;
+}
+
+#m1 {
+    height: 450px;
+}

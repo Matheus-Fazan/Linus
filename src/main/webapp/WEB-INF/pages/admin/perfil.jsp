@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.ProfessorDto" %>
+    <%@ page import="com.linus.dto.AdminDto" %>
 
-        <% ProfessorDto perfil=(ProfessorDto) request.getAttribute("perfil"); %>
+        <% AdminDto perfil=(AdminDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -28,18 +28,18 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/pagPrincipal.jsp">Página
+                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/pagPrincipal.jsp">Página
                                     inicial</a>
                             </li>
                             <li>
                                 <a
-                                    href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
+                                    href="${pageContext.request.contextPath}/WEB-INF/pages/admin/criarAcesso.jsp">Observação</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
                             </li>
                             <li>
-                                <a href="">Logout</a>
+                                <a href="index.html">Logout</a>
                             </li>
                         </ul>
                     </nav>
@@ -67,44 +67,9 @@
                                     <h2>Perfil</h2>
 
                                     <div class="perfil-linha">
-                                        <span class="perfil-label">Matrícula</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getMatricula() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Nome</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getNome() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
                                         <span class="perfil-label">Email</span>
                                         <span class="perfil-valor">
                                             <%= perfil.getEmail() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">CPF</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getCpf() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Situação</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getSituacao() %>
-                                        </span>
-                                    </div>
-
-                                    <div class="perfil-linha">
-                                        <span class="perfil-label">Turma</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getTurma() %>
                                         </span>
                                     </div>
 

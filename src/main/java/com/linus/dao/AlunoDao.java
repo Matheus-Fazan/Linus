@@ -5,7 +5,7 @@ import com.linus.dto.AlunoPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
-import com.linus.model.Aluno;
+import com.linus.model.dao.Aluno;
 import com.linus.model.enums.Situacao;
 import com.linus.utils.DaoUtil;
 
@@ -16,10 +16,12 @@ import java.util.List;
 public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
+    private final String SQL_PREVIOUS_SAVE_COMMAND = "INSERT INTO aluno(id_turma) VALUES(?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
+    private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
     private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = """
                                 SELECT
@@ -62,6 +64,29 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             }
 
             return aluno;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public String previousSave(AlunoDto dto) throws SQLException, ConnectionException {
+        ResultSet queryResult = null;
+        PreparedStatement ps = null;
+        String generatedMatricula = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_SAVE_COMMAND);
+
+            ps.setString(1, dto.idTurma);
+
+            queryResult = ps.executeQuery();
+
+            Aluno aluno = null;
+            if (queryResult.next()) {
+                generatedMatricula = queryResult.getString("matricula");
+            }
+
+            return generatedMatricula;
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
@@ -144,6 +169,25 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             ps.setString(3, dto.cpf);
             ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
             ps.setLong(5, Long.parseLong(dto.matricula));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateEmailByMatricula(AlunoDto dto)
+            throws SQLException, ConnectionException, NoRegistersAlteredException {
+
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND);
+
+            ps.setString(1, dto.email);
+            ps.setLong(2, Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat', sans-serif;
 }
 
-body {
-    background-color: #ececec;
+body{
+    background:#ececec;
 }
+
+/* HEADER */
 
 header {
     background: #ffffff;
@@ -18,40 +20,6 @@ header {
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #ddd;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo img {
-    width: 50px;
-}
-
-.logo h3 {
-    font-weight: 600;
-    font-size: 18px;
-    color: #333;
-}
-
-.nav-header ul {
-    display: flex;
-    gap: 50px;
-    list-style: none;
-}
-
-#filtroAluno {
-    display: flex;
-    justify-content: center;
-}
-
-#valorAluno {
-    width: 100%;
-    padding: 8px;
-    border-radius: 8px;
-    border-color: #b8b8b8;
 }
 
 .nav-header a {
@@ -65,33 +33,49 @@ header {
     color: #A25DDF;
 }
 
-/* FUNDO PRINCIPAL */
+.nav-header ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+}
 
-.fundo_tela {
-    padding: 40px 80px;
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:50px;
+}
+
+.logout{
+    text-decoration:none;
+    color:#444;
 }
 
 /* TOPO */
 
-.topo {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    margin-bottom: 30px;
-    margin-left: 20px;
+.topo{
+    padding:40px 80px 20px 80px;
 }
 
-.topo h1 {
-    font-size: 46px;
-    color: #A25DDF;
-    font-weight: 700;
-    margin-top: 3px;
+.topo h1{
+    font-size:42px;
+    color:#9b5de5;
 }
 
-.topo p {
-    color: #363636;
-    font-size: 14px;
-    margin-top: -1px;
+.topo p{
+    color:#555;
+    margin-top:5px;
+}
+
+.search{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #ccc;
 }
 
 /* CARDS DE INFORMAÇÃO */
@@ -109,80 +93,129 @@ header {
     border-radius: 12px;
     padding: 26px 60px ;
     min-width: 220px;
-}
+    }
 
-.informacoes_aluno {
-    display: flex;
-    justify-content: space-between;
-    gap: 15px;
-    margin-top: 10px;
-}
-
-.informacao_aluno {
-    display: flex;
-    justify-content: space-around
-}
+a {
+    text-decoration: none;
+    color: #000;
+}    
 
 .informacao p {
     font-size: 18px;
 }
 
-/* CARD PRINCIPAL (TABELA) */
+/* TABELA CARD */
 
-.tela_principal {
-    margin: 2px auto;
-    width: 90%;
-    background: #ffffff;
-    border: 1.5px solid #bcd0ea;
-    border-radius: 15px;
-    padding: 30px;
+.card-tabela{
+    width:90%;
+    margin:20px auto;
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:25px;
 }
 
-/* TABELA */
-
-.tela_principal hr {
-    border: none;
-    height: 1px;
-    background-color: #a5a5a5;
-    margin-bottom: 20px;
-    margin: 2px;
+.info-aluno{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 14px;
+table{
+    width:100%;
+    border-collapse:collapse;
 }
 
-th {
-    color: #A25DDF;
-    font-weight: 600;
-    font-size: 18px;
-    padding: 15px 10px;
-    border-bottom: 1px solid #ddd;
+th{
+    text-align:left;
+    color:#9b5de5;
+    padding:12px 10px;
+    border-bottom:1px solid #ddd;
+}
+
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eee;
+}
+
+hr {
+    margin: 25px;
+}
+/* GRID INFERIOR */
+
+.grid-inferior{
+    width:90%;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* CARD FORM */
+
+.card-form{
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:20px;
+}
+
+.card-form h2{
+    color:#4FB2D9;
+    margin-bottom:10px;
+}
+
+.card-form label{
+    display:block;
+    margin-top:10px;
+}
+
+.card-form input{
+    width:100%;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-top:5px;
+}
+
+.btn-roxo{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    background:linear-gradient(90deg,#9d4edd,#7b2cbf);
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+/* CARD AÇÕES */
+
+.card-acoes{
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:20px;
+}
+
+.card-acoes button {
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    background:white;
+    cursor:pointer;
+}
+
+.nao-encontrado img{
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+}
+.nao-encontrado h1 {
+    font-size: 40px;
+    margin-left: 60px;
     text-align: left;
-}
-
-td {
-    padding: 15px 10px;
-    border-bottom: 1px solid #eee;
-    color: #444;
-}
-
-tr:hover {
-    background-color: #fafafa;
-}
-
-/* BOTÃO */
-
-button {
-    background: none;
-    border: none;
-    color: #A25DDF;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.7;
 }
