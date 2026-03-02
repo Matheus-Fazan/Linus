@@ -36,7 +36,7 @@ public class BoletimServlet extends HttpServlet {
             requestReponse.addRequestAttribute("estatisticasBoletim", estatisticasBoletim);
 
         } catch (SQLException | ConnectionException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, <a href=\"" + req.getContextPath() + "/aluno/boletim\">tente novamente</a>.");
         } finally {
             requestReponse.forwardTo("/../pagPrincipal.jsp");
         }
