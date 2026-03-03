@@ -1,9 +1,12 @@
+<%@ page import="com.linus.dto.EstatisticasBoletimDto" %>
+<%@ page import="com.linus.dto.BoletimDto" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <html lang="pt-br">
 
-    <% List<BoletimDTO> BoletimDTO = (List<Boletim>) request.getAttribute("boletimDTO");
-            EstatisticaBoletimDTO estatistica=(EstatisticaBoletim) request.getAttribute("estatistica");
+    <% List<BoletimDto> BoletimDTO = (List<BoletimDto>) request.getAttribute("boletimDTO");
+            EstatisticasBoletimDto estatistica=(EstatisticasBoletimDto) request.getAttribute("estatistica");
             %>
 
             <head>
@@ -58,17 +61,15 @@
 
                             <div class="informacao">
                                 <h3>Notas baixas:</h3>
-                                <% for (EstatisticaBoletimDTO estatistica : estatistica) { %>
                                     <p>
-                                        <%= estatistica.getNotasBaixas()%>
+                                        <%= estatistica.notasBaixas%>
                                     </p>
-                                    <% } %>
                             </div>
 
                             <div class="informacao">
                                 <h3>Melhor matéria:</h3>
                                 <p>
-                                    <%= estatistica.getMelhorMateria() %>
+                                    <%= estatistica.situacao %>
                                 </p>
                             </div>
 
@@ -92,25 +93,25 @@
                                         <th>Observações</th>
                                     </tr>
 
-                                    <% for (BoletimDto nota : nota) { %>
+                                    <% for (BoletimDto boletim : BoletimDTO) { %>
                                         <tr>
                                             <td>
-                                                <%= nota.getProfessor() %>
+                                                <%= boletim.getProfessor() %>
                                             </td>
                                             <td>
-                                                <%= nota.getMateria() %>
+                                                <%= boletim.getMateria() %>
                                             </td>
                                             <td>
-                                                <%= nota.getN1() %>
+                                                <%= boletim.n1 %>
                                             </td>
                                             <td>
-                                                <%= nota.getN2() %>
+                                                <%= boletim.n2 %>
                                             </td>
                                             <td>
-                                                <%= nota.getMedia() %>
+                                                <%= boletim.media %>
                                             </td>
                                             <td>
-                                                <%= nota.getObservacao() %>
+                                                <%= boletim.observacao %>
                                             </td>
                                         </tr>
                             </section>
