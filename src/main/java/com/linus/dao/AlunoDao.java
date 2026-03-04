@@ -16,7 +16,7 @@ import java.util.List;
 public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
-    private final String SQL_PREVIOUS_SAVE_COMMAND = "INSERT INTO aluno(id_turma) VALUES(?) RETURNING matricula";
+    private final String SQL_PREVIOUS_SAVE_COMMAND = "INSERT INTO aluno(nome, cpf, id_turma) VALUES(?, ?, ?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
@@ -77,7 +77,9 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
         try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, dto.idTurma);
+            ps.setString(1, dto.nome);
+            ps.setString(2, dto.cpf);
+            ps.setLong(3, Long.parseLong(dto.idTurma));
 
             queryResult = ps.executeQuery();
 
