@@ -38,9 +38,7 @@ public class NotaServlet extends HttpServlet {
 
             NotaDto dto = new NotaDto(requestParms);
 
-            String professorMatricula = (String) req.getSession().getAttribute("matricula");
-
-            dto.idProfessor = professorMatricula;
+            dto.idProfessor = (String) req.getSession().getAttribute("matricula");
 
             dao.updateNotaByProfessor(dto);
 
