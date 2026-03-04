@@ -12,7 +12,8 @@ public class Validator {
             "email",     new EmailValidator()::validate,
             "senha",     new SenhaValidator()::validate,
             "cpf",       new CpfValidator()::validate,
-            "matricula", new MatriculaValidator()::validate
+            "matricula", new MatriculaValidator()::validate,
+            "usuario", new UsuarioValidator()::validate
     );
 
     public static void validateParams(Map<String, String> requestParams) throws ParamException {
