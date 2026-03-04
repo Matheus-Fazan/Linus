@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @WebServlet("/admin/adicionar-aluno")
-public class adicionarAlunoServlet extends HttpServlet {
+public class AdicionarAlunoServlet extends HttpServlet {
 
     private static final AlunoDao dao = new AlunoDao();
 
@@ -47,7 +47,7 @@ public class adicionarAlunoServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Falha ao adicionar pré-cadastro. Por favor, tente novamente.");
 
         } finally {
-            requestReponse.forwardTo("/../criarAcesso.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/admin/criarAcesso.jsp");
         }
     }
 }
