@@ -99,7 +99,7 @@
                                                 <%= boletim.getProfessor() %>
                                             </td>
                                             <td>
-                                                <%= boletim.getMateria() %>
+                                                <%= boletim.materia %>
                                             </td>
                                             <td>
                                                 <%= boletim.n1 %>
