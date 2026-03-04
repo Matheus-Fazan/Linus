@@ -18,7 +18,7 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @WebServlet("/admin/adicionar-aluno")
-public class adicionarAlunoServlet extends HttpServlet {
+public class AdicionarAlunoServlet extends HttpServlet {
 
     private static final AlunoDao dao = new AlunoDao();
 
