@@ -25,4 +25,35 @@ public class AdicionarNotaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/pages/professor/adicionarNota.jsp").forward(req, resp);
     }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+
+        Map<String, String> requestParms = requestReponse.getAllRequestParameters();
+
+        try {
+            Validator.validateParams(requestParms);
+
+            NotaDto dto = new NotaDto(requestParms);
+
+            dto.idProfessor = (String) req.getSession().getAttribute("matricula");
+
+            dao.insertNotaByProfessor(dto);
+
+            requestReponse.addRequestAttribute("success", "Nota adicionada com sucesso!");
+        } catch (ParamException cause) {
+            requestReponse.addRequestAttribute("error", cause.getMessage());
+
+        } catch (SQLException | ConnectionException cause) {
+            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+
+        } catch (NoRegistersAlteredException cause) {
+            requestReponse.addRequestAttribute("error", "Falha ao adicionar nota. Verifique se você tem permissão para adicionar nota nesta matéria.");
+
+        } finally {
+            requestReponse.forwardTo("/WEB-INF/pages/professor/adicionarNota.jsp");
+        }
+    }
 }
