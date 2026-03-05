@@ -21,6 +21,12 @@ public class BoletimServlet extends HttpServlet {
     private static final BoletimDao dao = new BoletimDao();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+        requestReponse.forwardTo("/WEB-INF/pages/aluno/pagPrincipal.jsp");
+    }
+
+        @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestReponse requestReponse = new RequestReponse(req, resp);
@@ -29,7 +35,7 @@ public class BoletimServlet extends HttpServlet {
 
         try {
 
-            List<BoletimDto> boletim = dao.findBoletimById(idUsuario);
+            List<BoletimDto> boletim = BoletimDao.findBoletimById(idUsuario);
             EstatisticasBoletimDto estatisticasBoletim = new EstatisticasBoletimDto(boletim);
 
             requestReponse.addRequestAttribute("boletim", boletim);
@@ -38,7 +44,7 @@ public class BoletimServlet extends HttpServlet {
         } catch (SQLException | ConnectionException cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, <a href=\"" + req.getContextPath() + "/aluno/boletim\">tente novamente</a>.");
         } finally {
-            requestReponse.forwardTo("/../pagPrincipal.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/aluno/pagPrincipal.jsp");
         }
     }
 }

@@ -11,10 +11,6 @@
 </head>
 
 <body>
-<div class="voltar">
-  <img src="./assets/imgs/seta.png">
-  <p>Voltar para home</p>
-</div>
 <div class="largest-container">
   <div class="title">
     <img src="./assets/imgs/logo.png">
@@ -30,7 +26,7 @@
       </div>
       <button>Login</button>
       <hr>
-      <p>É aluno? Faça seu primeiro acesso <a href="./pages/aluno/primeiro-acesso.html">aqui</a></p>
+      <p>É aluno? Faça seu primeiro acesso <a href="${pageContext.request.contextPath}/aluno/primeiro-acesso">aqui</a></p>
       <a class="login-forget" href="${pageContext.request.contextPath}/recuperar-senha">Esqueci minha senha</a>
 
       <% if (request.getAttribute("error") != null) { %>

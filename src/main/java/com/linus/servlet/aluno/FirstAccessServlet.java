@@ -26,6 +26,13 @@ public class FirstAccessServlet extends HttpServlet {
     private static final AlunoDao dao = new AlunoDao();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+        requestReponse.forwardTo("/WEB-INF/pages/aluno/primeiro-acesso.jsp");
+    }
+
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
@@ -50,7 +57,7 @@ public class FirstAccessServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Matricula não encontrada. Por favor, contate a escola para realizar o seu pré-cadastro.");
 
         } finally {
-            requestReponse.forwardTo("/../primeiro-acesso.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/aluno/primeiro-acesso.jsp");
         }
 
     }

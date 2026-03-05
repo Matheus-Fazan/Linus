@@ -20,7 +20,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
-    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ? WHERE matricula = ?";
+    private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, hash_senha = ? WHERE matricula = ? AND email IS NOT NULL AND hash_senha IS NOT NULL";
     private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM aluno WHERE matricula = ?";
     private final String SQL_FIND_PERFIL_BY_MATRICULA_COMMAND = """
@@ -170,10 +170,8 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             ps = con.prepareStatement(SQL_UPDATE_WITHOUT_IDTURMA_COMMAND);
 
             ps.setString(1, dto.email);
-            ps.setString(2, dto.nome);
-            ps.setString(3, dto.cpf);
-            ps.setString(4, DaoUtil.toBCryptHash(dto.senha));
-            ps.setLong(5, Long.parseLong(dto.matricula));
+            ps.setString(2, DaoUtil.toBCryptHash(dto.senha));
+            ps.setLong(3    , Long.parseLong(dto.matricula));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

@@ -22,7 +22,8 @@ public class AuthFilter implements Filter {
             "/acesso-negado.jsp",
             "/recuperar-senha",
             "/verificar-codigo",
-            "/redefinir-senha"
+            "/redefinir-senha",
+            "/aluno/primeiro-acesso"
     );
 
     @Override
@@ -61,7 +62,7 @@ public class AuthFilter implements Filter {
         if (perfilUsuario == null) return false;
 
         return switch (perfilUsuario.toLowerCase()) {
-            case "professor" -> caminho.startsWith("/professor/") || caminho.startsWith("/aluno/boletim/");
+            case "professor" -> caminho.startsWith("/professor/") || caminho.startsWith("/aluno/boletim/pdf");
             case "aluno"     -> caminho.startsWith("/aluno/");
             case "admin"     -> true;
             default          -> false;
