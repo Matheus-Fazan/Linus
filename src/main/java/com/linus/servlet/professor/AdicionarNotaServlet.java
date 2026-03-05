@@ -16,14 +16,14 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-@WebServlet("/professor/adicionar-nota")
+@WebServlet("/professor/notas")
 public class AdicionarNotaServlet extends HttpServlet {
 
     private static final NotaDao dao = new NotaDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/pages/professor/adicionarNota.jsp").forward(req, resp);
+        req.getRequestDispatcher("/WEB-INF/pages/professor/tabelaNotas.jsp").forward(req, resp);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class AdicionarNotaServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Falha ao adicionar nota. Verifique se você tem permissão para adicionar nota nesta matéria.");
 
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/professor/adicionarNota.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/professor/tabelaNotas.jsp");
         }
     }
 }
