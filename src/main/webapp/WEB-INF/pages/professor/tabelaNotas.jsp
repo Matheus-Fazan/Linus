@@ -1,7 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
     <%@ page import="java.util.List" %>
-        <%@ page import="seu.pacote.NotaDTO" %>
-            <html lang="pt-br">
+        <%@ page import="com.linus.dto.NotaDto" %>
+<%@ page import="com.linus.dto.AlunoDto" %>
+<html lang="pt-br">
 
             <head>
                 <meta charset="UTF-8">
@@ -13,6 +14,9 @@
                     type="image/x-icon">
 
             </head>
+
+            <% NotaDto nota = (NotaDto) request.getAttribute("NotaDto"); %>
+            <% AlunoDto aluno = (AlunoDto) request.getAttribute("AlunoDto"); %>
 
             <body>
 
@@ -55,7 +59,8 @@
 
                         <% if(encontrado !=null && encontrado){ %>
 
-                            <% Aluno aluno=(Aluno) request.getAttribute("aluno"); List<NotaDTO> notas = (List<NotasDTO>)
+                            <% Aluno aluno=(Aluno) request.getAttribute("aluno"); 
+                            List<BoletimDto> notas = (List<BoletimDto>)
                                     request.getAttribute("notas");
                                     %>
 
@@ -82,7 +87,7 @@
                                             </thead>
 
                                             <tbody>
-                                                <% for(NotasDTO n : notas){ %>
+                                                <% for (BoletimDto nota : nota) { %>
                                                     <tr>
                                                         <td>
                                                             <%= n.getMateria() %>
@@ -131,6 +136,29 @@
                                             </form>
                                         </div>
 
+                                        <div class="card-form">
+                                            <h2>Editar nota do aluno:</h2>
+                                            <p><strong>Nome do aluno:</strong>
+                                                <%= aluno.getNome() %>
+                                            </p>
+                                            <p><strong>Matéria:</strong> Matemática</p>
+
+                                            <form action="${pageContext.request.contextPath}/nota" method="post">
+                                                <input type="hidden" name="alunoId" value="<%= aluno.getId() %>">
+
+                                                <label>Nota 1:</label>
+                                                <input type="number" step="0.1" name="nota1"
+                                                       placeholder="Edite a nota do aluno" value="nota.getN1()">
+
+                                                <label>Nota 2:</label>
+                                                <input type="number" step="0.1" name="nota2"
+                                                       placeholder="Digite a nota" value="nota.getN2()">
+
+                                                <button type="submit" class="btn-roxo">Editar nota</button>
+                                            </form>
+                                        </div>
+                                    </section>
+
                                         <div class="card-acoes">
                                             <h3>Ações rápidas</h3>
                                             <a href="${pageContext.request.contextPath}/boletim"><button>Gerar
@@ -142,7 +170,7 @@
                                                     para página de perfil</button></a>
                                         </div>
 
-                                    </section>
+
 
                                     <% } else if(encontrado !=null && !encontrado){ %>
 
@@ -151,7 +179,8 @@
                                                 <img src="/src/main/webapp/assets/imgs/aluno-nao-achado 1.jpg"
                                                     width="200">
                                             </center>
-                                            <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado</h2>
+                                            <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado, <br> 
+                                            Pesquise novamente</h2>
                                         </div>
 
                                         <% } %>

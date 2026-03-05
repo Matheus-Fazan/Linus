@@ -1,7 +1,7 @@
-package com.linus.servlet.professor;
+package com.linus.servlet.admin;
 
-import com.linus.dao.NotaDao;
-import com.linus.dto.NotaDto;
+import com.linus.dao.ProfessorDao;
+import com.linus.dto.ProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.exception.requestParam.ParamException;
@@ -12,23 +12,18 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-@WebServlet("/professor/notas")
-public class NotaServlet extends HttpServlet {
+@WebServlet("/admin/adicionar-professor")
+public class AdicionarProfessorServlet extends HttpServlet {
 
-    private static final NotaDao dao = new NotaDao();
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/pages/professor/tabelaNotas.jsp").forward(req, resp);
-    }
+    private final static ProfessorDao dao = new ProfessorDao();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
         Map<String, String> requestParms = requestReponse.getAllRequestParameters();
@@ -36,13 +31,11 @@ public class NotaServlet extends HttpServlet {
         try {
             Validator.validateParams(requestParms);
 
-            NotaDto dto = new NotaDto(requestParms);
+            ProfessorDto dto = new ProfessorDto(requestParms);
 
-            dto.idProfessor = (String) req.getSession().getAttribute("matricula");
+            String generatedId = dao.saveReturningId(dto);
 
-            dao.updateNotaByProfessor(dto);
-
-            requestReponse.addRequestAttribute("success", "Nota alterada com sucesso!");
+            requestReponse.addRequestAttribute("success", "Cadastro realizado com sucesso! Matricula gerada: " + generatedId + ".");
         } catch (ParamException cause) {
             requestReponse.addRequestAttribute("error", cause.getMessage());
 
@@ -50,10 +43,10 @@ public class NotaServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
 
         } catch (NoRegistersAlteredException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao alterar nota. Verifique se você tem permissão para alterar esta nota.");
+            requestReponse.addRequestAttribute("error", "Falha ao adicionar. Por favor, tente novamente.");
 
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/professor/tabelaNotas.jsp");
+            requestReponse.forwardTo("/../criarAcesso.jsp");
         }
     }
 }

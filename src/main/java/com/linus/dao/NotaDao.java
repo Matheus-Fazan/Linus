@@ -21,6 +21,7 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
     private final String SQL_UPDATE_COMMAND = "UPDATE nota SET n1 = ?, n2 = ?, media = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM nota WHERE id = ?";
+    private final String SQL_UPDATE_BY_PROFESSOR = "UPDATE nota SET n1 = ?, n2 = ? WHERE id = ? AND id_professor = ?";
     private final String SQL_FIND_BY_MATRICULA = """
             SELECT
                 a.nome                                              AS nome_aluno,
@@ -145,6 +146,25 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
             ps.setLong(1, Long.parseLong(dto.id));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateNotaByProfessor(NotaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_BY_PROFESSOR);
+
+            ps.setBigDecimal(1, new BigDecimal(dto.n1));
+            ps.setBigDecimal(2, new BigDecimal(dto.n2));
+            ps.setLong(3, Long.parseLong(dto.id));
+            ps.setLong(4, Long.parseLong(dto.idProfessor));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

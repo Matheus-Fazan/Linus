@@ -13,10 +13,11 @@ import java.util.List;
 
 public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto> {
 
-    private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, cpf, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
+    // Ajustado para usar a coluna 'usuario' em vez de 'cpf'
+    private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, usuario, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM professor WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
-    private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, cpf = ?, id_materia = ? WHERE id = ?";
+    private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, usuario = ?, id_materia = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
     private static final String SQL_UPDATE_PASSWORD = """
         UPDATE professor SET hash_senha = ? WHERE id = ?
@@ -33,7 +34,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             ps.setString(1, dto.nome);
             ps.setString(2, dto.email);
             ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
-            ps.setString(4, dto.cpf);
+            ps.setString(4, dto.usuario);
             ps.setLong(5, Long.parseLong(dto.idMateria));
 
             queryResult = ps.executeQuery();
@@ -44,6 +45,33 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             }
 
             return professor;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public String saveReturningId(ProfessorDto dto) throws SQLException, ConnectionException {
+        ResultSet queryResult = null;
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_SAVE_COMMAND);
+
+            ps.setString(1, dto.nome);
+            ps.setString(2, dto.email);
+            ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
+            ps.setString(4, dto.usuario);
+            ps.setLong(5, Long.parseLong(dto.idMateria));
+
+            queryResult = ps.executeQuery();
+
+            String generatedKey = null;
+
+            if (queryResult.next()) {
+                generatedKey = queryResult.getString("id");
+            }
+
+            return generatedKey;
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
@@ -103,7 +131,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             ps.setString(1, dto.nome);
             ps.setString(2, dto.email);
             ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
-            ps.setString(4, dto.cpf);
+            ps.setString(4, dto.usuario); // Alterado de dto.cpf para dto.usuario
             ps.setLong(5, Long.parseLong(dto.idMateria));
             ps.setLong(6, Long.parseLong(dto.id));
 
