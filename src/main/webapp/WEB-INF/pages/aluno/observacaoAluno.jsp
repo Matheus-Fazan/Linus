@@ -1,6 +1,7 @@
 <%@ page import="com.linus.dto.ObservacaoDto" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.linus.model.dao.Observacao" %>
+<%@ page import="com.linus.model.dao.Professor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="pt-br">
 
@@ -41,6 +42,8 @@
         <p>Visualize os comentários de seus professores</p>
     </div>
     <%
+        Professor professor = (Professor) request.getAttribute("professor");
+
         List<Observacao> observacoes = (List<Observacao>) request.getAttribute("observacoes");
         for (Observacao observacao : observacoes) {
     %>
@@ -48,10 +51,10 @@
     <div class="card">
         <div class="row">
             <p><strong>Disciplina:</strong>
-                <%= observacao.getDisciplina() %>
+                <%= professor.getIdMateria() %>
             </p>
             <p><strong>Professor:</strong>
-                <%= observacao.getNomeProfessor() %>
+                <%= professor.getNome() %>
             </p>
         </div>
         <hr>
