@@ -24,16 +24,19 @@
         <nav class="nav-header">
           <ul>
             <li>
-              <a href="">Página inicial</a>
+              <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
             </li>
             <li>
-              <a href="">Criar Acesso</a>
+              <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
             </li>
             <li>
-              <a href="">Perfil</a>
+              <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
             </li>
             <li>
-              <a href="">Logout</a>
+              <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
+            </li>
+            <li>
+              <a href="index.html">Logout</a>
             </li>
           </ul>
         </nav>

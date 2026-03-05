@@ -27,7 +27,10 @@
                     <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Observação</a>
+                    <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
