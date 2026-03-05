@@ -39,7 +39,7 @@
                                 <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
                             </li>
                             <li>
-                                <a href="">Logout</a>
+                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
                             </li>
                         </ul>
                     </nav>

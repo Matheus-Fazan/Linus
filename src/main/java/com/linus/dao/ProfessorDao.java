@@ -19,6 +19,9 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
     private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, usuario = ?, id_materia = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
+    private static final String SQL_UPDATE_PASSWORD = """
+        UPDATE professor SET hash_senha = ? WHERE id = ?
+        """;
 
     @Override
     public Professor save(ProfessorDto dto) throws SQLException, ConnectionException {
@@ -152,6 +155,26 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
             }
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    /**
+     * Altera a senha de um professor pelo id.
+     *
+     * @param idOrigem  id do professor
+     * @param novaSenha nova senha já hasheada com BCrypt
+     */
+    public void alterarSenhaPorId(long idOrigem, String novaSenha) throws SQLException, ConnectionException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_PASSWORD);
+            ps.setString(1, DaoUtil.toBCryptHash(novaSenha));
+            ps.setLong(2, idOrigem);
+            ps.executeUpdate();
+
         } finally {
             DaoUtil.closeResources(ps);
         }
