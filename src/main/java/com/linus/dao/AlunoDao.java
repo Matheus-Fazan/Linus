@@ -41,6 +41,9 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
                              WHERE a.matricula = ?
                              GROUP BY a.matricula, a.nome, a.email, a.cpf, t.nome;
                 """;
+    private static final String SQL_UPDATE_PASSWORD = """
+        UPDATE aluno SET hash_senha = ? WHERE matricula = ?
+        """;
 
     @Override
     public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
@@ -228,11 +231,10 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
      * @throws SQLException        caso ocorra erro na execução da query
      */
     public AlunoPerfilDto findByMatricula(long matricula) throws ConnectionException, SQLException {
-        Connection conn = ConnectionManager.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
 
-        try {
+        try (Connection conn = ConnectionManager.connect()) {
             ps = conn.prepareStatement(SQL_FIND_PERFIL_BY_MATRICULA_COMMAND);
             ps.setLong(1, matricula);
 
@@ -246,6 +248,26 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
         } finally {
             DaoUtil.closeResources(ps, rs);
+        }
+    }
+
+    /**
+     * Altera a senha de um aluno pelo email.
+     *
+     * @param idOrigem  matricula do aluno
+     * @param novaSenha nova senha já hasheada com BCrypt
+     */
+    public void alterarSenhaPorId(long idOrigem, String novaSenha) throws SQLException, ConnectionException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_PASSWORD);
+            ps.setString(1, DaoUtil.toBCryptHash(novaSenha));
+            ps.setLong(2, idOrigem);
+            ps.executeUpdate();
+
+        } finally {
+            DaoUtil.closeResources(ps);
         }
     }
 }

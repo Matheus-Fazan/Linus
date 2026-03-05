@@ -15,7 +15,16 @@ import java.util.List;
 
 public class BoletimDao {
 
-    private static final String SQL_BOLETIM_COMMAND = "SELECT m.materia, coalesce(n.n1, '-'), coalesce(n.n2, '_'), coalesce(( (n.n1 + n.n2) / 2 ), '-') AS media, n.observacao FROM nota n JOIN materia m ON n.id_materia = m.id WHERE n.id_aluno = ?";
+    private static final String SQL_BOLETIM_COMMAND =
+            "SELECT m.nome AS materia, " +
+                    "coalesce(CAST(n.n1 AS VARCHAR), '-') AS n1, " +
+                    "coalesce(CAST(n.n2 AS VARCHAR), '-') AS n2, " +
+                    "coalesce(CAST(ROUND((n.n1 + n.n2) / 2, 2) AS VARCHAR), '-') AS media, " +
+                    "n.observacao " +
+                    "FROM nota n " +
+                    "JOIN professor p ON n.id_professor = p.id " +
+                    "JOIN materia m ON p.id_materia = m.id " +
+                    "WHERE n.id_aluno = ?";
 
     public static List<BoletimDto> findBoletimById(long id) throws SQLException, ConnectionException {
         List<BoletimDto> boletim = new ArrayList<>();
