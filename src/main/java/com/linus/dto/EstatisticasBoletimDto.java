@@ -15,41 +15,23 @@ public class EstatisticasBoletimDto {
         String situacao = "Aprovado";
 
         for (BoletimDto nota : boletim) {
-
-            if ( !nota.n1.equals("-") ) {
-                if ( Integer.valueOf(nota.n1) < 6) {
-                    notasBaixas++;
-                }
-            }
-
-            if ( !nota.n2.equals("-") ) {
-                if ( Integer.valueOf(nota.n2) < 6) {
-                    notasBaixas++;
-                }
-            }
-
+            if (!nota.n1.equals("-") && Double.valueOf(nota.n1) < 6) notasBaixas++;
+            if (!nota.n2.equals("-") && Double.valueOf(nota.n2) < 6) notasBaixas++;
             medias.add(nota.media);
         }
 
-        if ( medias.contains("-") ) {
+        if (medias.contains("-")) {
             situacao = "No processo";
-
-            this.notasBaixas = String.valueOf(notasBaixas);
-            this.situacao = situacao;
-
-            return;
-        }
-
-        for (String media : medias) {
-
-            if (Integer.valueOf(media) < 6) {
-                situacao = "Reprovado";
-
-                this.notasBaixas = String.valueOf(notasBaixas);
-                this.situacao = situacao;
-
-                return;
+        } else {
+            for (String media : medias) {
+                if (Double.valueOf(media) < 6) {
+                    situacao = "Reprovado";
+                    break;
+                }
             }
         }
+
+        this.notasBaixas = String.valueOf(notasBaixas);
+        this.situacao = situacao;
     }
 }

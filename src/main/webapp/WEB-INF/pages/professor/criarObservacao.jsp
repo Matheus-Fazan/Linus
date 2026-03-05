@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 
 <head>
-    <link rel="stylesheet" href="../../../assets/style/criarObservacao.css">
-    <link rel="shortcut icon" href="../../../assets/imgs/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/criarObservacao.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
     <title>Criar Observação</title>
 </head>
 
@@ -37,5 +37,4 @@
     </div>
 </form>
 </body>
-
 </html>

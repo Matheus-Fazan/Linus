@@ -11,10 +11,14 @@
 </head>
 
 <body>
+<div class="voltar">
+  <img src="./assets/imgs/seta.png" alt="back-landing">
+  <a href="https://lucasramosdecarvalho.github.io/Linus_landing_page/" target="_blank"><p>Voltar para home</p></a>
+</div>
 <div class="largest-container">
   <div class="title">
     <img src="./assets/imgs/logo.png">
-    <h1>Instituto de <br> Tecnologia</h1>
+    <h1>Instituto <br> Linus</h1>
   </div>
   <div class="main-container">
     <form action="${pageContext.request.contextPath}/login" method="post">

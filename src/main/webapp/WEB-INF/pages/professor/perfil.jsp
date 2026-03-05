@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.PRofessorPerfilDto" %>
+    <%@ page import="com.linus.dto.ProfessorPerfilDto" %>
 
         <% ProfessorPerfilDto perfil=(ProfessorPerfilDto) request.getAttribute("perfil"); %>
 
