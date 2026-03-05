@@ -31,7 +31,7 @@
                 <a href="${pageContext.request.contextPath}/aluno/boletim">Página inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/aluno/observacao">Observação</a>
+                <a href="${pageContext.request.contextPath}/aluno/observacoes">Observação</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/aluno/perfil">Perfil</a>
@@ -54,7 +54,7 @@
         <div class="informacoes_gerais">
 
             <div class="informacao">
-                <h3><a href="${pageContext.request.contextPath}/aluno/boletim/pdf">Gerar Boletim</a></h3>
+                <h3><a href="${pageContext.request.contextPath}/aluno/boletim/pdf?matricula=${sessionScope.idUsuario}">Gerar Boletim</a></h3>
             </div>
 
             <% if (estatistica != null) { %>

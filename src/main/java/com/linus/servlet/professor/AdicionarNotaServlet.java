@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-@WebServlet("/professor/notas")
+@WebServlet("/professor/notas/adicionar")
 public class AdicionarNotaServlet extends HttpServlet {
 
     private static final NotaDao dao = new NotaDao();

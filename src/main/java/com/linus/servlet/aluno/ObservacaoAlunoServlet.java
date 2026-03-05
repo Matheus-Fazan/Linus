@@ -20,7 +20,7 @@ public class ObservacaoAlunoServlet extends HttpServlet {
     private static final ObservacaoDao dao  = new ObservacaoDao();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
@@ -33,7 +33,7 @@ public class ObservacaoAlunoServlet extends HttpServlet {
         } catch (SQLException | ConnectionException cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, <a href=\"" + req.getContextPath() + "/aluno/observacoes\">tente novamente</a>.");
         } finally {
-            requestReponse.forwardTo("/../observacaoAluno.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/aluno/observacaoAluno.jsp");
         }
     }
 }
