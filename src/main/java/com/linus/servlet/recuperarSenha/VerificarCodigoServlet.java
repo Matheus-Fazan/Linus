@@ -11,7 +11,7 @@ import java.io.IOException;
 
 @WebServlet("/verificar-codigo")
 public class VerificarCodigoServlet extends HttpServlet {
-    private static final long CODIGO_TEMPO_EXPIRACAO = 1000;
+    private static final long CODIGO_TEMPO_EXPIRACAO = 600000;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
