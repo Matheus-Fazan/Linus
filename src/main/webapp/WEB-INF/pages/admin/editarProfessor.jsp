@@ -63,7 +63,7 @@
         <label for="email">Email:</label>
         <input type="email" id="email" value="<%= professor.email %>">
         <label for="idMateria">Matéria:</label>
-        <input type="text" id="idMateria" value="<%= professor. %>">
+        <input type="text" id="idMateria" value="<%= professor.idMateria %>">
         <button type="submit">Salvar Alterações</button>
       </form>
 
