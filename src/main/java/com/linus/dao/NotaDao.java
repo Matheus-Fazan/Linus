@@ -17,6 +17,7 @@ import java.util.List;
 public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO nota(n1, n2, media, id_professor, id_aluno) VALUES(?, ?, ?, ?, ?) RETURNING id";
+    private final String SQL_INSERT_BY_PROFESSOR = "INSERT INTO nota(n1, n2, id_professor, id_aluno) SELECT ?, ?, ?, ? WHERE EXISTS (SELECT 1 FROM professor WHERE id = ? AND id_materia = (SELECT id_materia FROM aluno WHERE matricula = ?))";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM nota WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
     private final String SQL_UPDATE_COMMAND = "UPDATE nota SET n1 = ?, n2 = ?, media = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
@@ -69,6 +70,27 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
             return nota;
         } finally {
             DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public void insertNotaByProfessor(NotaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_INSERT_BY_PROFESSOR);
+
+            ps.setBigDecimal(1, new BigDecimal(dto.n1));
+            ps.setBigDecimal(2, new BigDecimal(dto.n2));
+            ps.setLong(3, Long.parseLong(dto.idProfessor));
+            ps.setLong(4, Long.parseLong(dto.idAluno));
+            ps.setLong(5, Long.parseLong(dto.idProfessor));
+            ps.setLong(6, Long.parseLong(dto.idAluno));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
         }
     }
 
