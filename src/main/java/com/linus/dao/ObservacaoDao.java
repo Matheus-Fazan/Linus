@@ -89,7 +89,7 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
         }
     }
 
-    public List<Observacao> findAllById(long id) throws SQLException, ConnectionException {
+    public List<Observacao> findAllById(Long id) throws SQLException, ConnectionException {
         List<Observacao> observacoes = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet queryResult = null;
