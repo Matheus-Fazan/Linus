@@ -44,7 +44,7 @@
         </div>
         <div class="buttons">
             <button>Filtrar</button>
-            <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/criarObservacao.html"><button>+ Criar Observação</button></a>
+            <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/criarObservacao.jsp"><button>+ Criar Observação</button></a>
         </div>
     </div>
     <%

@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
         try {
             AcessoDAO acessoDAO = new AcessoDAO();
             Usuario usuario = acessoDAO.auth(email, senha);
-
+            System.out.println(usuario);
             if (usuario == null) {
                 resposta.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 requisicao.setAttribute("error", "Email e/ou senha inválidos");
@@ -48,7 +48,7 @@ public class LoginServlet extends HttpServlet {
             String urlRedirecionamento = switch (usuario.getCargo().toLowerCase()) {
                 case "admin"     -> "/admin/dashboard";
                 case "professor" -> "/professor/notas";
-                case "aluno"     -> "/aluno/perfil";
+                case "aluno"     -> "/aluno/boletim";
                 default          -> "/index.jsp";
             };
 
@@ -57,7 +57,7 @@ public class LoginServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             resposta.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-            requisicao.setAttribute("error", "Email ou senha inválidos");
+            requisicao.setAttribute("error", "Ocorreu um erro durante a autenticação. Tente novamente.");
             requisicao.getRequestDispatcher("/index.jsp").forward(requisicao, resposta);
         }
     }
