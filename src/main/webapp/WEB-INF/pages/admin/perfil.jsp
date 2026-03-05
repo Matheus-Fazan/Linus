@@ -63,17 +63,26 @@
                         <% } else if (perfil !=null) { %>
 
                             <center>
-                                <section class="perfil-card">
-                                    <h2>Perfil</h2>
+                                <form action="atualizarPerfil" method="post" class="perfil-card">
 
                                     <div class="perfil-linha">
-                                        <span class="perfil-label">Email</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getEmail() %>
-                                        </span>
+                                        <label class="perfil-label" for="email">Email</label>
+
+                                        <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                class="perfil-input"
+                                                value="<%= perfil.email %>"
+                                                required
+                                        >
                                     </div>
 
-                                </section>
+                                    <button type="submit" class="btn-salvar">
+                                        Salvar alterações
+                                    </button>
+
+                                </form>
                             </center>
 
                             <% } %>

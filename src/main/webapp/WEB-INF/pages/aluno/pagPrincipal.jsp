@@ -85,7 +85,6 @@
                             <section class="card-tabela">
                                 <table border="0">
                                     <tr id="titulo_tabela">
-                                        <th>Professor</th>
                                         <th>Matéria</th>
                                         <th>Nota 1</th>
                                         <th>Nota 2</th>
@@ -95,9 +94,6 @@
 
                                     <% for (BoletimDto boletim : BoletimDTO) { %>
                                         <tr>
-                                            <td>
-                                                <%= boletim.getProfessor() %>
-                                            </td>
                                             <td>
                                                 <%= boletim.materia %>
                                             </td>

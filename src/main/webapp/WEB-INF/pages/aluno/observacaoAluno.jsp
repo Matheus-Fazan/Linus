@@ -1,4 +1,6 @@
-<%@ page import="com.linus.model.dao.ObservacaoDTO" %>
+<%@ page import="com.linus.dto.ObservacaoDto" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.linus.model.dao.Observacao" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="pt-br">
 
@@ -39,8 +41,8 @@
         <p>Visualize os comentários de seus professores</p>
     </div>
     <%
-        List<ObservacaoDTO> observacoes = (List<ObservacaoDTO>) request.getAttribute("observacoes");
-        for (ObservacaoDTO observacao : observacoes) {
+        List<Observacao> observacoes = (List<Observacao>) request.getAttribute("observacoes");
+        for (Observacao observacao : observacoes) {
     %>
 
     <div class="card">
@@ -58,7 +60,7 @@
                 <%= observacao.getObservacao() %>
             </p>
             <p><strong>Data:</strong>
-                <%= observacao.getData() %>
+                <%= observacao.getDataCriacao() %>
             </p>
         </div>
     </div>

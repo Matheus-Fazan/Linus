@@ -1,4 +1,5 @@
 <%@ page import="com.linus.model.dao.Professor" %>
+<%@ page import="com.linus.dto.ProfessorDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -10,6 +11,8 @@
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
+
+  <% ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");%>
 
 <body>
 <header>
@@ -36,28 +39,30 @@
   </nav>
 
 </header>
-<% Professor professor = (Professor) request.getAttribute("professor");%>
-<div class="largest-container">
-  <div class="subtitle" id="s1">
-    <h2>Edite o perfil do professor</h2>
-    <p>Visualize suas informações e as edite.</p>
+
+  <div class="largest-container">
+    <div class="subtitle" id="s1">
+      <h2>Edite o perfil do professor</h2>
+      <p>Visualize suas informações e as edite.</p>
+    </div>
+    <input type="text" class="search-bar"
+           placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
+    <div class="main-container" id="m1">
+
+      <form action="" class="form-perfil">
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" value="<%= professor.nome %>">
+        <label for="user">Usuário:</label>
+        <input type="text" id="user" value="<%= professor.usuario %>">
+        <label for="email">Email:</label>
+        <input type="email" id="email" value="<%= professor.email %>">
+        <label for="idMateria">Matéria:</label>
+        <input type="text" id="idMateria" value="<%= professor. %>">
+        <button type="submit">Salvar Alterações</button>
+      </form>
+
+    </div>
   </div>
-  <input type="text" class="search-bar"
-         placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
-  <div class="main-container" id="m1">
-    <form action="" class="form-perfil">
-      <label for="nome">Nome:</label>
-      <input type="text" name="nome" value="<%= professor.getNome() %>">
-      <label for="user">Usuário:</label>
-      <input type="text" name="user" value="<%= professor.getUsuario() %>">
-      <label for="email">Email:</label>
-      <input type="email" name="email" value="<%= professor.getEmail() %>">
-      <label for="idMateria">Matéria:</label>
-      <input type="text" name="idMateria" value="<%= professor.getIdMateria() %>">
-      <button type="submit">Salvar Alterações</button>
-    </form>
-  </div>
-</div>
 
 
 </body>

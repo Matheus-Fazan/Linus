@@ -1,5 +1,6 @@
 <%@ page import="com.linus.model.dao.Aluno" %>
-  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.linus.dto.AlunoDto" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <html>
 
@@ -10,6 +11,8 @@
       <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
       <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
     </head>
+
+    <% AlunoDto aluno=(AlunoDto) request.getAttribute("aluno");%>
 
     <body>
       <header>
@@ -36,7 +39,7 @@
         </nav>
 
       </header>
-      <% Aluno aluno=(Aluno) request.getAttribute("aluno");%>
+
         <div class="largest-container">
           <div class="subtitle">
             <h2>Edite o perfil do aluno</h2>
@@ -47,15 +50,15 @@
           <div class="main-container">
             <form action="" class="form-perfil">
               <label>Matrícula:</label>
-              <input type="text" name="matricula" value="<%= aluno.getMatricula() %>">
+              <input type="text" name="matricula" value="<%= aluno.matricula %>">
               <label>Nome:</label>
-              <input type="text" name="nome" value="<%= aluno.getNome() %>">
+              <input type="text" name="nome" value="<%= aluno.nome %>">
               <label>Email:</label>
-              <input type="email" name="email" value="<%= aluno.getEmail() %>">
+              <input type="email" name="email" value="<%= aluno.email %>">
               <label>CPF:</label>
-              <input type="text" name="cpf" value="<%= aluno.getCpf() %>">
+              <input type="text" name="cpf" value="<%= aluno.cpf %>">
               <label>Turma:</label>
-              <input type="text" name="idTurma" value="<%= aluno.getIdTurma() %>">
+              <input type="text" name="idTurma" value="<%= aluno.turmaDto %>">
               <button type="submit">Salvar Alterações</button>
             </form>
           </div>
