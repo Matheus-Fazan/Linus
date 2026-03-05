@@ -13,7 +13,7 @@
 <body>
 <div class="voltar">
   <img src="./assets/imgs/seta.png" alt="back-landing">
-  <a href="https://github.com/LucasRamosDeCarvalho/Linus_landing_page" target="_blank"><p>Voltar para home</p></a>
+  <a href="https://lucasramosdecarvalho.github.io/Linus_landing_page/" target="_blank"><p>Voltar para home</p></a>
 </div>
 <div class="largest-container">
   <div class="title">
