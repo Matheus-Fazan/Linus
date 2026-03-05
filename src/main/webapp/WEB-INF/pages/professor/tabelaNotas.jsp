@@ -68,10 +68,10 @@
 
                                         <div class="info-aluno">
                                             <span><strong>Aluno:</strong>
-                                                <%= aluno.getNome() %>
+                                                <%= aluno.nome() %>
                                             </span>
                                             <span><strong>Turma:</strong>
-                                                <%= aluno.getTurma() %>
+                                                <%= aluno.turma() %>
                                             </span>
                                         </div>
 
