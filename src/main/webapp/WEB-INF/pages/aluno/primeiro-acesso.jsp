@@ -30,7 +30,11 @@
         <div class="error">
             <%= request.getAttribute("error") %>
         </div>
-        <%} %>
+        <% } else if (request.getAttribute("success") != null) { %>
+        <div class="success">
+            <%= request.getAttribute("success") %>
+        </div>
+        <% } %>
     </div>
 </body>
 
