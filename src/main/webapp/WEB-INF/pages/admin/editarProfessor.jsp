@@ -36,7 +36,7 @@
         <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
       </li>
       <li>
-        <a href="index.html">Logout</a>
+        <a href="${pageContext.request.contextPath}/admin/index.jsp">Logout</a>
       </li>
     </ul>
   </nav>
@@ -50,6 +50,9 @@
     </div>
     <input type="text" class="search-bar"
            placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
+  
+  <% Boolean encontrado = (Boolean) request.getAttribute("encontrado"); %>
+  <% if(encontrado !=null && encontrado){ %>
     <div class="main-container" id="m1">
 
       <form action="" class="form-perfil">
@@ -65,6 +68,15 @@
       </form>
 
     </div>
+    <% } else if(encontrado !=null && !encontrado){ %>
+
+  <div class="nao-encontrado">
+    <img src="${pageContext.request.contextPath}/assets/imgs/aluno-nao-achado%201.png" width="200" alt="not found">
+    <h2 style="color: #4FB2D9;">Nenhum professor foi encontrado, <br>
+      Pesquise novamente</h2>
+  </div>
+
+  <% } %>
   </div>
 
 
