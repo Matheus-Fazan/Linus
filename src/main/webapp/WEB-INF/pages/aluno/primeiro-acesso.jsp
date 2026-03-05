@@ -1,22 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../../assets/style/primeiro-acesso.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/primeiro-acesso.css">
     <title>Primeiro Acesso</title>
-    <link rel="shortcut icon" href="../../../assets/imgs/logo.png" type="image/x-icon">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <body>
     <div class="voltar">
-        <img src="../../../assets/imgs/seta.png">
+        <img src="${pageContext.request.contextPath}/assets/imgs/seta.png" alt="seta">
         <p>Voltar para home</p>
     </div>
     <div class="largest-container">
         <div class="title">
-            <img src="../../../assets/imgs/logo.png">
+            <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
             <h1>Instituto Linus</h1>
         </div>
         <div class="main-container">
