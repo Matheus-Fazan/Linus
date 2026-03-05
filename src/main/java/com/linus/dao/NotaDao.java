@@ -155,13 +155,11 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
     }
 
     public List<GeraBoletimDto> findByMatricula(int matricula) throws ConnectionException, SQLException {
-
-        Connection conn = ConnectionManager.connect();
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<GeraBoletimDto> boletim = new ArrayList<>();
 
-        try {
+        try (Connection conn = ConnectionManager.connect()) {
             ps = conn.prepareStatement(SQL_FIND_BY_MATRICULA);
             ps.setLong(1, matricula);
 

@@ -20,7 +20,9 @@ public class AuthFilter implements Filter {
             "/index.jsp",
             "/login",
             "/acesso-negado.jsp",
-            "/recuperar-senha"
+            "/recuperar-senha",
+            "/verificar-codigo",
+            "/redefinir-senha"
     );
 
     @Override
