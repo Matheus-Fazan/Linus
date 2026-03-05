@@ -58,7 +58,7 @@
                     <label for="turma">Turma:</label>
                     <select id="turma" name="turma" required>
                         <% for (String reposta : turma.keySet()) { %>
-                        <option value="<%= reposta %>" <%=reposta == turma.getId() ? "selected" : "" %>>
+                        <option value="<%= reposta %>" <%=reposta == turma.get(String) ? "selected" : "" %>>
                             <%= turma.get(reposta) %>
                         </option>
                         <% } %>
@@ -83,7 +83,8 @@
                 <label for="disciplina">Disciplina:</label>
                 <select id="disciplina" name="disciplina" required>
                     <% for (String materiaDto : materia.keySet()) { %>
-                    <option value="<%= materiaDto %>" <%=materiaDto == materia.getId() ? "selected" : "" %>>
+                    <option value="<%= materiaDto %>"
+                            <%= materia.equals(materiaDto) ? "selected" : "" %>>
                         <%= materia.get(materiaDto) %>
                     </option>
                     <% } %>
