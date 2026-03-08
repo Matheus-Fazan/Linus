@@ -52,7 +52,6 @@ public class ConnectionManager {
      */
     private static Map<String, String> getEnvironmentVariables() {
         Map<String, String> envMap = new HashMap();
-        System.out.println( System.getenv("DB_URL"));
 
         String dbURL = System.getenv("DB_URL");
         String dbUSER = System.getenv("DB_USER");

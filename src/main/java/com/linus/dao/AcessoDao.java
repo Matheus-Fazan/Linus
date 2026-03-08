@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class AcessoDAO {
+public class AcessoDao {
     private static final String SQL_FIND_BY_EMAIL = """
             SELECT cargo, email, hash_senha, id_origem
             FROM   acesso
