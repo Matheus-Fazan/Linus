@@ -9,10 +9,12 @@
 </head>
 
 <body>
-    <div class="voltar">
-        <img src="${pageContext.request.contextPath}/assets/imgs/seta.png" alt="seta">
-        <p>Voltar para home</p>
-    </div>
+    <a href="${pageContext.request.contextPath}/index.jsp">
+        <div class="voltar">
+            <img src="${pageContext.request.contextPath}/assets/imgs/seta.png" alt="seta">
+            <p>Voltar para home</p>
+        </div>
+    </a>
     <div class="largest-container">
         <div class="title">
             <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
