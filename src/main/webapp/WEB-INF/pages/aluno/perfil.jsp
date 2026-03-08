@@ -28,13 +28,13 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/pagPrincipal.jsp">Página inicial</a>
+                                <a href="${pageContext.request.contextPath}/aluno/boletim">Página inicial</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/observacaoAluno.jsp">Observação</a>
+                                <a href="${pageContext.request.contextPath}/aluno/observacoes">Observação</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/aluno/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/aluno/perfil">Perfil</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/logout">Logout</a>
@@ -110,7 +110,6 @@
                             </center>
 
                             <% } %>
-
                 </div>
 
             </body>

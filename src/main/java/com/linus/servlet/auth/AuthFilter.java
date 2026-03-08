@@ -22,7 +22,9 @@ public class AuthFilter implements Filter {
             "/acesso-negado.jsp",
             "/recuperar-senha",
             "/verificar-codigo",
-            "/redefinir-senha"
+            "/redefinir-senha",
+            "/primeiro-acesso.jsp",
+            "/aluno/primeiro-acesso"
     );
 
     @Override
