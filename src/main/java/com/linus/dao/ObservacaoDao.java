@@ -16,7 +16,16 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
     private final String SQL_SAVE_COMMAND = "INSERT INTO observacao(observacao, id_professor, id_aluno) VALUES(?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM observacao WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM observacao";
-    private final String SQL_FINDALL_BY_ID_COMMAND = "SELECT * FROM observacao WHERE id_aluno = ?";
+    private final String SQL_FINDALL_BY_ID_COMMAND =
+            "SELECT \n" +
+            "    p.nome AS nome_professor,\n" +
+            "    m.nome AS materia_professor,\n" +
+            "    o.observacao,\n" +
+            "    TO_CHAR(o.data_criacao, 'DD/MM/YYYY') AS data_publicacao\n" +
+            "FROM observacao o\n" +
+            "JOIN professor p ON o.id_professor = p.id\n" +
+            "JOIN materia m ON p.id_materia = m.id\n" +
+            "WHERE o.id_aluno = ?";
     private final String SQL_UPDATE_COMMAND = "UPDATE observacao SET observacao = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM observacao WHERE id = ?";
 
@@ -89,8 +98,8 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
         }
     }
 
-    public List<Observacao> findAllById(Long id) throws SQLException, ConnectionException {
-        List<Observacao> observacoes = new ArrayList<>();
+    public List<ObservacaoDto> findAllById(Long id) throws SQLException, ConnectionException {
+        List<ObservacaoDto> observacoes = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
@@ -101,7 +110,7 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
             queryResult = ps.executeQuery();
 
             while (queryResult.next()) {
-                observacoes.add(new Observacao(queryResult));
+                observacoes.add(new ObservacaoDto(queryResult));
             }
 
             return observacoes;

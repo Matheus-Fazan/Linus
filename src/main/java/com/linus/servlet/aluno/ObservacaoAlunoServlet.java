@@ -1,6 +1,7 @@
 package com.linus.servlet.aluno;
 
 import com.linus.dao.ObservacaoDao;
+import com.linus.dto.ObservacaoDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.model.dao.Observacao;
 import com.linus.model.servlet.RequestReponse;
@@ -27,7 +28,7 @@ public class ObservacaoAlunoServlet extends HttpServlet {
         Long idUsuario = (Long) requestReponse.getSessionAttribute("idUsuario");
 
         try {
-            List<Observacao> observacoes = dao.findAllById(idUsuario);
+            List<ObservacaoDto> observacoes = dao.findAllById(idUsuario);
 
             requestReponse.addRequestAttribute("observacoes", observacoes);
         } catch (SQLException | ConnectionException cause) {
