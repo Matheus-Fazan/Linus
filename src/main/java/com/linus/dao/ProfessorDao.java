@@ -1,5 +1,6 @@
 package com.linus.dao;
 
+import com.linus.dto.ListarAlunosDto;
 import com.linus.dto.ProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
@@ -17,6 +18,24 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
     private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, usuario, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM professor WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
+    private static final String SQL_FIND_ALUNOS_BY_PROFESSOR = """
+            SELECT
+                a.matricula,
+                a.nome AS nome_aluno,
+                COALESCE(t.nome, 'Sem turma') AS turma,
+                COALESCE(n.n1::VARCHAR, '-') AS n1,
+                COALESCE(n.n2::VARCHAR, '-') AS n2
+            FROM professor p
+            JOIN aluno a
+                ON a.id_turma IS NOT NULL
+            LEFT JOIN turma t 
+                ON a.id_turma = t.id
+            LEFT JOIN nota n
+                ON n.id_aluno = a.matricula
+                AND n.id_professor = p.id
+            WHERE p.id = ?                         
+            ORDER BY t.nome, a.nome;
+            """;
     private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, usuario = ?, id_materia = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
     private static final String SQL_UPDATE_PASSWORD = """
@@ -116,6 +135,26 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             }
 
             return professores;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public List<ListarAlunosDto> findAlunosByProfessor(Long idProfessor) throws SQLException, ConnectionException {
+        List<ListarAlunosDto> alunos = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet queryResult = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FIND_ALUNOS_BY_PROFESSOR);
+            ps.setLong(1, idProfessor);
+            queryResult = ps.executeQuery();
+
+            while (queryResult.next()) {
+                alunos.add(new ListarAlunosDto(queryResult));
+            }
+
+            return alunos;
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
