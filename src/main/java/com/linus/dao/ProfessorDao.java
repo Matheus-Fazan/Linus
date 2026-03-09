@@ -26,11 +26,11 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                 COALESCE(n.n1::VARCHAR, '-') AS n1,
                 COALESCE(n.n2::VARCHAR, '-') AS n2
             FROM professor p
-            JOIN aluno
+            JOIN aluno a
                 ON a.id_turma IS NOT NULL
-            LEFT JOIN turma 
+            LEFT JOIN turma t 
                 ON a.id_turma = t.id
-            LEFT JOIN nota 
+            LEFT JOIN nota n
                 ON n.id_aluno = a.matricula
                 AND n.id_professor = p.id
             WHERE p.id = ?                         
