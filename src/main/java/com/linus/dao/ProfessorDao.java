@@ -1,6 +1,6 @@
 package com.linus.dao;
 
-import com.linus.dto.AlunosProfessorDto;
+import com.linus.dto.ListarAlunosDto;
 import com.linus.dto.ProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
@@ -140,8 +140,8 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         }
     }
 
-    public List<AlunosProfessorDto> findAlunosByProfessor(Long idProfessor) throws SQLException, ConnectionException {
-        List<AlunosProfessorDto> alunos = new ArrayList<>();
+    public List<ListarAlunosDto> findAlunosByProfessor(Long idProfessor) throws SQLException, ConnectionException {
+        List<ListarAlunosDto> alunos = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
@@ -151,7 +151,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             queryResult = ps.executeQuery();
 
             while (queryResult.next()) {
-                alunos.add(new AlunosProfessorDto(queryResult));
+                alunos.add(new ListarAlunosDto(queryResult));
             }
 
             return alunos;

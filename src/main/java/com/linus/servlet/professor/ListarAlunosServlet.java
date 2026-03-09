@@ -1,7 +1,7 @@
 package com.linus.servlet.professor;
 
 import com.linus.dao.ProfessorDao;
-import com.linus.dto.AlunosProfessorDto;
+import com.linus.dto.ListarAlunosDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.model.servlet.RequestReponse;
 import jakarta.servlet.ServletException;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/professor/alunos")
-public class ListarALunosServlet extends HttpServlet {
+public class ListarAlunosServlet extends HttpServlet {
 
     private static final ProfessorDao dao = new ProfessorDao();
 
@@ -27,7 +27,7 @@ public class ListarALunosServlet extends HttpServlet {
         Long idProfessor = (Long) requestReponse.getSessionAttribute("idUsuario");
 
         try {
-            List<AlunosProfessorDto> alunos = dao.findAlunosByProfessor(idProfessor);
+            List<ListarAlunosDto> alunos = dao.findAlunosByProfessor(idProfessor);
             requestReponse.addRequestAttribute("alunos", alunos);
 
         } catch (SQLException | ConnectionException cause) {
