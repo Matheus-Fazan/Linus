@@ -20,7 +20,7 @@ public class AdminDao implements GenericDaoInterface<Admin, AdminDto> {
     private final String SQL_UPDATE_COMMAND = "UPDATE admin SET email = ?, hash_senha = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM admin WHERE id = ?";
     private final String SQL_FIND_PERFIL_BY_ID = """
-                SELECT nome, email, hash_senha
+                SELECT nome, email
                 FROM admin
                 WHERE id = ?
             """;
