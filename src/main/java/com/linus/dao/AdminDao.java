@@ -1,6 +1,7 @@
 package com.linus.dao;
 
 import com.linus.dto.AdminDto;
+import com.linus.dto.AdminPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -18,6 +19,11 @@ public class AdminDao implements GenericDaoInterface<Admin, AdminDto> {
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM admin";
     private final String SQL_UPDATE_COMMAND = "UPDATE admin SET email = ?, hash_senha = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM admin WHERE id = ?";
+    private final String SQL_FIND_PERFIL_BY_ID = """
+                SELECT nome, email, hash_senha
+                FROM admin
+                WHERE id = ?
+            """;
 
     @Override
     public Admin save(AdminDto dto) throws SQLException, ConnectionException {
@@ -120,6 +126,27 @@ public class AdminDao implements GenericDaoInterface<Admin, AdminDto> {
             }
         } finally {
             DaoUtil.closeResources(ps);
+        }
+    }
+
+    public AdminPerfilDto findById(long id) throws ConnectionException, SQLException {
+        PreparedStatement ps = null;
+        ResultSet queryResult = null;
+
+        try (Connection conn = ConnectionManager.connect()) {
+            ps = conn.prepareStatement(SQL_FIND_PERFIL_BY_ID);
+            ps.setLong(1, id);
+
+            queryResult = ps.executeQuery();
+
+            if (queryResult.next()) {
+                return new AdminPerfilDto(queryResult);
+            }
+
+            return null;
+
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
         }
     }
 }
