@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.AdminDto" %>
+    <%@ page import="com.linus.dto.AdminPerfilDto" %>
 
-        <% AdminDto perfil=(AdminDto) request.getAttribute("perfil"); %>
+        <% AdminPerfilDto perfil=(AdminPerfilDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -21,7 +21,7 @@
 
                 <header>
                     <div class="logo">
-                        <img src="/src/main/webapp/assets/imgs/logo.png" alt="logo colegio">
+                        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
                         <h3>Instituto Linus</h3>
                     </div>
 
@@ -31,13 +31,13 @@
                                 <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
+                                <a href="${pageContext.request.contextPath}/admin/dashboard">Visualização</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
+                                <a href="${pageContext.request.contextPath}/admin/adicionar-aluno">Criar Acesso</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
                             </li>
                             <li>
                                 <a href="index.html">Logout</a>
@@ -53,40 +53,36 @@
                         <p>Visualize suas informações.</p>
                     </div>
 
-                    <% if (request.getAttribute("error") !=null) { %>
-
+                    <% if (request.getAttribute("error") != null) { %>
                         <div class="error-box">
-                            <p>
-                                <%= request.getAttribute("error") %>
-                            </p>
+                            <p><%= request.getAttribute("error") %></p>
                         </div>
+                    <% } %>
 
-                        <% } else if (perfil !=null) { %>
+                    <% if (request.getAttribute("success") != null) { %>
+                        <div class="success-box">
+                            <p><%= request.getAttribute("success") %></p>
+                        </div>
+                    <% } %>
 
-                            <center>
-                                <form action="atualizarPerfil" method="post" class="perfil-card">
-
-                                    <div class="perfil-linha">
-                                        <label class="perfil-label" for="email">Email</label>
-
-                                        <input
-                                                type="email"
-                                                id="email"
-                                                name="email"
-                                                class="perfil-input"
-                                                value="<%= perfil.email %>"
-                                                required
-                                        >
-                                    </div>
-
-                                    <button type="submit" class="btn-salvar">
-                                        Salvar alterações
-                                    </button>
-
-                                </form>
-                            </center>
-
-                            <% } %>
+                    <% if (perfil != null) { %>
+                        <center>
+                            <form action="${pageContext.request.contextPath}/admin/perfil" method="post" class="perfil-card">
+                                <div class="perfil-linha">
+                                    <label class="perfil-label" for="email">Email</label>
+                                    <input
+                                            type="email"
+                                            id="email"
+                                            name="email"
+                                            class="perfil-input"
+                                            value="<%= perfil.getEmail() %>"
+                                            required
+                                    >
+                                </div>
+                                <button type="submit" class="btn-salvar">Salvar alterações</button>
+                            </form>
+                        </center>
+                    <% } %>
 
                 </div>
 
