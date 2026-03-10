@@ -103,3 +103,29 @@ main {
     color: #3da5ff;
     font-weight: 600;
 }
+
+.topo {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons button {
+    background-color: #A25DDF;
+    color: #ffffff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #bb86e9;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+}
+
+#sb2 {
+    margin-left: 0px;
+}

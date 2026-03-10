@@ -14,7 +14,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluno | Tela Inicial</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 

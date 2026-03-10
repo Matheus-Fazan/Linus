@@ -11,7 +11,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
                 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
                     type="image/x-icon">
                 <title>Perfil Aluno</title>

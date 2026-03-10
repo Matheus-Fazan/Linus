@@ -8,7 +8,7 @@
     <title>Editar Notas</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 <body>
@@ -20,16 +20,16 @@
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/adicionarNotas.jsp">Adicionar Notas</a>
+                <a href="${pageContext.request.contextPath}/professor/adicionarNotas">Adicionar Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/editarNotas.jsp">Editar Notas</a>
+                <a href="${pageContext.request.contextPath}/professor/editarNotas">Editar Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
             </li>
             <li>
-                <a href="">Logout</a>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
             </li>
         </ul>
     </nav>
@@ -50,11 +50,11 @@
 
         <form action="" class="form-perfil">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" value="<%= aluno.getNome() %>" disabled>
+            <input type="text" id="nome" value="<%= aluno.nome %>" disabled>
             <label for="n1">Nota 1</label>
-            <input type="text" id="n1" value="<%= nota.getNota1() %>">
+            <input type="text" id="n1" value="<%= nota.n1 %>">
             <label for="n2">Nota 2</label>
-            <input type="text" id="n2" value="<%= nota.getNota2() %>">
+            <input type="text" id="n2" value="<%= nota.n2 %>">
             <button type="submit">Salvar Alterações</button>
         </form>
 

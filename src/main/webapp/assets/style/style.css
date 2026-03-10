@@ -67,7 +67,6 @@ body {
 .main-container input {
     border: none;
     background-color: #F3F3F3;
-    /* outline: none; */
     width: 100%;
     padding: 10px 10px;
     border-radius: 10px;
@@ -122,4 +121,12 @@ p {
     text-align: center;
     margin: 10px;
     font-size: 14px;
+}
+
+#mc2 {
+    height: 80%;
+}
+
+#mc2 h2 {
+    margin-bottom: 20px;
 }

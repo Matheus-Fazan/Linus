@@ -1,19 +1,16 @@
-<%@ page import="com.linus.dto.AlunoDto" %>
-<%@ page import="com.linus.dto.BoletimDto" %>
 <%@ page import="java.util.List" %>
+<%@ page import="com.linus.dto.ListarAlunosDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
     <title>Professor | Tela Inicial</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
-<% AlunoDto aluno = (AlunoDto) request.getAttribute("AlunoDto"); %>
-<% List<BoletimDto> notas = (List<BoletimDto>) request.getAttribute("notas"); %>
+<% List<ListarAlunosDto> alunos = (List<ListarAlunosDto>) request.getAttribute("idProfessor"); %>
 <body>
 <header>
     <div class="logo">
@@ -23,16 +20,16 @@
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/adicionarNotas.jsp">Adicionar Notas</a>
+                <a href="${pageContext.request.contextPath}/professor/adicionarNotas">Adicionar Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/editarNotas.jsp">Editar Notas</a>
+                <a href="${pageContext.request.contextPath}/professor/editarNotas">Editar Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
             </li>
             <li>
-                <a href="">Logout</a>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
             </li>
         </ul>
     </nav>
@@ -59,22 +56,22 @@
         </thead>
 
         <tbody>
-        <% for (AlunoProfessorDto n : notas) { %>
+        <% for (ListarAlunosDto listarAlunosDto : alunos) { %>
         <tr>
             <td>
-                <%= n.matricula %>
+                <%= listarAlunosDto.matricula %>
             </td>
             <td>
-                <%= n.nome %>
+                <%= listarAlunosDto.nome %>
             </td>
             <td>
-                <%= n.turma %>
+                <%= listarAlunosDto.turma %>
             </td>
             <td>
-                <%= n.n1 %>
+                <%= listarAlunosDto.n1 %>
             </td>
             <td>
-                <%= n.n2 %>
+                <%= listarAlunosDto.n2 %>
             </td>
 
         </tr>
@@ -85,7 +82,7 @@
 
     <div class="nao-encontrado">
         <center>
-            <img src="${pageContext.request.contextPath}/assets/imgs/"
+            <img src="${pageContext.request.contextPath}/assets/imgs/aluno-nao-achado%201.png"
                  width="200">
         </center>
         <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado, <br>
