@@ -11,6 +11,8 @@ public class AdminDto {
     public String email;
     public String senha;
 
+    public AdminDto() {}
+
     public AdminDto(Map<String, String> requestParams) {
         this.id = requestParams.get("id");
         this.email = requestParams.get("email");
