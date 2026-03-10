@@ -8,9 +8,10 @@
 }
 
 body {
-    background-color: #F0FBFF;
+    background-color: #F1F1F1;
     height: 750px;
-    font-family: 'Montserrat';;
+    font-family: 'Montserrat';
+    overflow: hidden;
 }
 
 .voltar {
@@ -25,12 +26,18 @@ body {
     margin-top: 30px;
 }
 
+.voltar a {
+    text-decoration: none;
+    color: black;
+    text-align: left;
+}
+
 .largest-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     height: 700px;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .title {
@@ -47,7 +54,7 @@ body {
 }
 
 .title img {
-    width: 125px;
+    width: 100px;
 }
 
 .main-container {
