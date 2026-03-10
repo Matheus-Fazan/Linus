@@ -23,6 +23,7 @@ public class AuthFilter implements Filter {
             "/recuperar-senha",
             "/verificar-codigo",
             "/redefinir-senha",
+            "/primeiro-acesso.jsp",
             "/aluno/primeiro-acesso"
     );
 

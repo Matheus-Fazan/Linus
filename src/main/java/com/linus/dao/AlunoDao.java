@@ -16,7 +16,6 @@ import java.util.List;
 public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
-    private final String SQL_PREVIOUS_SAVE_COMMAND = "INSERT INTO aluno(nome, cpf, id_turma) VALUES(?, ?, ?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
@@ -44,6 +43,8 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private static final String SQL_UPDATE_PASSWORD = """
         UPDATE aluno SET hash_senha = ? WHERE matricula = ?
         """;
+
+    private static final String SQL_FIRST_ACCESS_UPDATE_COMMAND = "UPDATE aluno SET email=?, hash_senha=? WHERE matricula=? AND nome=? AND cpf=?";
 
     @Override
     public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
@@ -264,6 +265,28 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             ps.setLong(2, idOrigem);
             ps.executeUpdate();
 
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void firstAccess(AlunoDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException{
+
+        PreparedStatement ps = null;
+
+        try(Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FIRST_ACCESS_UPDATE_COMMAND);
+
+            ps.setString(1, dto.email);
+            ps.setString(2, DaoUtil.toBCryptHash(dto.senha));
+            ps.setLong(3, Long.parseLong(dto.matricula));
+            ps.setString(4, dto.nome);
+            ps.setString(5, dto.cpf);
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+
+            }
         } finally {
             DaoUtil.closeResources(ps);
         }

@@ -1,6 +1,6 @@
 package com.linus.servlet.auth;
 
-import com.linus.dao.AcessoDAO;
+import com.linus.dao.AcessoDao;
 import com.linus.model.dao.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +28,7 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-            AcessoDAO acessoDAO = new AcessoDAO();
+            AcessoDao acessoDAO = new AcessoDao();
             Usuario usuario = acessoDAO.auth(email, senha);
             System.out.println(usuario);
             if (usuario == null) {

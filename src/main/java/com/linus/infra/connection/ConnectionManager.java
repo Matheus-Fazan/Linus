@@ -49,11 +49,9 @@ public class ConnectionManager {
      * Obtém as variáveis de ambiente necessárias para a conexão com o banco.
      *
      * @return {@code Map} contendo DB_URL, DB_USER e DB_PASSWORD do ambiente do sistema
-     * @throws IllegalStateException se as variaveis de ambiente não estiverem configuradas
      */
-    private static Map<String, String> getEnvironmentVariables() throws IllegalStateException {
+    private static Map<String, String> getEnvironmentVariables() {
         Map<String, String> envMap = new HashMap();
-        System.out.println( System.getenv("DB_URL"));
 
         String dbURL = System.getenv("DB_URL");
         String dbUSER = System.getenv("DB_USER");

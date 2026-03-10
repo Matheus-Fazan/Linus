@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.ProfessorPerfilDto" %>
+<%@ page import="com.linus.dto.ProfessorDto" %>
 
-        <% ProfessorPerfilDto perfil=(ProfessorPerfilDto) request.getAttribute("perfil"); %>
+<% ProfessorDto perfil=(ProfessorDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -70,21 +70,21 @@
                                     <div class="perfil-linha">
                                         <span class="perfil-label">Nome</span>
                                         <span class="perfil-valor">
-                                            <%= perfil.getNome() %>
+                                            <%= perfil.nome %>
                                         </span>
                                     </div>
 
                                     <div class="perfil-linha">
                                         <span class="perfil-label">Usuario</span>
                                         <span class="perfil-valor">
-                                            <%= perfil.getUsuario() %>
+                                            <%= perfil.usuario %>
                                         </span>
                                     </div>
 
                                     <div class="perfil-linha">
                                         <span class="perfil-label">Email</span>
                                         <span class="perfil-valor">
-                                            <%= perfil.getEmail() %>
+                                            <%= perfil.email %>
                                         </span>
                                     </div>
 

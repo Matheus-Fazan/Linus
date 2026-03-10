@@ -27,7 +27,10 @@
                     <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
                 </li>
                 <li>
-                    <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Observação</a>
+                    <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
+                </li>
+                <li>
+                    <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
                 </li>
                 <li>
                     <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
@@ -58,7 +61,7 @@
                     <label for="turma">Turma:</label>
                     <select id="turma" name="turma" required>
                         <% for (String reposta : turma.keySet()) { %>
-                        <option value="<%= reposta %>" <%=reposta == turma.getId() ? "selected" : "" %>>
+                        <option value="<%= reposta %>" <%=reposta == turma.get(String) ? "selected" : "" %>>
                             <%= turma.get(reposta) %>
                         </option>
                         <% } %>
@@ -83,7 +86,8 @@
                 <label for="disciplina">Disciplina:</label>
                 <select id="disciplina" name="disciplina" required>
                     <% for (String materiaDto : materia.keySet()) { %>
-                    <option value="<%= materiaDto %>" <%=materiaDto == materia.getId() ? "selected" : "" %>>
+                    <option value="<%= materiaDto %>"
+                            <%= materia.equals(materiaDto) ? "selected" : "" %>>
                         <%= materia.get(materiaDto) %>
                     </option>
                     <% } %>

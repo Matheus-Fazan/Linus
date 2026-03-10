@@ -1,5 +1,6 @@
 <%@ page import="com.linus.model.dao.Aluno" %>
-  <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.linus.dto.AlunoDto" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
     <html>
 
@@ -11,6 +12,8 @@
       <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
     </head>
 
+    <% AlunoDto aluno=(AlunoDto) request.getAttribute("aluno");%>
+
     <body>
       <header>
         <div class="logo">
@@ -21,22 +24,25 @@
         <nav class="nav-header">
           <ul>
             <li>
-              <a href="">Página inicial</a>
+              <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
             </li>
             <li>
-              <a href="">Criar Acesso</a>
+              <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
             </li>
             <li>
-              <a href="">Perfil</a>
+              <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
             </li>
             <li>
-              <a href="">Logout</a>
+              <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
+            </li>
+            <li>
+              <a href="index.html">Logout</a>
             </li>
           </ul>
         </nav>
 
       </header>
-      <% Aluno aluno=(Aluno) request.getAttribute("aluno");%>
+
         <div class="largest-container">
           <div class="subtitle">
             <h2>Edite o perfil do aluno</h2>
@@ -49,15 +55,15 @@
           <div class="main-container">
             <form action="" class="form-perfil">
               <label>Matrícula:</label>
-              <input type="text" name="matricula" value="<%= aluno.getMatricula() %>">
+              <input type="text" name="matricula" value="<%= aluno.matricula %>">
               <label>Nome:</label>
-              <input type="text" name="nome" value="<%= aluno.getNome() %>">
+              <input type="text" name="nome" value="<%= aluno.nome %>">
               <label>Email:</label>
-              <input type="email" name="email" value="<%= aluno.getEmail() %>">
+              <input type="email" name="email" value="<%= aluno.email %>">
               <label>CPF:</label>
-              <input type="text" name="cpf" value="<%= aluno.getCpf() %>">
+              <input type="text" name="cpf" value="<%= aluno.cpf %>">
               <label>Turma:</label>
-              <input type="text" name="idTurma" value="<%= aluno.getIdTurma() %>">
+              <input type="text" name="idTurma" value="<%= aluno.turmaDto %>">
               <button type="submit">Salvar Alterações</button>
             </form>
           </div>

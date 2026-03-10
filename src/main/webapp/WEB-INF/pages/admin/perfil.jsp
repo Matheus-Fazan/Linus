@@ -28,15 +28,16 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/pagPrincipal.jsp">Página
-                                    inicial</a>
+                                <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
                             </li>
                             <li>
-                                <a
-                                    href="${pageContext.request.contextPath}/WEB-INF/pages/admin/criarAcesso.jsp">Observação</a>
+                                <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/admin/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
+                            </li>
+                            <li>
+                                <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
                             </li>
                             <li>
                                 <a href="index.html">Logout</a>
@@ -63,17 +64,26 @@
                         <% } else if (perfil !=null) { %>
 
                             <center>
-                                <section class="perfil-card">
-                                    <h2>Perfil</h2>
+                                <form action="atualizarPerfil" method="post" class="perfil-card">
 
                                     <div class="perfil-linha">
-                                        <span class="perfil-label">Email</span>
-                                        <span class="perfil-valor">
-                                            <%= perfil.getEmail() %>
-                                        </span>
+                                        <label class="perfil-label" for="email">Email</label>
+
+                                        <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                class="perfil-input"
+                                                value="<%= perfil.email %>"
+                                                required
+                                        >
                                     </div>
 
-                                </section>
+                                    <button type="submit" class="btn-salvar">
+                                        Salvar alterações
+                                    </button>
+
+                                </form>
                             </center>
 
                             <% } %>

@@ -25,7 +25,7 @@ public class AlunoPerfilServlet extends HttpServlet {
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
         try {
-            Integer matricula = (Integer) requestReponse.getSessionAttribute("idUsuario");
+            Long matricula = (Long) requestReponse.getSessionAttribute("idUsuario");
 
             AlunoPerfilDto dto = dao.findByMatricula(matricula);
 
@@ -35,7 +35,7 @@ public class AlunoPerfilServlet extends HttpServlet {
                 requestReponse.addRequestAttribute("perfil", dto);
             }
 
-        } catch (SQLException | ConnectionException cause) {
+        } catch (Exception cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
 
         } finally {

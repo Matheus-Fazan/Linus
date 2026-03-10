@@ -2,14 +2,11 @@ package com.linus.servlet.aluno;
 
 import com.linus.dao.AlunoDao;
 import com.linus.dto.AlunoDto;
-
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.exception.requestParam.ParamException;
 import com.linus.model.servlet.RequestReponse;
-
 import com.linus.validation.Validator;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -21,44 +18,38 @@ import java.sql.SQLException;
 import java.util.Map;
 
 @WebServlet("/aluno/primeiro-acesso")
-public class FirstAccessServlet extends HttpServlet {
+public class PrimeiroAcessoServlet extends HttpServlet {
 
     private static final AlunoDao dao = new AlunoDao();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RequestReponse requestReponse = new RequestReponse(req, resp);
-        requestReponse.forwardTo("/WEB-INF/pages/aluno/primeiro-acesso.jsp");
-    }
-
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
-        Map<String, String> requestParams = requestReponse.getAllRequestParameters();
+        Map<String, String> requestParms =  requestReponse.getAllRequestParameters();
 
         try {
-            Validator.validateParams(requestParams);
 
-            AlunoDto dto = new AlunoDto(requestParams);
+            Validator.validateParams(requestParms);
 
-            dao.updateWithoutIdTurma(dto);
+            dao.firstAccess(new AlunoDto(requestParms));
 
-            requestReponse.addRequestAttribute("success", "Cadastro realizado com sucesso! Agora você pode realizar o seu login na tela de inicio!");
+            requestReponse.addRequestAttribute("sucess", "Primeiro acesso realizado com sucesso! Agora é possível fazer o login.");
+
+        } catch (SQLException | ConnectionException cause) {
+            cause.printStackTrace();
+            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+
+        } catch (NoRegistersAlteredException cause) {
+            requestReponse.addRequestAttribute("error", "Pré cadastro não encontrado para matricula: " + requestParms.get("matricula"));
 
         } catch (ParamException cause) {
             requestReponse.addRequestAttribute("error", cause.getMessage());
 
-        } catch (SQLException | ConnectionException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
-
-        } catch (NoRegistersAlteredException cause) {
-            requestReponse.addRequestAttribute("error", "Matricula não encontrada. Por favor, contate a escola para realizar o seu pré-cadastro.");
-
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/aluno/primeiro-acesso.jsp");
-        }
+            requestReponse.forwardTo("/primeiro-acesso.jsp");
 
+        }
     }
 }

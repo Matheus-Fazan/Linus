@@ -2,6 +2,7 @@
     <%@ page import="java.util.List" %>
         <%@ page import="com.linus.dto.NotaDto" %>
 <%@ page import="com.linus.dto.AlunoDto" %>
+<%@ page import="com.linus.dto.BoletimDto" %>
 <html lang="pt-br">
 
             <head>
@@ -15,8 +16,8 @@
 
             </head>
 
-            <% NotaDto nota = (NotaDto) request.getAttribute("NotaDto"); %>
             <% AlunoDto aluno = (AlunoDto) request.getAttribute("AlunoDto"); %>
+            <% List<BoletimDto> notas = (List<BoletimDto>) request.getAttribute("notas"); %>
 
             <body>
 
@@ -59,19 +60,14 @@
 
                         <% if(encontrado !=null && encontrado){ %>
 
-                            <% Aluno aluno=(Aluno) request.getAttribute("aluno"); 
-                            List<BoletimDto> notas = (List<BoletimDto>)
-                                    request.getAttribute("notas");
-                                    %>
-
                                     <section class="card-tabela">
 
                                         <div class="info-aluno">
                                             <span><strong>Aluno:</strong>
-                                                <%= aluno.nome() %>
+                                                <%= aluno.nome %>
                                             </span>
                                             <span><strong>Turma:</strong>
-                                                <%= aluno.turma() %>
+                                                <%= aluno.turmaDto %>
                                             </span>
                                         </div>
 
@@ -87,22 +83,22 @@
                                             </thead>
 
                                             <tbody>
-                                                <% for (BoletimDto nota : nota) { %>
+                                                <% for (BoletimDto n : notas) { %>
                                                     <tr>
                                                         <td>
-                                                            <%= n.getMateria() %>
+                                                            <%= n.materia %>
                                                         </td>
                                                         <td>
-                                                            <%= n.getNota1() %>
+                                                            <%= n.n1 %>
                                                         </td>
                                                         <td>
-                                                            <%= n.getNota2() %>
+                                                            <%= n.n2 %>
                                                         </td>
                                                         <td>
-                                                            <%= n.getMedia() %>
+                                                            <%= n.media %>
                                                         </td>
                                                         <td>
-                                                            <%= n.getObservacao() %>
+                                                            <%= n.observacao %>
                                                         </td>
                                                     </tr>
                                                     <% } %>
@@ -117,12 +113,12 @@
                                         <div class="card-form">
                                             <h2>Definir nota do aluno:</h2>
                                             <p><strong>Nome do aluno:</strong>
-                                                <%= aluno.getNome() %>
+                                                <%= aluno.nome %>
                                             </p>
                                             <p><strong>Matéria:</strong> Matemática</p>
 
                                             <form action="${pageContext.request.contextPath}/nota" method="post">
-                                                <input type="hidden" name="alunoId" value="<%= aluno.getId() %>">
+                                                <input type="hidden" name="alunoId" value="<%= aluno.id %>">
 
                                                 <label>Nota 1:</label>
                                                 <input type="number" step="0.1" name="nota1"
@@ -139,12 +135,12 @@
                                         <div class="card-form">
                                             <h2>Editar nota do aluno:</h2>
                                             <p><strong>Nome do aluno:</strong>
-                                                <%= aluno.getNome() %>
+                                                <%= aluno.nome %>
                                             </p>
                                             <p><strong>Matéria:</strong> Matemática</p>
 
                                             <form action="${pageContext.request.contextPath}/nota" method="post">
-                                                <input type="hidden" name="alunoId" value="<%= aluno.getId() %>">
+                                                <input type="hidden" name="alunoId" value="<%= aluno.id %>">
 
                                                 <label>Nota 1:</label>
                                                 <input type="number" step="0.1" name="nota1"
