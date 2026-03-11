@@ -35,13 +35,16 @@ public class AlterarEmailAlunoServlet extends HttpServlet {
 
                 if (dto == null) {
                     requestReponse.addRequestAttribute("error", "Aluno não encontrado.");
+                    requestReponse.addRequestAttribute("encontrado", false);
                 } else {
                     requestReponse.addRequestAttribute("aluno", dto);
+                    requestReponse.addRequestAttribute("encontrado", true);
                 }
             }
 
         } catch (Exception cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+            requestReponse.addRequestAttribute("encontrado", false);
 
         } finally {
             requestReponse.forwardTo("/WEB-INF/pages/admin/editarAluno.jsp");
