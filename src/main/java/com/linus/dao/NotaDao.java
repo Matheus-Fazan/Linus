@@ -20,7 +20,14 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
     private final String SQL_INSERT_BY_PROFESSOR = "INSERT INTO nota(n1, n2, id_professor, id_aluno) SELECT ?, ?, ?, ? WHERE EXISTS (SELECT 1 FROM professor WHERE id = ? AND id_materia = (SELECT id_materia FROM aluno WHERE matricula = ?))";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM nota WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
-    private final String SQL_UPDATE_COMMAND = "UPDATE nota SET n1 = ?, n2 = ?, media = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
+    private final String SQL_UPDATE_COMMAND = """
+                UPDATE nota
+                SET n1    = ?,
+                    n2    = ?,
+                    media = (? + ?) / 2,
+                    observacao = ?
+                WHERE id = ?
+                """;;
     private final String SQL_DELETE_COMMAND = "DELETE FROM nota WHERE id = ?";
     private final String SQL_UPDATE_BY_PROFESSOR = "UPDATE nota SET n1 = ?, n2 = ? WHERE id = ? AND id_professor = ?";
     private final String SQL_FIND_BY_MATRICULA = """
@@ -139,22 +146,23 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
     }
 
     @Override
-    public void update(NotaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(NotaDto dto)  {
+        System.out.println("Não implementado.");
+    }
+
+    public void update(long idNota, double n1, double n2, String observacao) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
         try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
+            ps.setDouble(1, n1);
+            ps.setDouble(2, n2);
+            ps.setDouble(3, n1);
+            ps.setDouble(4, n2);
+            ps.setString(5, observacao);
+            ps.setLong(6, idNota);
+            ps.executeUpdate();
 
-            ps.setBigDecimal(1, new BigDecimal(dto.n1));
-            ps.setBigDecimal(2, new BigDecimal(dto.n2));
-            ps.setBigDecimal(3, new BigDecimal(dto.media));
-            ps.setLong(4, Long.parseLong(dto.idProfessor));
-            ps.setLong(5, Long.parseLong(dto.idAluno));
-            ps.setLong(6, Long.parseLong(dto.id));
-
-            if (ps.executeUpdate() < 1) {
-                throw new NoRegistersAlteredException();
-            }
         } finally {
             DaoUtil.closeResources(ps);
         }

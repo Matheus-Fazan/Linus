@@ -26,7 +26,7 @@ public class BoletimServlet extends HttpServlet {
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
         Long idUsuario = (Long) requestReponse.getSessionAttribute("idUsuario");
-        System.out.println("idUsuario: " + idUsuario); // log temporário
+        System.out.println("idUsuario: " + idUsuario);
 
         try {
 
