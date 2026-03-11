@@ -1,5 +1,5 @@
 <%@ page import="com.linus.model.dao.Professor" %>
-<%@ page import="com.linus.dto.ProfessorDto" %>
+<%@ page import="com.linus.dto.ProfessorPerfilDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -12,7 +12,7 @@
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
-<% ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");%>
+<% ProfessorPerfilDto professor = (ProfessorPerfilDto) request.getAttribute("professor");%>
 
 <body>
 <header>
@@ -24,19 +24,19 @@
   <nav class="nav-header">
     <ul>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
+        <a href="${pageContext.request.contextPath}/admin/pagPrincipal">Página inicial</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
+        <a href="${pageContext.request.contextPath}/admin/dashboard">Visualização</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
+        <a href="${pageContext.request.contextPath}/admin/adicionar-aluno">Criar Acesso</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
+        <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/index.jsp">Logout</a>
+        <a href="${pageContext.request.contextPath}/logout">Logout</a>
       </li>
     </ul>
   </nav>
@@ -54,17 +54,19 @@
   <% Boolean encontrado = (Boolean) request.getAttribute("encontrado"); %>
   <% if(encontrado !=null && encontrado){ %>
   <div class="main-container" id="m1">
+    <div class="info-professor">
+      <p><strong>Nome:</strong> <%= professor.nome %></p>
+      <p><strong>Usuário:</strong> <%= professor.usuario %></p>
+      <p><strong>Disciplina:</strong> <%= professor.getDisciplina() %></p>
+    </div>
 
-    <form action="" class="form-perfil">
-      <label for="nome">Nome:</label>
-      <input type="text" id="nome" value="<%= professor.nome %>">
-      <label for="user">Usuário:</label>
-      <input type="text" id="user" value="<%= professor.usuario %>">
-      <label for="email">Email:</label>
-      <input type="email" id="email" value="<%= professor.email %>">
-      <label for="idMateria">Matéria:</label>
-      <input type="text" id="idMateria" value="<%= professor.idMateria %>">
-      <button type="submit">Salvar Alterações</button>
+    <form action="${pageContext.request.contextPath}/admin/alterar-email-professor" method="POST" class="form-perfil">
+      <input type="hidden" name="id" value="<%= professor.getId() %>">
+      <label for="email-atual">Email Atual:</label>
+      <input type="email" id="email-atual" value="<%= professor.email %>" disabled>
+      <label for="email">Novo Email:</label>
+      <input type="email" id="email" name="email" placeholder="Digite o novo email" required>
+      <button type="submit">Alterar Email</button>
     </form>
 
   </div>
