@@ -15,7 +15,7 @@
 <header>
     <div class="logo">
         <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3> Instituto Linus </h3>
+        <h3> Instituto <br> Linus </h3>
     </div>
     <nav class="nav-header">
         <ul>
@@ -37,11 +37,9 @@
 <main>
     <section class="topo">
         <h1>Visualização dos alunos</h1>
-        <p>Acompanhe seus alunosx</p>
+        <p>Acompanhe seus alunos</p>
         <input type="text" class="search" placeholder="Pesquise o aluno pelo número de matrícula:">
     </section>
-    <input type="text" class="search-bar"
-           placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
     <% Boolean encontrado=(Boolean) request.getAttribute("encontrado"); %>
     <% if (encontrado != null && encontrado) { %>
     <table>

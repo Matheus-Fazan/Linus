@@ -139,7 +139,10 @@ td{
 }
 
 hr {
-    margin: 25px;
+    width: 90%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* GRID INFERIOR */
 
