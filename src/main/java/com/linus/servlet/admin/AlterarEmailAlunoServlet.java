@@ -2,6 +2,7 @@ package com.linus.servlet.admin;
 
 import com.linus.dao.AlunoDao;
 import com.linus.dto.AlunoDto;
+import com.linus.dto.AlunoPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.exception.requestParam.ParamException;
@@ -17,10 +18,35 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Map;
 
-@WebServlet("/admin/alterar-email")
-public class AlterarEmailServlet extends HttpServlet {
+@WebServlet("/admin/alterar-email-aluno")
+public class AlterarEmailAlunoServlet extends HttpServlet {
 
     private static final AlunoDao dao = new AlunoDao();
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+
+        try {
+            String matricula = requestReponse.getRequestParameter("matricula");
+
+            if (matricula != null && !matricula.isEmpty()) {
+                AlunoPerfilDto dto = dao.findByMatricula(Long.parseLong(matricula));
+
+                if (dto == null) {
+                    requestReponse.addRequestAttribute("error", "Aluno não encontrado.");
+                } else {
+                    requestReponse.addRequestAttribute("aluno", dto);
+                }
+            }
+
+        } catch (Exception cause) {
+            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+
+        } finally {
+            requestReponse.forwardTo("/WEB-INF/pages/admin/editarAluno.jsp");
+        }
+    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -47,7 +73,7 @@ public class AlterarEmailServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Nenhum registro foi alterado. Por favor, verifique a matrícula informada.");
 
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/admin/editarAluno.jsp");
+            doGet(req, resp);
         }
     }
 }
