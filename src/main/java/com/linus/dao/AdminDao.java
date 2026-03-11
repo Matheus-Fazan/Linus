@@ -19,6 +19,7 @@ public class AdminDao implements GenericDaoInterface<Admin, AdminDto> {
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM admin";
     private final String SQL_UPDATE_COMMAND = "UPDATE admin SET email = ?, hash_senha = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM admin WHERE id = ?";
+    private final String SQL_UPDATE_EMAIL = "UPDATE admin SET email = ? WHERE id = ?";
     private final String SQL_FIND_PERFIL_BY_ID = """
                 SELECT nome, email
                 FROM admin
@@ -147,6 +148,22 @@ public class AdminDao implements GenericDaoInterface<Admin, AdminDto> {
 
         } finally {
             DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public void updateEmail(AdminDto dto) throws ConnectionException, SQLException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try (Connection conn = ConnectionManager.connect()) {
+            ps = conn.prepareStatement(SQL_UPDATE_EMAIL);
+            ps.setString(1, dto.email);
+            ps.setLong(2, Long.parseLong(dto.id));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
+        } finally {
+            DaoUtil.closeResources(ps);
         }
     }
 }
