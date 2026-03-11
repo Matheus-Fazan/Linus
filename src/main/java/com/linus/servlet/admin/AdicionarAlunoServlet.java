@@ -47,7 +47,7 @@ public class AdicionarAlunoServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Falha ao adicionar pré-cadastro. Por favor, tente novamente.");
 
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/admin/criarAcesso.jsp");
+            resp.sendRedirect(req.getContextPath() + "/admin/criar-acesso");
         }
     }
 }

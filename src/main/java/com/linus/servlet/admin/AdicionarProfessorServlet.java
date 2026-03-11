@@ -46,7 +46,7 @@ public class AdicionarProfessorServlet extends HttpServlet {
             requestReponse.addRequestAttribute("error", "Falha ao adicionar. Por favor, tente novamente.");
 
         } finally {
-            requestReponse.forwardTo("/../criarAcesso.jsp");
+            resp.sendRedirect(req.getContextPath() + "/admin/criar-acesso");
         }
     }
 }
