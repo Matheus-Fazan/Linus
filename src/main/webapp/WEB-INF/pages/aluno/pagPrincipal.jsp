@@ -13,6 +13,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluno | Tela Inicial</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/tables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
@@ -76,7 +77,7 @@
 
         <div class="tabela_usuarios">
             <hr>
-            <section class="card-tabela">
+            <section class="table-container" style="width: 90%; margin: 20px auto 0;">
                 <table border="0">
                     <tr id="titulo_tabela">
                         <th>Matéria</th>

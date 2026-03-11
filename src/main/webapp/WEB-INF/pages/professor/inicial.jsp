@@ -10,7 +10,7 @@
     String  success                     = (String)  request.getAttribute("success");
     String  filtro                      = request.getParameter("matricula");
 %>
-<!DOCTYPE html>
+
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +25,7 @@
 <header>
     <div class="logo">
         <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3>Instituto Linus</h3>
+        <h3>Instituto <br>Linus</h3>
     </div>
     <nav class="nav-header">
         <ul>
@@ -205,7 +205,7 @@
             </div>
 
             <div class="popup-actions">
-                <button type="button" class="btn btn-secondary" onclick="fecharPopupEdicao()">Cancelar</button>
+                <button style="color: black" type="button" class="btn btn-secondary" onclick="fecharPopupEdicao()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Salvar alterações</button>
             </div>
         </form>

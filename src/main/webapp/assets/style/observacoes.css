@@ -71,13 +71,12 @@ main {
 
 .card {
     background-color: #ffffff;
-    margin: 0 auto;
     width: 75%;
-    padding: 15px;
+    padding: 10px;
     border-radius: 14px;
     border: 1px solid #5588A3;
+    margin: 0 auto 20px;
 }
-
 
 .card p {
     margin-bottom: 10px;
