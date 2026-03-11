@@ -32,7 +32,7 @@ public interface GenericDaoInterface<Model, ModelDto> {
      * @throws SQLException        se houver erro na operação SQL
      * @throws ConnectionException se houver erro ao estabelecer conexão com o banco de dados
      */
-    Model findById(ModelDto dto) throws SQLException, ConnectionException;
+    Model findById(ModelDto dto ) throws SQLException, ConnectionException;
 
     /**
      * Retorna todas as entidades cadastradas.

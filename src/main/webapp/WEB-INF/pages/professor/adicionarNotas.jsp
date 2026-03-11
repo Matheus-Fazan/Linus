@@ -48,7 +48,7 @@
         <form action="" method="post">
             <div>
                 <label for="nome">Nome</label>
-                <input type="text" name="nome" value="<%= aluno.getNome() %>" disabled>
+                <input type="text" name="nome" value="<%= aluno.nome %>" disabled>
                 <label for="n1">Nota 1</label>
                 <input type="text" name="n1" placeholder="Digite a nota 1">
                 <label for="n2">Nota 2</label>

@@ -50,11 +50,11 @@
 
         <form action="" class="form-perfil">
             <label for="nome">Nome</label>
-            <input type="text" id="nome" value="<%= aluno.getNome() %>" disabled>
+            <input type="text" id="nome" value="<%= aluno.nome %>" disabled>
             <label for="n1">Nota 1</label>
-            <input type="text" id="n1" value="<%= nota.getNota1() %>">
+            <input type="text" id="n1" value="<%= nota.n1 %>">
             <label for="n2">Nota 2</label>
-            <input type="text" id="n2" value="<%= nota.getNota2() %>">
+            <input type="text" id="n2" value="<%= nota.n2 %>">
             <button type="submit">Salvar Alterações</button>
         </form>
 
