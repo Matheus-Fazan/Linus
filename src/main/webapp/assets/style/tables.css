@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
-    --primary-color: #A25DDF;
+    --primary-color: #b26ff3;
     --primary-color-hover: #b06eef;
     --secondary-color: #21B558;
     --info-color: #4FB2D9;
@@ -9,7 +9,7 @@
     --text-secondary: #718096;
     --text-light: #FFFFFF;
     --bg-main: #FFFFFF;
-    --bg-alt: #f8f8f8;
+    --bg-alt: #ececec;
     --border-color: #E2E8F0;
     --font-family-base: "Inter", sans-serif;
 }
@@ -24,8 +24,8 @@ body {
     font-family: var(--font-family-base), sans-serif;
     background-color: var(--bg-main);
     color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
 }
-
 
 header {
     background: #ffffff;
@@ -63,9 +63,8 @@ header {
     width:50px;
 }
 
-/* --- LAYOUT --- */
 .page-container {
-    display: block; /* Removido flex para evitar conflito com header superior */
+    display: block;
 }
 
 .main-content {
@@ -128,7 +127,6 @@ header {
     background-color: var(--primary-color-hover);
 }
 
-/* --- TABELA --- */
 .table-container {
     background: white;
     border: 1px solid var(--border-color);
@@ -163,7 +161,6 @@ tbody tr:hover {
     background-color: #fcfcfc;
 }
 
-/* --- BOTÕES DE AÇÃO --- */
 .action-buttons {
     display: flex;
     gap: 12px;
@@ -178,15 +175,13 @@ tbody tr:hover {
     transition: opacity 0.2s;
 }
 
-.btn-pdf { background-color: #E2E8F0; color: #475569; }
-.btn-edit { background-color: #DCFCE7; color: #166534; }
-.btn-obs { background-color: #DBEAFE; color: #1E40AF; }
+.btn-gray { background-color: #E2E8F0; color: #475569; border: none; }
+.btn-edit { background-color: #DCFCE7; color: #166534; border: none; }
 
 .btn-action:hover {
     opacity: 0.8;
 }
 
-/* --- MENSAGENS --- */
 .error-message {
     background-color: #FEE2E2;
     color: #B91C1C;
@@ -206,3 +201,4 @@ tbody tr:hover {
 .nao-encontrado h2 {
     font-weight: 500;
 }
+

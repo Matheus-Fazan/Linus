@@ -1,6 +1,7 @@
 package com.linus.dao;
 
 import com.linus.dto.ObservacaoDto;
+import com.linus.dto.ObservacaoProfessorDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -28,6 +29,21 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
             "WHERE o.id_aluno = ?";
     private final String SQL_UPDATE_COMMAND = "UPDATE observacao SET observacao = ?, id_professor = ?, id_aluno = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM observacao WHERE id = ?";
+    private final String SQL_FIND_BY_PROFESSOR = """
+        SELECT
+            o.id,
+            a.nome          AS nome_aluno,
+            m.nome          AS disciplina,
+            p.nome          AS nome_professor,
+            o.observacao,
+            TO_CHAR(o.data_criacao, 'DD/MM/YYYY HH24:MI') AS data_criacao
+        FROM observacao o
+        JOIN aluno     a ON a.matricula = o.id_aluno
+        JOIN professor p ON p.id        = o.id_professor
+        JOIN materia   m ON m.id        = p.id_materia
+        WHERE o.id_professor = ?
+        ORDER BY o.data_criacao DESC
+       """;
 
     @Override
     public Observacao save(ObservacaoDto dto) throws SQLException, ConnectionException {
@@ -153,6 +169,28 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
             }
         } finally {
             DaoUtil.closeResources(ps);
+        }
+    }
+
+    public List<ObservacaoProfessorDto> findByProfessor(long idProfessor) throws ConnectionException, SQLException {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<ObservacaoProfessorDto> resultado = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FIND_BY_PROFESSOR);
+            ps.setLong(1, idProfessor);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                resultado.add(new ObservacaoProfessorDto(rs));
+            }
+
+            return resultado;
+
+        } finally {
+            DaoUtil.closeResources(ps, rs);
         }
     }
 }
