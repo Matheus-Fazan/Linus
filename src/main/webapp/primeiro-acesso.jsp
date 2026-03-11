@@ -23,14 +23,10 @@
         <div class="main-container">
             <form action="${pageContext.request.contextPath}/aluno/primeiro-acesso" method="POST">
                 <h2>Primeiro Acesso</h2>
-                <label for="nome">Nome</label>
-                <input type="text" name="nome" placeholder="Digite seu nome">
                 <label for="email">Email</label>
                 <input type="email" name="email" placeholder="Digite seu email">
                 <label for="senha">Senha</label>
                 <input type="password" name="senha" placeholder="Digite sua senha">
-                <label for="cpf">CPF</label>
-                <input type="text" name="cpf" placeholder="Digite seu CPF">
                 <label for="matricula">Matricula</label>
                 <input type="text" name="matricula" placeholder="Digite sua matricula">
                 <button>Login</button>
