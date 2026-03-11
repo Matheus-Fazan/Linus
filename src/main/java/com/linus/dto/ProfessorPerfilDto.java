@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 public class ProfessorPerfilDto {
 
+    @Getter
+    private long id;
     public String nome;
     public String usuario;
     public String email;
@@ -14,6 +16,7 @@ public class ProfessorPerfilDto {
     private String disciplina;
 
     public ProfessorPerfilDto(ResultSet rs) throws SQLException {
+        this.id         = rs.getLong("id");
         this.nome       = rs.getString("nome");
         this.usuario    = rs.getString("usuario");
         this.email      = rs.getString("email");
