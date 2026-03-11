@@ -19,6 +19,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
     private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, usuario, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = """
                 SELECT
+                    p.id,
                     p.nome,
                     p.usuario,
                     p.email,
