@@ -7,6 +7,7 @@
 <head>
   <title>Editar aluno</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
@@ -58,12 +59,11 @@
       <p><strong>Nome:</strong> <%= aluno.getNome() %></p>
       <p><strong>CPF:</strong> <%= aluno.getCpf() %></p>
       <p><strong>Turma:</strong> <%= aluno.getTurma() %></p>
+      <p><strong>Email Atual:</strong> <%= aluno.getEmail() %></p>
     </div>
     
     <form action="${pageContext.request.contextPath}/admin/alterar-email-aluno" method="POST" class="form-perfil">
       <input type="hidden" name="matricula" value="<%= aluno.getMatricula() %>">
-      <label>Email Atual:</label>
-      <input type="email" value="<%= aluno.getEmail() %>" disabled>
       <label>Novo Email:</label>
       <input type="email" name="email" placeholder="Digite o novo email" required>
       <button type="submit">Alterar Email</button>

@@ -7,6 +7,7 @@
 <head>
   <title>Editar Professor</title>
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
@@ -58,12 +59,11 @@
       <p><strong>Nome:</strong> <%= professor.nome %></p>
       <p><strong>Usuário:</strong> <%= professor.usuario %></p>
       <p><strong>Disciplina:</strong> <%= professor.getDisciplina() %></p>
+      <p><strong>Email Atual:</strong> <%= professor.email %></p>
     </div>
 
     <form action="${pageContext.request.contextPath}/admin/alterar-email-professor" method="POST" class="form-perfil">
       <input type="hidden" name="id" value="<%= professor.getId() %>">
-      <label for="email-atual">Email Atual:</label>
-      <input type="email" id="email-atual" value="<%= professor.email %>" disabled>
       <label for="email">Novo Email:</label>
       <input type="email" id="email" name="email" placeholder="Digite o novo email" required>
       <button type="submit">Alterar Email</button>
