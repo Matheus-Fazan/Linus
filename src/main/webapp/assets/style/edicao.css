@@ -56,18 +56,17 @@ header{
     margin:50px auto;
 }
 
-.subtitle {
-    display: flex;
-    justify-content: space-between;
+.barra-inicial {
+    margin: 60px;
 }
 
-.subtitle h2{
+.barra-inicial h2{
     font-size:40px;
     color:#9b5de5;
     margin-bottom:8px;
 }
 
-.subtitle p{
+.barra-inicial p{
     color:#6d6d6d;
     margin-bottom:40px;
 }
@@ -87,7 +86,7 @@ header{
     justify-content:center;
 }
 
-.perfil-linha{
+.info-aluno {
     background:#fff;
     border:1.5px solid #828282;
     border-radius:18px;
@@ -98,14 +97,14 @@ header{
     gap:14px;
 }
 
-.perfil-linha input{
+.info-aluno input{
     border:none;
     padding:6px 4px;
     outline:none;
     font-size:14px;
 }
 
-.perfil-linha button{
+.info-aluno button{
     margin-top:20px;
     padding:10px;
     border:none;
@@ -116,7 +115,7 @@ header{
     transition:0.2s;
 }
 
-.perfil-linha button:hover{
+.info-aluno button:hover{
     background:#7c43c4;
 }
 

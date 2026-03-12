@@ -30,7 +30,7 @@ header {
 }
 
 .nav-header a:hover {
-    color: #A25DDF;
+    color: var(--primary-color);
 }
 
 .nav-header ul {
@@ -62,7 +62,7 @@ header {
 
 .topo h1{
     font-size:42px;
-    color:#9b5de5;
+    color: var(--primary-color);
 }
 
 .topo p{
@@ -81,9 +81,9 @@ header {
 
 .form-perfil {
     background-color: white;
-    width: 350px;
+    width: 450px;
     height: 80%;
-    padding: 40px;
+    padding: 30px;
     margin: 20px;
     border-radius: 20px;
     gap: 40px;
@@ -102,6 +102,10 @@ header {
 
 }
 
+.main-container h2 {
+    color: var(--primary-color);
+}
+
 input,
 select{
     padding:5px;
@@ -118,4 +122,8 @@ button{
     color:white;
     border-radius:10px;
     width: 100%;
+}
+
+h1, h2 {
+    color: var(--primary-color);
 }
