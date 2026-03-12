@@ -14,110 +14,94 @@
     ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");
 %>
 
-    <html>
-    <head>
-        <title>Visualizar Professores e Alunos</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/visualizarAdm.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
-              type="image/x-icon">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-                <h3>Instituto Linus</h3>
+<html>
+<head>
+    <title>Visualizar Professores e Alunos</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/visualizarAdm.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
+          type="image/x-icon">
+</head>
+<body>
+<jsp:include page="headerAdmin.jsp"/>
+<main>
+    <div class="container">
+
+        <h1>Visualize professores e alunos</h1>
+        <div class="sub">Veja os dados dos alunos e edite se necessário</div>
+
+        <form method="get">
+            <input class="search-input" type="text" name="pesquisa"
+                   placeholder="Pesquise o aluno/professor pelo número de matrícula ou email">
+
+            <div class="btn-group">
+                <button class="btn" type="submit" name="tipo" value="aluno">
+                    Ver informações dos alunos
+                </button>
+
+                <button class="btn" type="submit" name="tipo" value="professor">
+                    Ver informações dos professores
+                </button>
             </div>
+        </form>
 
-            <nav class="nav-header">
-                <ul>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
-                    </li>
-                    <li>
-                        <a href="index.html">Logout</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div class="container">
+        <% if ("aluno".equals(tipo)) { %>
 
-                <h1>Visualize professores e alunos</h1>
-                <div class="sub">Veja os dados dos alunos e edite se necessário</div>
+        <div class="card">
+            <h3>Alunos</h3>
 
-                <form method="get">
-                    <input class="search-input" type="text" name="pesquisa"
-                           placeholder="Pesquise o aluno/professor pelo número de matrícula ou email">
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Usuário</th>
+                    <th>Email</th>
+                    <th>CPF</th>
+                    <th>Matrícula</th>
+                    <th>Turma</th>
+                </tr>
+                <tr>
+                    <td><%= aluno.nome %>
+                    </td>
+                    <td><%= aluno.email %>
+                    </td>
+                    <td><%= aluno.cpf %>
+                    </td>
+                    <td><%= aluno.matricula %>
+                    </td>
+                    <td><%= aluno.turmaDto %>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                    <div class="btn-group">
-                        <button class="btn" type="submit" name="tipo" value="aluno">
-                            Ver informações dos alunos
-                        </button>
+        <% } else if ("professor".equals(tipo)) { %>
 
-                        <button class="btn" type="submit" name="tipo" value="professor">
-                            Ver informações dos professores
-                        </button>
-                    </div>
-                </form>
+        <div class="card">
+            <h3>Professores</h3>
 
-                <% if ("aluno".equals(tipo)) { %>
+            <table>
+                <tr>
+                    <th>Nome</th>
+                    <th>Usuário</th>
+                    <th>Email</th>
+                    <th>Disciplina</th>
+                </tr>
+                <tr>
+                    <td><%= professor.nome %>
+                    </td>
+                    <td><%= professor.usuario %>
+                    </td>
+                    <td><%= professor.email %>
+                    </td>
+                    <td><%= professor.disciplina %>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
-                <div class="card">
-                    <h3>Alunos</h3>
+        <% } %>
 
-                    <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Usuário</th>
-                            <th>Email</th>
-                            <th>CPF</th>
-                            <th>Matrícula</th>
-                            <th>Turma</th>
-                        </tr>
-                        <tr>
-                            <td><%= aluno.nome %></td>
-                            <td><%= aluno.email %></td>
-                            <td><%= aluno.cpf %></td>
-                            <td><%= aluno.matricula %></td>
-                            <td><%= aluno.turmaDto %></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <% } else if ("professor".equals(tipo)) { %>
-
-                <div class="card">
-                    <h3>Professores</h3>
-
-                    <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Usuário</th>
-                            <th>Email</th>
-                            <th>Disciplina</th>
-                        </tr>
-                        <tr>
-                            <td><%= professor.nome %></td>
-                            <td><%= professor.usuario %></td>
-                            <td><%= professor.email %></td>
-                            <td><%= professor.disciplina %></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <% } %>
-
-            </div>
-        </main>
-    </body>
+    </div>
+</main>
+</body>
 </html>
