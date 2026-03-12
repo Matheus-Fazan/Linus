@@ -28,9 +28,9 @@
     </div>
     <nav class="nav-header">
         <ul>
-            <li><a href="${pageContext.request.contextPath}/admin/pagPrincipal">Página inicial</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/dashboard">Página inicial</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/adicionar-aluno">Criar Acesso</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/criar-acesso">Criar Acesso</a></li>
             <li><a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a></li>
             <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
@@ -74,7 +74,7 @@
                         <td><%= p.getIdMateria() %></td>
 
                         <td class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/admin/editarProfessor?id=<%= p.getId() %>"
+                            <a href="${pageContext.request.contextPath}/admin/alterar-email-professor?id=<%= p.getId() %>"
                                class="btn-action btn-edit" title="Ir para tela de editar professor">Editar</a>
                         </td>
                     </tr>
@@ -112,7 +112,7 @@
                         <td><%= a.getCpf() %></td>
 
                         <td class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/admin/editarAluno?matricula=<%= a.getMatricula() %>"
+                            <a href="${pageContext.request.contextPath}/admin/alterar-email-aluno?matricula=<%= a.getMatricula() %>"
                                class="btn-action btn-edit" title="Ir para tela de editar professor">Editar</a>
                         </td>
                     </tr>
