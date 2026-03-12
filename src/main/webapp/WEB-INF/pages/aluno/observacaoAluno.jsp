@@ -14,7 +14,7 @@
 <header>
     <div class="logo">
         <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3> Instituto Linus</h3>
+        <h3> Instituto <br> Linus</h3>
     </div>
     <nav class="nav-header">
         <ul>

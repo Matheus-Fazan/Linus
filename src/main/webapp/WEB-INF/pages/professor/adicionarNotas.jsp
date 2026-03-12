@@ -19,17 +19,17 @@
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/adicionarNotas.jsp">Adicionar
+                <a href="${pageContext.request.contextPath}/professor/adicionarNotas">Adicionar
                     Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/editarNotas.jsp">Editar Notas</a>
+                <a href="${pageContext.request.contextPath}/professor/editarNotas">Editar Notas</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
+                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
             </li>
             <li>
-                <a href="">Logout</a>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
             </li>
         </ul>
     </nav>

@@ -9,7 +9,7 @@
     --text-secondary: #718096;
     --text-light: #FFFFFF;
     --bg-main: #FFFFFF;
-    --bg-alt: #ececec;
+    --bg-alt: #e3e3e3;
     --border-color: #E2E8F0;
     --font-family-base: "Inter", sans-serif;
 }
@@ -77,6 +77,7 @@ header {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 8px;
+    color: var(--primary-color);
 }
 
 .page-header p {
@@ -205,4 +206,3 @@ tbody tr:hover {
 .nao-encontrado h2 {
     font-weight: 500;
 }
-
