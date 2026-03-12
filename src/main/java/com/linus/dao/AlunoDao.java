@@ -17,7 +17,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
-    private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
+    private final String SQL_FINDALL_COMMAND = "SELECT matricula, nome, email, cpf, id_turma FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, hash_senha = ? WHERE matricula = ? AND (email IS NULL OR hash_senha IS NULL)";
     private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";

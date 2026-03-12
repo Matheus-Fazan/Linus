@@ -27,7 +27,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                 JOIN materia m ON m.id = p.id_materia
                 WHERE p.id = ?
                 """;
-    private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
+    private final String SQL_FINDALL_COMMAND = "SELECT id, nome, email, usuario, id_materia FROM professor";
     private static final String SQL_FIND_ALUNOS = """
             SELECT
               n.id AS id_nota,

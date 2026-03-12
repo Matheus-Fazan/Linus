@@ -1,10 +1,10 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.linus.dto.AlunoDto" %>
-<%@ page import="com.linus.dto.ProfessorPerfilDto" %>
+<%@ page import="com.linus.model.dao.Aluno" %>
+<%@ page import="com.linus.model.dao.Professor" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<ProfessorPerfilDto > professores       = (List<ProfessorPerfilDto >) request.getAttribute("professor");
-    List<AlunoDto> alunos = (List<AlunoDto>)     request.getAttribute("observacoes");
+    List<Professor> professores = (List<Professor>) request.getAttribute("professores");
+    List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
     Boolean encontrado                  = (Boolean) request.getAttribute("encontrado");
     String  error                       = (String)  request.getAttribute("error");
     String  success                     = (String)  request.getAttribute("success");
@@ -28,11 +28,11 @@
     </div>
     <nav class="nav-header">
         <ul>
-            <li><a href="${pageContext.request.contextPath}/admin/dashboard.jsp">Página inicial</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/index.jsp">Logout</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/pagPrincipal">Página inicial</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/adicionar-aluno">Criar Acesso</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
         </ul>
     </nav>
 </header>
@@ -54,28 +54,28 @@
 
         <section class="table-section">
 
-            <% if (encontrado != null && encontrado) { %>
+            <% if (professores != null && !professores.isEmpty()) { %>
             <div class="table-container">
                 <table>
                     <thead>
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>usuario</th>
+                        <th>CPF</th>
                         <th>Disciplina</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (ProfessorPerfilDto p : professores) { %>
+                    <% for (Professor p : professores) { %>
                     <tr>
-                        <td><%= p.nome %></td>
-                        <td><%= p.email %></td>
-                        <td><%= p.usuario %></td>
-                        <td><%= p.getDisciplina() %></td>
+                        <td><%= p.getNome() %></td>
+                        <td><%= p.getEmail() %></td>
+                        <td><%= p.getCpf() %></td>
+                        <td><%= p.getIdMateria() %></td>
 
                         <td class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/admin/editar-professor/usuario=<%= p.usuario %>"
-                               class="btn-action btn-edit" title="Ir para tela de editar aluno">Editar</a>
+                            <a href="${pageContext.request.contextPath}/admin/editarProfessor?id=<%= p.getId() %>"
+                               class="btn-action btn-edit" title="Ir para tela de editar professor">Editar</a>
                         </td>
                     </tr>
                     <% } %>
@@ -83,9 +83,9 @@
                 </table>
             </div>
 
-            <% } else if (encontrado != null && !encontrado) { %>
+            <% } else if (professores != null && professores.isEmpty()) { %>
             <div class="nao-encontrado">
-                <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado,<br>pesquise novamente.</h2>
+                <h2 style="color: #4FB2D9;">Nenhum professor foi encontrado.</h2>
             </div>
             <% } %>
         </section>
@@ -104,16 +104,16 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (AlunoDto a : alunos) { %>
+                    <% for (Aluno a : alunos) { %>
                     <tr>
-                        <td><%= a.matricula %></td>
-                        <td><%= a.nome %></td>
-                        <td><%= a.email %></td>
-                        <td><%= a.cpf %></td>
+                        <td><%= a.getMatricula() %></td>
+                        <td><%= a.getNome() %></td>
+                        <td><%= a.getEmail() %></td>
+                        <td><%= a.getCpf() %></td>
 
                         <td class="action-buttons">
-                            <a href="${pageContext.request.contextPath}/admin/editar-aluno/matricula=<%= a.matricula %>"
-                               class="btn-action btn-edit" title="Ir para tela de editar aluno">Editar</a>
+                            <a href="${pageContext.request.contextPath}/admin/editarAluno?matricula=<%= a.getMatricula() %>"
+                               class="btn-action btn-edit" title="Ir para tela de editar professor">Editar</a>
                         </td>
                     </tr>
                     <% } %>
@@ -122,7 +122,7 @@
             </div>
             <% } else { %>
             <div class="nao-encontrado">
-                <h2 style="color: #4FB2D9;">Nenhuma observação registrada ainda.</h2>
+                <h2 style="color: #4FB2D9;">Nenhum aluno encontrado.</h2>
             </div>
             <% } %>
         </section>
