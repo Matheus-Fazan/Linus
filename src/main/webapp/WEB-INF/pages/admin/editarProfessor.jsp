@@ -6,9 +6,7 @@
 
 <head>
     <title>Editar Professor</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
