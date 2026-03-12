@@ -1,0 +1,130 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body{
+    background:#f4f4f4;
+    color:#333;
+}
+
+header{
+    width:100%;
+    background:#ffffff;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:15px 60px;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo img{
+    width:45px;
+}
+
+.logo h3{
+    font-weight:600;
+}
+
+.nav-header ul{
+    display:flex;
+    list-style:none;
+    gap:35px;
+}
+
+.nav-header a{
+    text-decoration:none;
+    color:#000;
+    font-size:15px;
+    transition:0.2s;
+}
+
+.nav-header a:hover{
+    color:#9b5de5;
+}
+
+.perfil-card{
+    width:100%;
+    max-width:1100px;
+    margin:50px auto;
+}
+
+.subtitle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.subtitle h2{
+    font-size:40px;
+    color:#9b5de5;
+    margin-bottom:8px;
+}
+
+.subtitle p{
+    color:#6d6d6d;
+    margin-bottom:40px;
+}
+
+.search-bar{
+    width:80%;
+    height: 40px;
+    max-width:400px;
+    padding:12px;
+    border-radius:25px;
+    border:1px solid #ccc;
+    margin-bottom:40px;
+}
+
+.main-container{
+    display:flex;
+    justify-content:center;
+}
+
+.perfil-linha{
+    background:#fff;
+    border:1.5px solid #828282;
+    border-radius:18px;
+    padding:35px 45px;
+    width:400px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+}
+
+.perfil-linha input{
+    border:none;
+    padding:6px 4px;
+    outline:none;
+    font-size:14px;
+}
+
+.perfil-linha button{
+    margin-top:20px;
+    padding:10px;
+    border:none;
+    border-radius:10px;
+    background:#9b5de5;
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.perfil-linha button:hover{
+    background:#7c43c4;
+}
+
+.nao-encontrado{
+    margin-top:40px;
+    text-align:center;
+}
+
+.nao-encontrado img{
+    margin-bottom:15px;
+}
