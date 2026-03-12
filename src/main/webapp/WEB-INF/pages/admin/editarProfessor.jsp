@@ -15,33 +15,7 @@
 <% ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");%>
 
 <body>
-<header>
-    <div class="logo">
-        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3>Instituto linus</h3>
-    </div>
-
-    <nav class="nav-header">
-        <ul>
-            <li>
-                <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/admin/criarAcesso">Criar Acesso</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
-
-</header>
+<jsp:include page="headerAdmin.jsp"/>
 
 <div class="largest-container">
     <div class="subtitle" id="s1">
