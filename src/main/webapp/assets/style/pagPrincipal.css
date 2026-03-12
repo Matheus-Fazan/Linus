@@ -9,6 +9,7 @@
 
 body{
     background:#ececec;
+    overflow-x: hidden;
 }
 
 /* HEADER */
@@ -80,20 +81,32 @@ header {
 
 /* CARDS DE INFORMAÇÃO */
 
+.top-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .informacoes_gerais {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     gap: 15px;
     margin-top: 10px;
+    margin-right: 70px;
 }
 
 .informacao {
     background: #ffffff;
+    font-size: smaller;
     border: 1.5px solid #cfd8e3;
     border-radius: 12px;
-    padding: 26px 60px ;
-    min-width: 220px;
-    }
+    padding: 15px;
+    height: 75px;
+    width: 175px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 a {
     text-decoration: none;
@@ -139,7 +152,10 @@ td{
 }
 
 hr {
-    margin: 25px;
+    width: 90%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* GRID INFERIOR */
 
@@ -218,4 +234,26 @@ hr {
     font-size: 40px;
     margin-left: 60px;
     text-align: left;
+}
+
+#perfil{
+    width: 50px;
+    height: 50px;
+}
+
+.tabela_usuarios{
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+button.btn-filtro:hover{
+    border-bottom-color: #2d6689;
+}
+
+#limpaFiltro:hover{
+    background-color: #2d6689;
+}
+
+#cadastrar:hover{
+    background-color: #2d6689;
 }

@@ -11,7 +11,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
                 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
                     type="image/x-icon">
                 <title>Perfil Aluno</title>
@@ -28,7 +27,7 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
+                                <a href="${pageContext.request.contextPath}/admin/pagPrincipal">Página inicial</a>
                             </li>
                             <li>
                                 <a href="${pageContext.request.contextPath}/admin/dashboard">Visualização</a>
@@ -40,7 +39,7 @@
                                 <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
                             </li>
                             <li>
-                                <a href="index.html">Logout</a>
+                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
                             </li>
                         </ul>
                     </nav>
@@ -53,36 +52,40 @@
                         <p>Visualize suas informações.</p>
                     </div>
 
-                    <% if (request.getAttribute("error") != null) { %>
+                    <% if (request.getAttribute("error") !=null) { %>
+
                         <div class="error-box">
-                            <p><%= request.getAttribute("error") %></p>
+                            <p>
+                                <%= request.getAttribute("error") %>
+                            </p>
                         </div>
-                    <% } %>
 
-                    <% if (request.getAttribute("success") != null) { %>
-                        <div class="success-box">
-                            <p><%= request.getAttribute("success") %></p>
-                        </div>
-                    <% } %>
+                        <% } else if (perfil !=null) { %>
 
-                    <% if (perfil != null) { %>
-                        <center>
-                            <form action="${pageContext.request.contextPath}/admin/perfil" method="post" class="perfil-card">
-                                <div class="perfil-linha">
-                                    <label class="perfil-label" for="email">Email</label>
-                                    <input
-                                            type="email"
-                                            id="email"
-                                            name="email"
-                                            class="perfil-input"
-                                            value="<%= perfil.getEmail() %>"
-                                            required
-                                    >
-                                </div>
-                                <button type="submit" class="btn-salvar">Salvar alterações</button>
-                            </form>
-                        </center>
-                    <% } %>
+                            <center>
+                                <form action="atualizarPerfil" method="post" class="perfil-card">
+
+                                    <div class="perfil-linha">
+                                        <label class="perfil-label" for="email">Email</label>
+
+                                        <input
+                                                type="email"
+                                                id="email"
+                                                name="email"
+                                                class="perfil-input"
+                                                value="<%= perfil.getEmail() %>"
+                                                required
+                                        >
+                                    </div>
+
+                                    <button type="submit" class="btn-salvar">
+                                        Salvar alterações
+                                    </button>
+
+                                </form>
+                            </center>
+
+                            <% } %>
 
                 </div>
 
