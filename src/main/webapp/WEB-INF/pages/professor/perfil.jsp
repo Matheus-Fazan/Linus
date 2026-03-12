@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.linus.dto.ProfessorDto" %>
+<%@ page import="com.linus.dto.ProfessorPerfilDto" %>
 
-<% ProfessorDto perfil = (ProfessorDto) request.getAttribute("perfil"); %>
+<% ProfessorPerfilDto perfil=(ProfessorPerfilDto) request.getAttribute("perfil"); %>
 
 
 <html lang="pt-br">
@@ -16,51 +16,51 @@
     <title>Perfil Aluno</title>
 </head>
 
-<body>
+            <body>
 
 <jsp:include page="headerProfessor.jsp"/>
 
-<div class="container">
+                <div class="container">
 
-    <div class="topo">
-        <h1>Veja seu Perfil</h1>
-        <p>Visualize suas informações.</p>
-    </div>
+                    <div class="topo">
+                        <h1>Veja seu Perfil</h1>
+                        <p>Visualize suas informações.</p>
+                    </div>
 
-    <% if (request.getAttribute("error") != null) { %>
+                    <% if (request.getAttribute("error") !=null) { %>
 
-    <div class="error-box">
-        <p>
-            <%= request.getAttribute("error") %>
-        </p>
-    </div>
+                        <div class="error-box">
+                            <p>
+                                <%= request.getAttribute("error") %>
+                            </p>
+                        </div>
 
-    <% } else if (perfil != null) { %>
+                        <% } else if (perfil !=null) { %>
 
-    <center>
-        <section class="perfil-card">
-            <h2>Perfil</h2>
+                            <center>
+                                <section class="perfil-card">
+                                    <h2>Perfil</h2>
 
-            <div class="perfil-linha">
-                <span class="perfil-label">Nome</span>
-                <span class="perfil-valor">
+                                    <div class="perfil-linha">
+                                        <span class="perfil-label">Nome</span>
+                                        <span class="perfil-valor">
                                             <%= perfil.nome %>
                                         </span>
-            </div>
+                                    </div>
 
-            <div class="perfil-linha">
-                <span class="perfil-label">Usuario</span>
-                <span class="perfil-valor">
+                                    <div class="perfil-linha">
+                                        <span class="perfil-label">Usuario</span>
+                                        <span class="perfil-valor">
                                             <%= perfil.usuario %>
                                         </span>
-            </div>
+                                    </div>
 
-            <div class="perfil-linha">
-                <span class="perfil-label">Email</span>
-                <span class="perfil-valor">
+                                    <div class="perfil-linha">
+                                        <span class="perfil-label">Email</span>
+                                        <span class="perfil-valor">
                                             <%= perfil.email %>
                                         </span>
-            </div>
+                                    </div>
 
             <div class="perfil-linha">
                 <span class="perfil-label">Disciplina</span>
@@ -74,8 +74,8 @@
 
     <% } %>
 
-</div>
+                </div>
 
-</body>
+            </body>
 
-</html>
+            </html>

@@ -3,12 +3,12 @@
 <%@ page import="com.linus.dto.ObservacaoProfessorDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<AlunoProfessorDto> notas       = (List<AlunoProfessorDto>) request.getAttribute("notas");
-    List<ObservacaoProfessorDto>     observacoes = (List<ObservacaoProfessorDto>)     request.getAttribute("observacoes");
-    Boolean encontrado                  = (Boolean) request.getAttribute("encontrado");
-    String  error                       = (String)  request.getAttribute("error");
-    String  success                     = (String)  request.getAttribute("success");
-    String  filtro                      = request.getParameter("matricula");
+    List<AlunoProfessorDto>      notas       = (List<AlunoProfessorDto>)      request.getAttribute("notas");
+    List<ObservacaoProfessorDto> observacoes = (List<ObservacaoProfessorDto>) request.getAttribute("observacoes");
+    Boolean encontrado                       = (Boolean) request.getAttribute("encontrado");
+    String  error                            = (String)  request.getAttribute("error");
+    String  success                          = (String)  request.getAttribute("success");
+    String  filtro                           = request.getParameter("matricula");
 %>
 
 <html lang="pt-br">
@@ -52,6 +52,13 @@
                         <button type="submit">Buscar</button>
                     </form>
                 </div>
+                    <div class="table-actions">
+                        <button type="button"
+                                class="btn-action btn-gray"
+                                onclick="abrirPopupLancarNota()">
+                            + Adicionar nota
+                        </button>
+                    </div>
             </header>
 
             <% if (encontrado != null && encontrado) { %>
@@ -60,6 +67,7 @@
                     <thead>
                     <tr>
                         <th>Matrícula</th>
+                        <th>Materia</th>
                         <th>Nome</th>
                         <th>Turma</th>
                         <th>Nota 1</th>
@@ -74,22 +82,32 @@
                     <% for (AlunoProfessorDto n : notas) { %>
                     <tr>
                         <td><%= n.matricula %></td>
+                        <td><%= n.materia %></td>
                         <td><%= n.nome %></td>
                         <td><%= n.turma %></td>
                         <td><%= n.n1 %></td>
                         <td><%= n.n2 %></td>
                         <td><%= n.media %></td>
                         <td><%= n.situacao %></td>
-                        <td><%= n.observacao %></td>
+                        <td><%= n.observacao != null ? n.observacao : "-" %></td>
                         <td class="action-buttons">
                             <a href="${pageContext.request.contextPath}/aluno/boletim/pdf?matricula=<%= n.matricula %>"
                                class="btn-action btn-gray" title="Gerar boletim PDF">PDF</a>
+                            <% if (n.pertenceAoProfessor) { %>
                             <button type="button"
                                     class="btn-action btn-edit"
                                     title="Editar notas"
-                                    onclick="abrirPopupEdicao(<%= n.idNota %>, '<%= n.nome %>', <%= n.n1 %>, <%= n.n2 %>, '<%= n.observacao %>')">
+                                    onclick="abrirPopupEdicao(<%= n.idNota %>, '<%= n.nome %>', <%= n.n1 %>, <%= n.n2 %>, '<%= n.observacao != null ? n.observacao : "" %>')">
                                 Editar
                             </button>
+                            <% } else { %>
+                            <button type="button"
+                                    class="btn-action btn-edit"
+                                    title="Você não pode editar notas de outra matéria"
+                                    disabled>
+                                Editar
+                            </button>
+                            <% } %>
                         </td>
                     </tr>
                     <% } %>
@@ -110,12 +128,10 @@
                 <div class="table-actions">
                     <button type="button"
                             class="btn-action btn-gray"
-                            title="Adicionar observação"
-                            onclick="abrirPopupEdicao(null, null, null, null, null)">
-                        Adicionar Observação
+                            onclick="abrirPopupObservacao()">
+                        + Adicionar Observação
                     </button>
                 </div>
-
             </header>
 
             <% if (observacoes != null && !observacoes.isEmpty()) { %>
@@ -182,7 +198,7 @@
 
             <div class="popup-field">
                 <label for="popup-observacao">Observação</label>
-                <input type="text" id="popup-observacao" name="observacao"
+                <input type="text" id="popup-observacao-nota" name="observacao"
                        placeholder="Digite sua observação">
             </div>
 
@@ -192,13 +208,98 @@
             </div>
 
             <div class="popup-actions">
-                <button style="color: black" type="button" class="btn btn-secondary" onclick="fecharPopupEdicao()">Cancelar</button>
+                <button type="button" class="btn btn-secondary" onclick="fecharPopupEdicao()">Cancelar</button>
                 <button type="submit" class="btn btn-primary">Salvar alterações</button>
             </div>
         </form>
     </div>
 </div>
+
+<div class="overlay" id="popup-observacao" style="display: none;">
+    <div class="popup-container">
+        <h1>Adicionar Observação</h1>
+        <p>Informe a matrícula do aluno e escreva a observação.</p>
+
+        <form action="${pageContext.request.contextPath}/professor/observacao/adicionar" method="post">
+
+            <div class="popup-field">
+                <label for="obs-matricula">Matrícula do Aluno</label>
+                <input type="number" id="obs-matricula" name="matricula"
+                       placeholder="Digite a matrícula" min="1" required>
+            </div>
+
+            <div class="popup-field">
+                <label for="obs-texto">Observação</label>
+                <textarea id="obs-texto" name="observacao"
+                          placeholder="Digite sua observação"
+                          maxlength="255"
+                          rows="4"
+                          required></textarea>
+                <small id="obs-contador">0 / 255 caracteres</small>
+            </div>
+
+            <div class="popup-actions">
+                <button type="button" class="btn btn-secondary" onclick="fecharPopupObservacao()">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="overlay" id="popup-lancar" style="display: none;">
+    <div class="popup-container">
+        <h1>Lançar Nota</h1>
+        <form id="form-lancar-nota"
+              action="${pageContext.request.contextPath}/professor/notas/adicionar"
+              method="post">
+
+            <div class="popup-field">
+                <label for="popup-n1">Matricula do aluno</label>
+                <input type="number" id="popup-lancar-matricula" name="matricula"
+                       placeholder="Matricula"
+                       required>
+            </div>
+
+            <div class="popup-field">
+                <label for="popup-n1">Nota 1</label>
+                <input type="number" id="popup-lancar-n1" name="n1"
+                       min="0" max="10" step="0.1"
+                       placeholder="0.0"
+                       oninput="calcularPrevia()"
+                       required>
+            </div>
+
+            <div class="popup-field">
+                <label for="popup-n2">Nota 2</label>
+                <input type="number" id="popup-lancar-n2" name="n2"
+                       min="0" max="10" step="0.1"
+                       placeholder="0.0"
+                       oninput="calcularPrevia()">
+            </div>
+
+            <div class="popup-field">
+                <label for="popup-observacao">Observação</label>
+                <input type="text" id="popup-lancar-observacao-nota" name="observacao"
+                       placeholder="Digite sua observação">
+            </div>
+
+            <div class="popup-previa">
+                <span>Média:</span>
+                <strong id="popup-lancar-media">-</strong>
+            </div>
+
+            <div class="popup-actions">
+                <button type="button" class="btn btn-secondary" onclick="fecharPopupLancarNota()">Cancelar</button>
+                <button type="submit" class="btn btn-primary">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <script src="${pageContext.request.contextPath}/assets/js/popup-edicao.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/popup-observacao.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/popup-lancar.js"></script>
 
 </body>
 </html>

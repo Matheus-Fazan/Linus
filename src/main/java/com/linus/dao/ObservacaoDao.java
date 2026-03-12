@@ -14,7 +14,9 @@ import java.util.List;
 
 public class ObservacaoDao implements GenericDaoInterface<Observacao, ObservacaoDto> {
 
-    private final String SQL_SAVE_COMMAND = "INSERT INTO observacao(observacao, id_professor, id_aluno) VALUES(?, ?, ?) RETURNING id";
+    private final String SQL_SAVE_COMMAND = """
+    INSERT INTO observacao (observacao, data_criacao, id_professor, id_aluno) VALUES (?, NOW(), ?, ?)
+    """;
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM observacao WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM observacao";
     private final String SQL_FINDALL_BY_ID_COMMAND =
@@ -67,6 +69,21 @@ public class ObservacaoDao implements GenericDaoInterface<Observacao, Observacao
             return observacao;
         } finally {
             DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public void save(long idProfessor, long matricula, String observacao) throws SQLException, ConnectionException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_SAVE_COMMAND);
+            ps.setString(1, observacao);
+            ps.setLong(2, idProfessor);
+            ps.setLong(3, matricula);
+            ps.executeUpdate();
+
+        } finally {
+            DaoUtil.closeResources(ps);
         }
     }
 

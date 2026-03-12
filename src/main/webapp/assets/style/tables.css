@@ -68,7 +68,7 @@ header {
 }
 
 .main-content {
-    max-width: 1200px;
+    max-width: 1300px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -109,7 +109,7 @@ header {
     outline: none;
     background: transparent;
     font-size: 0.9rem;
-    width: 300px;
+    width: 480px;
     padding: 8px;
 }
 
@@ -180,6 +180,11 @@ tbody tr:hover {
 
 .btn-action:hover {
     opacity: 0.8;
+}
+
+.btn-action:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .error-message {
