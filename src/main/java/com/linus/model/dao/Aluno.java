@@ -28,7 +28,6 @@ public class Aluno {
         this.email = rs.getString("email");
         this.nome = rs.getString("nome");
         this.cpf = rs.getString("cpf");
-        this.hashSenha = rs.getString("hash_senha");
         this.id_turma = rs.getLong("id_turma");
     }
 
@@ -40,6 +39,5 @@ public class Aluno {
         this.email = email;
         this.nome = nome;
         this.cpf = cpf;
-        this.hashSenha = hashSenha;
     }
 }

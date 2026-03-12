@@ -2,6 +2,7 @@ package com.linus.dao;
 
 import com.linus.dto.AlunoDto;
 import com.linus.dto.AlunoPerfilDto;
+import com.linus.dto.AlunoVisualizarDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -17,7 +18,8 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
     private final String SQL_SAVE_COMMAND = "INSERT INTO aluno(email, nome, cpf, hash_senha, id_turma) VALUES(?, ?, ?, ?, ?) RETURNING matricula";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM aluno WHERE matricula = ?";
-    private final String SQL_FINDALL_COMMAND = "SELECT * FROM aluno";
+    private final String SQL_FINDALL_COMMAND = "SELECT matricula, nome, email, cpf, id_turma FROM aluno";
+    private final String SQL_FINDALL_FOR_VISUALIZACAO = "SELECT matricula, nome, email FROM aluno";
     private final String SQL_UPDATE_COMMAND = "UPDATE aluno SET email = ?, nome = ?, cpf = ?, hash_senha = ?, id_turma = ? WHERE matricula = ?";
     private final String SQL_UPDATE_WITHOUT_IDTURMA_COMMAND = "UPDATE aluno SET email = ?, hash_senha = ? WHERE matricula = ? AND (email IS NULL OR hash_senha IS NULL)";
     private final String SQL_UPDATE_EMAIL_BY_MATRICULA_COMMAND = "UPDATE aluno SET email = ? WHERE matricula = ?";
@@ -133,6 +135,25 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
             while (queryResult.next()) {
                 alunos.add(new Aluno(queryResult));
+            }
+
+            return alunos;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public List<AlunoVisualizarDto> findAllForVisualizacao() throws SQLException, ConnectionException {
+        List<AlunoVisualizarDto> alunos = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet queryResult = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FINDALL_FOR_VISUALIZACAO);
+            queryResult = ps.executeQuery();
+
+            while (queryResult.next()) {
+                alunos.add(new AlunoVisualizarDto(queryResult));
             }
 
             return alunos;
