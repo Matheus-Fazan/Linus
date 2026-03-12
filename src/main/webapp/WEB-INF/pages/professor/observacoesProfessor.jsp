@@ -1,5 +1,3 @@
-<%@ page import="com.linus.model.dao.ObservacaoDTO" %>
-
 <%@ page import="java.util.List" %>
 <%@ page import="com.linus.model.dao.Observacao" %>
 <%@ page import="com.linus.dto.ProfessorDto" %>
