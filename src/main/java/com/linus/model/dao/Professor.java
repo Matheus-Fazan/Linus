@@ -27,8 +27,6 @@ public class Professor {
         this.id = rs.getLong("id");
         this.nome = rs.getString("nome");
         this.email = rs.getString("email");
-        this.hashSenha = rs.getString("hash_senha");
-        this.cpf = rs.getString("cpf");
         this.idMateria = rs.getLong("id_materia");
     }
 }

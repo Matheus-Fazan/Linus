@@ -3,6 +3,7 @@ package com.linus.dao;
 import com.linus.dto.AlunoProfessorDto;
 import com.linus.dto.ProfessorDto;
 import com.linus.dto.ProfessorPerfilDto;
+import com.linus.dto.ProfessorVisualizarDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -27,7 +28,16 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                 JOIN materia m ON m.id = p.id_materia
                 WHERE p.id = ?
                 """;
-    private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
+    private final String SQL_FINDALL_COMMAND = "SELECT id, nome, email, usuario, id_materia FROM professor";
+    private final String SQL_FINDALL_FOR_VISUALIZACAO = """
+            SELECT
+                p.id,
+                p.nome,
+                p.email,
+                m.nome AS disciplina
+            FROM professor p
+            JOIN materia m ON m.id = p.id_materia
+            """;
     private static final String SQL_FIND_ALUNOS = """
             SELECT
               n.id AS id_nota,
@@ -197,6 +207,25 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
 
             while (queryResult.next()) {
                 professores.add(new Professor(queryResult));
+            }
+
+            return professores;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
+    public List<ProfessorVisualizarDto> findAllForVisualizacao() throws SQLException, ConnectionException {
+        List<ProfessorVisualizarDto> professores = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet queryResult = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FINDALL_FOR_VISUALIZACAO);
+            queryResult = ps.executeQuery();
+
+            while (queryResult.next()) {
+                professores.add(new ProfessorVisualizarDto(queryResult));
             }
 
             return professores;

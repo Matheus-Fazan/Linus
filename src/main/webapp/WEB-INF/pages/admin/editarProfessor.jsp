@@ -1,19 +1,47 @@
-<%@ page import="com.linus.model.dao.Professor" %>
-<%@ page import="com.linus.dto.ProfessorDto" %>
+<%@ page import="com.linus.dto.ProfessorPerfilDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
 
 <head>
     <title>Editar Professor</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
-<% ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");%>
+<% ProfessorPerfilDto professor = (ProfessorPerfilDto) request.getAttribute("professor");%>
 
 <body>
-<jsp:include page="headerAdmin.jsp"/>
+<header>
+    <div class="logo">
+        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
+        <h3>Instituto Linus</h3>
+    </div>
+
+    <nav class="nav-header">
+        <ul>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/dashboard">Página inicial</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/criar-acesso">Criar Acesso</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
+            </li>
+            <li>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
+            </li>
+        </ul>
+    </nav>
+
+</header>
 
 <div class="largest-container">
     <div class="barra-inicial" id="s1">
@@ -25,20 +53,21 @@
 
     <% Boolean encontrado = (Boolean) request.getAttribute("encontrado"); %>
     <% if (encontrado != null && encontrado) { %>
-    <div class="main-container" id="m1">
-
-        <form action="" class="form-perfil">
-            <label for="nome">Nome:</label>
-            <input type="text" id="nome" value="<%= professor.nome %>">
-            <label for="user">Usuário:</label>
-            <input type="text" id="user" value="<%= professor.usuario %>">
-            <label for="email">Email:</label>
-            <input type="email" id="email" value="<%= professor.email %>">
-            <label for="idMateria">Matéria:</label>
-            <input type="text" id="idMateria" value="<%= professor.idMateria %>">
-            <button type="submit">Salvar Alterações</button>
+    <div class="main-container">
+        <div class="info-aluno">
+            <p><strong>ID:</strong> <%= professor.getId() %></p>
+            <p><strong>Nome:</strong> <%= professor.nome %></p>
+            <p><strong>Usuário:</strong> <%= professor.usuario %></p>
+            <p><strong>Disciplina:</strong> <%= professor.getDisciplina() %></p>
+            <p><strong>Email Atual:</strong> <%= professor.email %></p>
+        </div>
+        
+        <form action="${pageContext.request.contextPath}/admin/alterar-email-professor" method="POST" class="form-perfil">
+            <input type="hidden" name="id" value="<%= professor.getId() %>">
+            <label>Novo Email:</label>
+            <input type="email" name="email" placeholder="Digite o novo email" required>
+            <button type="submit">Alterar Email</button>
         </form>
-
     </div>
     <% } else if (encontrado != null && !encontrado) { %>
 
