@@ -18,6 +18,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
     private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, usuario, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = """
                 SELECT
+                    p.id,
                     p.nome,
                     p.usuario,
                     p.email,
@@ -65,6 +66,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
     private static final String SQL_UPDATE_PASSWORD = """
         UPDATE professor SET hash_senha = ? WHERE id = ?
         """;
+    private static final String SQL_UPDATE_EMAIL = "UPDATE professor SET email = ? WHERE id = ?";
     private static final String  SQL_FIND_ALUNOS_BY_MATRICULA_E_PROFESSOR = """
                 SELECT
                     n.id AS id_nota,
@@ -302,6 +304,22 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             ps.setLong(2, idOrigem);
             ps.executeUpdate();
 
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void updateEmailById(ProfessorDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_UPDATE_EMAIL);
+            ps.setString(1, dto.email);
+            ps.setLong(2, Long.parseLong(dto.id));
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
         } finally {
             DaoUtil.closeResources(ps);
         }
