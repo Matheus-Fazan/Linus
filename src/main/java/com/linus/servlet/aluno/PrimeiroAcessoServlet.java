@@ -23,6 +23,12 @@ public class PrimeiroAcessoServlet extends HttpServlet {
     private static final AlunoDao dao = new AlunoDao();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+        requestReponse.forwardTo("/primeiro-acesso.jsp");
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestReponse requestReponse = new RequestReponse(req, resp);

@@ -1,5 +1,5 @@
 <%@ page import="com.linus.model.dao.ObservacaoDTO" %>
-<%@ page import="com.linus.dto.ObservacaoDto" %>
+
 <%@ page import="java.util.List" %>
 <%@ page import="com.linus.model.dao.Observacao" %>
 <%@ page import="com.linus.dto.ProfessorDto" %>
@@ -9,7 +9,7 @@
 <head>
     <title>Observações</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
@@ -22,29 +22,26 @@
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/tabelaNotas.jsp">Página inicial</a>
+                <a href="${pageContext.request.contextPath}/professor/inicio">Página inicial</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/observacoesProfessor.jsp">Observação</a>
+                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
             </li>
             <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
-            </li>
-            <li>
-                <a href="">Logout</a>
+                <a href="${pageContext.request.contextPath}/logout">Logout</a>
             </li>
         </ul>
     </nav>
 </header>
 <main>
     <div class="topo">
-        <div class="subtitle">
+        <div class="subtitle" id="sb2">
             <h2>Observações</h2>
             <p>Visualize os comentários de seus professores</p>
         </div>
         <div class="buttons">
             <button>Filtrar</button>
-            <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/criarObservacao.jsp"><button>+ Criar Observação</button></a>
+            <a href="${pageContext.request.contextPath}/professor/criarObservacao"><button>+ Criar Observação</button></a>
         </div>
     </div>
     <%
@@ -57,7 +54,7 @@
     <div class="card">
         <div class="row">
             <p><strong>Disciplina:</strong>
-                <%= professor.aDefinir %>
+                <%= professor.idMateria %>
             </p>
             <p><strong>Professor:</strong>
                 <%= professor.nome %>

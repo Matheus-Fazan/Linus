@@ -8,32 +8,12 @@
     <title>Editar Notas</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoes.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 <body>
-<header>
-    <div class="logo">
-        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3> Instituto Linus </h3>
-    </div>
-    <nav class="nav-header">
-        <ul>
-            <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/adicionarNotas.jsp">Adicionar Notas</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/editarNotas.jsp">Editar Notas</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
-            </li>
-            <li>
-                <a href="">Logout</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="headerProfessor.jsp"/>
+
 <div class="largest-container">
     <div class="subtitle" id="s1">
         <h2>Edite as notas dos alunos</h2>

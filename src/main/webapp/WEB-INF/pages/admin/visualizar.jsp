@@ -1,123 +1,133 @@
+<%@ page import="java.util.List" %>
 <%@ page import="com.linus.dto.AlunoDto" %>
-<%@ page import="com.linus.dto.ProfessorDto" %>
+<%@ page import="com.linus.dto.ProfessorPerfilDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String tipo = request.getParameter("tipo");
-    if (tipo == null) {
-        tipo = "";
-    }
-%>
-<%
-    AlunoDto aluno = (AlunoDto) request.getAttribute("aluno");
-%>
-<%
-    ProfessorDto professor = (ProfessorDto) request.getAttribute("professor");
+    List<ProfessorPerfilDto > professores       = (List<ProfessorPerfilDto >) request.getAttribute("professor");
+    List<AlunoDto> alunos = (List<AlunoDto>)     request.getAttribute("observacoes");
+    Boolean encontrado                  = (Boolean) request.getAttribute("encontrado");
+    String  error                       = (String)  request.getAttribute("error");
+    String  success                     = (String)  request.getAttribute("success");
 %>
 
-    <html>
-    <head>
-        <title>Visualizar Professores e Alunos</title>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/visualizarAdm.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-        <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
-              type="image/x-icon">
-    </head>
-    <body>
-        <header>
-            <div class="logo">
-                <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-                <h3>Instituto Linus</h3>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/tables.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/popup.css">
+    <title>Professor | Tela Inicial</title>
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
+</head>
+<body>
+
+<header>
+    <div class="logo">
+        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
+        <h3>Instituto <br>Linus</h3>
+    </div>
+    <nav class="nav-header">
+        <ul>
+            <li><a href="${pageContext.request.contextPath}/admin/dashboard.jsp">Página inicial</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a></li>
+            <li><a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a></li>
+            <li><a href="${pageContext.request.contextPath}/index.jsp">Logout</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="page-container">
+    <main class="main-content">
+
+        <div class="page-header">
+            <h1>Visualize professores e alunos</h1>
+            <p>Veja os dados dos alunos e edite se necessário</p>
+        </div>
+
+        <% if (success != null) { %>
+        <p class="success-message"><%= success %></p>
+        <% } %>
+        <% if (error != null) { %>
+        <p class="error-message"><%= error %></p>
+        <% } %>
+
+        <section class="table-section">
+
+            <% if (encontrado != null && encontrado) { %>
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>usuario</th>
+                        <th>Disciplina</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (ProfessorPerfilDto p : professores) { %>
+                    <tr>
+                        <td><%= p.nome %></td>
+                        <td><%= p.email %></td>
+                        <td><%= p.usuario %></td>
+                        <td><%= p.getDisciplina() %></td>
+
+                        <td class="action-buttons">
+                            <a href="${pageContext.request.contextPath}/admin/editar-professor/usuario=<%= p.usuario %>"
+                               class="btn-action btn-edit" title="Ir para tela de editar aluno">Editar</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
             </div>
 
-            <nav class="nav-header">
-                <ul>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/pagPrincipal.jsp">Página inicial</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a>
-                    </li>
-                    <li>
-                        <a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a>
-                    </li>
-                    <li>
-                        <a href="index.html">Logout</a>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-        <main>
-            <div class="container">
-
-                <h1>Visualize professores e alunos</h1>
-                <div class="sub">Veja os dados dos alunos e edite se necessário</div>
-
-                <form method="get">
-                    <input class="search-input" type="text" name="pesquisa"
-                           placeholder="Pesquise o aluno/professor pelo número de matrícula ou email">
-
-                    <div class="btn-group">
-                        <button class="btn" type="submit" name="tipo" value="aluno">
-                            Ver informações dos alunos
-                        </button>
-
-                        <button class="btn" type="submit" name="tipo" value="professor">
-                            Ver informações dos professores
-                        </button>
-                    </div>
-                </form>
-
-                <% if ("aluno".equals(tipo)) { %>
-
-                <div class="card">
-                    <h3>Alunos</h3>
-
-                    <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Usuário</th>
-                            <th>Email</th>
-                            <th>CPF</th>
-                            <th>Matrícula</th>
-                            <th>Turma</th>
-                        </tr>
-                        <tr>
-                            <td><%= aluno.nome %></td>
-                            <td><%= aluno.email %></td>
-                            <td><%= aluno.cpf %></td>
-                            <td><%= aluno.matricula %></td>
-                            <td><%= aluno.turmaDto %></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <% } else if ("professor".equals(tipo)) { %>
-
-                <div class="card">
-                    <h3>Professores</h3>
-
-                    <table>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Usuário</th>
-                            <th>Email</th>
-                            <th>Disciplina</th>
-                        </tr>
-                        <tr>
-                            <td><%= professor.nome %></td>
-                            <td><%= professor.usuario %></td>
-                            <td><%= professor.email %></td>
-                            <td><%= professor.disciplina %></td>
-                        </tr>
-                    </table>
-                </div>
-
-                <% } %>
-
+            <% } else if (encontrado != null && !encontrado) { %>
+            <div class="nao-encontrado">
+                <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado,<br>pesquise novamente.</h2>
             </div>
-        </main>
-    </body>
+            <% } %>
+        </section>
+
+        <section class="table-section" style="margin-top: 32px;">
+
+            <% if (alunos != null && !alunos.isEmpty()) { %>
+            <div class="table-container">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Matrícula</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>CPF</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (AlunoDto a : alunos) { %>
+                    <tr>
+                        <td><%= a.matricula %></td>
+                        <td><%= a.nome %></td>
+                        <td><%= a.email %></td>
+                        <td><%= a.cpf %></td>
+
+                        <td class="action-buttons">
+                            <a href="${pageContext.request.contextPath}/admin/editar-aluno/matricula=<%= a.matricula %>"
+                               class="btn-action btn-edit" title="Ir para tela de editar aluno">Editar</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
+            </div>
+            <% } else { %>
+            <div class="nao-encontrado">
+                <h2 style="color: #4FB2D9;">Nenhuma observação registrada ainda.</h2>
+            </div>
+            <% } %>
+        </section>
+
+    </main>
+</div>
+</body>
 </html>

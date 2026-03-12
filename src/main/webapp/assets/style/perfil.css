@@ -41,3 +41,12 @@
     color:#a00000;
     margin-top:20px;
 }
+
+.btn-salvar {
+    background-color: #A25DDF;
+    color: #ffffff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
