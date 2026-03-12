@@ -39,7 +39,7 @@ public class BoletimPdfServlet extends HttpServlet {
         try {
             String cargoUsuario = (String) requestReponse.getSessionAttribute("perfilUsuario");
             String matriculaParam = requestReponse.getRequestParameter("matricula");
-            Integer idUsuarioLogadoParam = (Integer) requestReponse.getSessionAttribute("idUsuario");
+            Long idUsuarioLogadoParam = (Long) requestReponse.getSessionAttribute("idUsuario");
             System.out.println(idUsuarioLogadoParam);
 
             if (matriculaParam == null || matriculaParam.isBlank()) {

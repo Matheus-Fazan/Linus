@@ -1,6 +1,6 @@
 package com.linus.servlet.recuperarSenha;
 
-import com.linus.dao.AcessoDAO;
+import com.linus.dao.AcessoDao;
 import com.linus.dao.AlunoDao;
 import com.linus.dao.ProfessorDao;
 import com.linus.exception.dao.DataAccessException;
@@ -54,7 +54,7 @@ public class RedefinirSenhaServlet extends HttpServlet {
         }
 
         try {
-            AcessoDAO acessoDAO = new AcessoDAO();
+            AcessoDao acessoDAO = new AcessoDao();
 
             Optional<String[]> resultado = acessoDAO.findCargoByEmail(email);
 

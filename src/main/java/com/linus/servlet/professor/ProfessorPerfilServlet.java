@@ -1,8 +1,8 @@
-package com.linus.servlet.aluno;
+package com.linus.servlet.professor;
 
-import com.linus.dao.AlunoDao;
-import com.linus.dto.AlunoPerfilDto;
-
+import com.linus.dao.ProfessorDao;
+import com.linus.dto.ProfessorDto;
+import com.linus.dto.ProfessorPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.model.servlet.RequestReponse;
 
@@ -15,31 +15,32 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
 
-@WebServlet("/aluno/perfil")
-public class AlunoPerfilServlet extends HttpServlet {
+@WebServlet("/professor/perfil")
+public class ProfessorPerfilServlet extends HttpServlet {
 
-    private static final AlunoDao dao = new AlunoDao();
+    private static final ProfessorDao dao = new ProfessorDao();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
         try {
-            Long matricula = (Long) requestReponse.getSessionAttribute("idUsuario");
+            Number idSession = (Number) requestReponse.getSessionAttribute("idUsuario");
+            long idProfessor = idSession.longValue();
 
-            AlunoPerfilDto dto = dao.findByMatricula(matricula);
+            ProfessorPerfilDto dto = dao.findById(idProfessor);
 
             if (dto == null) {
-                requestReponse.addRequestAttribute("error", "Aluno não encontrado.");
+                requestReponse.addRequestAttribute("error", "Professor não encontrado.");
             } else {
                 requestReponse.addRequestAttribute("perfil", dto);
             }
 
-        } catch (Exception cause) {
+        } catch (SQLException | ConnectionException cause) {
             requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
 
         } finally {
-            requestReponse.forwardTo("/WEB-INF/pages/aluno/perfil.jsp");
+            requestReponse.forwardTo("/WEB-INF/pages/professor/perfil.jsp");
         }
     }
 }

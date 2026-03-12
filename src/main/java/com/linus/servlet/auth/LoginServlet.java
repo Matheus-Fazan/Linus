@@ -1,6 +1,6 @@
 package com.linus.servlet.auth;
 
-import com.linus.dao.AcessoDAO;
+import com.linus.dao.AcessoDao;
 import com.linus.model.dao.Usuario;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,9 +28,9 @@ public class LoginServlet extends HttpServlet {
         }
 
         try {
-            AcessoDAO acessoDAO = new AcessoDAO();
+            AcessoDao acessoDAO = new AcessoDao();
             Usuario usuario = acessoDAO.auth(email, senha);
-            System.out.println(usuario);
+            System.out.println("aparece queridao " + usuario);
             if (usuario == null) {
                 resposta.setStatus(HttpServletResponse.SC_BAD_REQUEST);
                 requisicao.setAttribute("error", "Email e/ou senha inválidos");
@@ -47,7 +47,7 @@ public class LoginServlet extends HttpServlet {
 
             String urlRedirecionamento = switch (usuario.getCargo().toLowerCase()) {
                 case "admin"     -> "/admin/dashboard";
-                case "professor" -> "/professor/notas";
+                case "professor" -> "/professor/inicio";
                 case "aluno"     -> "/aluno/boletim";
                 default          -> "/index.jsp";
             };

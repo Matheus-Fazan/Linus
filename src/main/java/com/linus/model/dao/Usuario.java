@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class Usuario {
-    private int    id;
+    private Long    id;
     private String nome;
     private String email;
     private String cargo;
@@ -12,7 +12,7 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(int id, String nome, String email,
+    public Usuario(Long id, String nome, String email,
                            String cargo, String tipoTabela) {
         this.id         = id;
         this.nome       = nome;

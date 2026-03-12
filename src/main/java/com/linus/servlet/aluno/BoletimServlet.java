@@ -21,12 +21,18 @@ public class BoletimServlet extends HttpServlet {
     private static final BoletimDao dao = new BoletimDao();
 
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        RequestReponse requestReponse = new RequestReponse(req, resp);
+        requestReponse.forwardTo("/WEB-INF/pages/aluno/pagPrincipal.jsp");
+    }
+
+        @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
-        Long idUsuario = ((Integer) requestReponse.getSessionAttribute("idUsuario")).longValue();
-        System.out.println("idUsuario: " + idUsuario); // log temporário
+        Long idUsuario = (Long) requestReponse.getSessionAttribute("idUsuario");
+        System.out.println("idUsuario: " + idUsuario);
 
         try {
 

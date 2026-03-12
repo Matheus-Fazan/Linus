@@ -12,8 +12,9 @@
 
 <body>
 <div class="voltar">
-  <img src="./assets/imgs/seta.png" alt="back-landing">
-  <a href="https://lucasramosdecarvalho.github.io/Linus_landing_page/" target="_blank"><p>Voltar para home</p></a>
+  <a href="https://lucasramosdecarvalho.github.io/Linus_landing_page/" target="_blank">
+    <img src="${pageContext.request.contextPath}/assets/imgs/seta.png">
+  </a>
 </div>
 <div class="largest-container">
   <div class="title">
@@ -30,7 +31,8 @@
       </div>
       <button>Login</button>
       <hr>
-      <p>É aluno? Faça seu primeiro acesso <a href="WEB-INF/pages/aluno/primeiro-acesso.jsp">aqui</a></p>
+      <p>É aluno? Faça seu primeiro acesso <a href="${pageContext.request.contextPath}/primeiro-acesso.jsp">aqui</a></p>
+      <br>
       <a class="login-forget" href="${pageContext.request.contextPath}/recuperar-senha">Esqueci minha senha</a>
 
       <% if (request.getAttribute("error") != null) { %>

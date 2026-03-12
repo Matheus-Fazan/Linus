@@ -1,6 +1,6 @@
 package com.linus.utils;
 
-import com.linus.dao.AcessoDAO;
+import com.linus.dao.AcessoDao;
 import com.linus.exception.dao.EntityNotFoundException;
 import jakarta.mail.*;
 import jakarta.mail.internet.InternetAddress;
@@ -34,7 +34,7 @@ public class EmailUtil {
      * @throws UnsupportedEncodingException Se a codificação do nome do remetente ("Linus") não for suportada.
      */
     public static void enviarEmail(String email, String codigoVerificacao) throws MessagingException, UnsupportedEncodingException, EntityNotFoundException, SQLException {
-        AcessoDAO acessoDAO = new AcessoDAO();
+        AcessoDao acessoDAO = new AcessoDao();
 
         Optional<String[]> resultado = acessoDAO.findCargoByEmail(email);
 

@@ -1,6 +1,9 @@
 package com.linus.dao;
 
+import com.linus.dto.AlunoProfessorDto;
+import com.linus.dto.ListarAlunosDto;
 import com.linus.dto.ProfessorDto;
+import com.linus.dto.ProfessorPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.exception.dao.NoRegistersAlteredException;
 import com.linus.infra.connection.ConnectionManager;
@@ -13,15 +16,83 @@ import java.util.List;
 
 public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto> {
 
-    // Ajustado para usar a coluna 'usuario' em vez de 'cpf'
     private final String SQL_SAVE_COMMAND = "INSERT INTO professor(nome, email, hash_senha, usuario, id_materia) VALUES(?, ?, ?, ?, ?) RETURNING id";
-    private final String SQL_FINDBYID_COMMAND = "SELECT * FROM professor WHERE id = ?";
+    private final String SQL_FINDBYID_COMMAND = """
+                SELECT
+                    p.nome,
+                    p.usuario,
+                    p.email,
+                    m.nome AS disciplina
+                FROM professor p
+                JOIN materia m ON m.id = p.id_materia
+                WHERE p.id = ?
+                """;
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
+    private static final String SQL_FIND_ALUNOS_BY_PROFESSOR = """
+            SELECT
+                    n.id AS id_nota,
+                    a.matricula,
+                    a.nome,
+                    COALESCE(t.nome, 'Sem turma') AS turma,
+                    n.n1,
+                    n.n2,
+                    n.media,
+                    n.observacao,
+                    CASE
+                         WHEN avg(n.media) IS NULL  THEN 'Em processo'
+                         WHEN avg(n.media) >= 7      THEN 'Aprovado'
+                         ELSE                             'Reprovado'
+                    END AS situacao
+                FROM nota n
+                JOIN aluno    a ON a.matricula = n.id_aluno
+                LEFT JOIN turma t ON t.id      = a.id_turma
+                WHERE n.id_professor = ?
+                GROUP BY a.matricula,
+                    a.nome,
+                    n.id,
+                    turma,
+                    n.n1,
+                    n.n2,
+                    n.media,
+                    n.observacao
+               ORDER by a.nome
+            """;
     private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, usuario = ?, id_materia = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
     private static final String SQL_UPDATE_PASSWORD = """
         UPDATE professor SET hash_senha = ? WHERE id = ?
         """;
+    private static final String  SQL_FIND_ALUNOS_BY_MATRICULA_E_PROFESSOR = """
+                SELECT
+                    n.id AS id_nota,
+                    a.matricula,
+                    a.nome,
+                    COALESCE(t.nome, 'Sem turma') AS turma,
+                    n.n1,
+                    n.n2,
+                    n.media,
+                    n.observacao,
+                    CASE
+                         WHEN avg(n.media) IS NULL  THEN 'Em processo'
+                         WHEN avg(n.media) >= 7      THEN 'Aprovado'
+                         ELSE                             'Reprovado'
+                    END AS situacao
+                FROM nota n
+                JOIN aluno    a ON a.matricula = n.id_aluno
+                LEFT JOIN turma t ON t.id      = a.id_turma
+                WHERE n.id_aluno    = ?
+                  AND n.id_professor = ?
+                GROUP BY a.matricula,
+                    a.nome,
+                    n.id,
+                    n.media,
+                    turma,
+                    n.n1,
+                    n.n2,
+                    n.media,
+                    n.observacao
+               ORDER by a.matricula
+                """;
 
     @Override
     public Professor save(ProfessorDto dto) throws SQLException, ConnectionException {
@@ -48,6 +119,12 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
+    }
+
+    @Override
+    public Professor findById(ProfessorDto professorDto) throws SQLException, ConnectionException {
+        // Método não implementado
+        return null;
     }
 
     public String saveReturningId(ProfessorDto dto) throws SQLException, ConnectionException {
@@ -77,24 +154,22 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         }
     }
 
-    @Override
-    public Professor findById(ProfessorDto dto) throws SQLException, ConnectionException {
+    public ProfessorPerfilDto findById(long idProfessor) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
         try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
-
-            ps.setLong(1, Long.parseLong(dto.id));
+            ps.setLong(1, idProfessor);
 
             queryResult = ps.executeQuery();
 
-            Professor professor = null;
             if (queryResult.next()) {
-                professor = new Professor(queryResult);
+                return new ProfessorPerfilDto(queryResult);
             }
 
-            return professor;
+            return null;
+
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
@@ -121,6 +196,26 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         }
     }
 
+    public List<AlunoProfessorDto> findAlunosByProfessor(Long idProfessor) throws SQLException, ConnectionException {
+        List<AlunoProfessorDto> alunos = new ArrayList<>();
+        PreparedStatement ps = null;
+        ResultSet queryResult = null;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FIND_ALUNOS_BY_PROFESSOR);
+            ps.setLong(1, idProfessor);
+            queryResult = ps.executeQuery();
+
+            while (queryResult.next()) {
+                alunos.add(new AlunoProfessorDto(queryResult));
+            }
+
+            return alunos;
+        } finally {
+            DaoUtil.closeResources(ps, queryResult);
+        }
+    }
+
     @Override
     public void update(ProfessorDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
@@ -131,7 +226,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             ps.setString(1, dto.nome);
             ps.setString(2, dto.email);
             ps.setString(3, DaoUtil.toBCryptHash(dto.senha));
-            ps.setString(4, dto.usuario); // Alterado de dto.cpf para dto.usuario
+            ps.setString(4, dto.usuario);
             ps.setLong(5, Long.parseLong(dto.idMateria));
             ps.setLong(6, Long.parseLong(dto.id));
 
@@ -157,6 +252,31 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
             }
         } finally {
             DaoUtil.closeResources(ps);
+        }
+    }
+
+    public List<AlunoProfessorDto> findByMatriculaEProfessor(long matricula, long idProfessor)
+            throws ConnectionException, SQLException {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<AlunoProfessorDto> resultado = new ArrayList<>();
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_FIND_ALUNOS_BY_MATRICULA_E_PROFESSOR);
+            ps.setLong(1, matricula);
+            ps.setLong(2, idProfessor);
+
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                resultado.add(new AlunoProfessorDto(rs));
+            }
+
+            return resultado;
+
+        } finally {
+            DaoUtil.closeResources(ps, rs);
         }
     }
 

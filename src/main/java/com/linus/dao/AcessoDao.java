@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Optional;
 
-public class AcessoDAO {
+public class AcessoDao {
     private static final String SQL_FIND_BY_EMAIL = """
             SELECT cargo, email, hash_senha, id_origem
             FROM   acesso
@@ -46,7 +46,7 @@ public class AcessoDAO {
             }
 
             String cargo = queryResult.getString("cargo");
-            int id = queryResult.getInt("id_origem");
+            long id = queryResult.getLong("id_origem");
 
             String nome = findNameByCargo(cargo, id);
 
@@ -57,7 +57,7 @@ public class AcessoDAO {
         }
     }
 
-    private String findNameByCargo(String cargo, int id) throws SQLException {
+    private String findNameByCargo(String cargo, Long id) throws SQLException {
         String table = switch (cargo.toLowerCase()) {
             case "admin" -> "Admin";
             case "professor" -> "Professor";
@@ -74,7 +74,7 @@ public class AcessoDAO {
         ResultSet rs = null;
         try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setLong(1, id);
             rs = ps.executeQuery();
             return rs.next() ? rs.getString(colName) : null;
 

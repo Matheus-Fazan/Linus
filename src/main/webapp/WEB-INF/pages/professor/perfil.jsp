@@ -11,7 +11,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
                 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
                     type="image/x-icon">
                 <title>Perfil Aluno</title>
@@ -21,26 +20,26 @@
 
                 <header>
                     <div class="logo">
-                        <img src="/src/main/webapp/assets/imgs/logo.png" alt="logo colegio">
+                        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
                         <h3>Instituto Linus</h3>
                     </div>
 
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/pagPrincipal.jsp">Página inicial</a>
+                                <a href="${pageContext.request.contextPath}/professor/pagPrincipal">Página inicial</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/tabelaNotas.jsp">Notas</a>
+                                <a href="${pageContext.request.contextPath}/professor/tabelaNotas">Notas</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/observacaoAluno.jsp">Observação</a>
+                                <a href="${pageContext.request.contextPath}/professor/observacaoAluno">Observação</a>
                             </li>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
+                                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
                             </li>
                             <li>
-                                <a href="index.html">Logout</a>
+                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
                             </li>
                         </ul>
                     </nav>
