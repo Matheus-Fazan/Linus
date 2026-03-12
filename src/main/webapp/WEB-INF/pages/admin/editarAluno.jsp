@@ -5,12 +5,11 @@
 <html>
 
 <head>
-  <title>Editar aluno</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
-  <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
+    <title>Editar aluno</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoes.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
 <% AlunoPerfilDto aluno=(AlunoPerfilDto) request.getAttribute("aluno");%>
@@ -61,7 +60,7 @@
       <p><strong>Turma:</strong> <%= aluno.getTurma() %></p>
       <p><strong>Email Atual:</strong> <%= aluno.getEmail() %></p>
     </div>
-    
+
     <form action="${pageContext.request.contextPath}/admin/alterar-email-aluno" method="POST" class="form-perfil">
       <input type="hidden" name="matricula" value="<%= aluno.getMatricula() %>">
       <label>Novo Email:</label>
@@ -81,6 +80,6 @@
 </div>
 
 
-</body>
+    </body>
 
-</html>
+    </html>

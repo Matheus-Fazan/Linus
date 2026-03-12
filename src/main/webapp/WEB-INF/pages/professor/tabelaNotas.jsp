@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="java.util.List" %>
-        <%@ page import="com.linus.dto.NotaDto" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.linus.dto.NotaDto" %>
 <%@ page import="com.linus.dto.AlunoDto" %>
 <%@ page import="com.linus.dto.BoletimDto" %>
 <html lang="pt-br">
@@ -10,7 +10,6 @@
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>Aluno | Tela Inicial</title>
                 <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-                <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
                 <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png"
                     type="image/x-icon">
 
@@ -29,19 +28,19 @@
                     <nav class="nav-header">
                         <ul>
                             <li>
-                                <a href="${pageContext.request.contextPath}/WEB-INF/pages/professor/tabelaNotas.jsp">Página
+                                <a href="${pageContext.request.contextPath}/professor/tabelaNotas">Página
                                     inicial</a>
                             </li>
                             <li>
                                 <a
-                                    href="${pageContext.request.contextPath}/WEB-INF/pages/professor/observacoesProfessor.jsp">Observação</a>
+                                    href="${pageContext.request.contextPath}/professor/observacoesProfessor">Observação</a>
                             </li>
                             <li>
                                 <a
-                                    href="${pageContext.request.contextPath}/WEB-INF/pages/professor/perfil.jsp">Perfil</a>
+                                    href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
                             </li>
                             <li>
-                                <a href="">Logout</a>
+                                <a href="${pageContext.request.contextPath}/logout">Logout</a>
                             </li>
                         </ul>
                     </nav>
@@ -160,9 +159,9 @@
                                             <a href="${pageContext.request.contextPath}/boletim"><button>Gerar
                                                     boletim</button></a>
                                             <a
-                                                href="${pageContext.request.contextPath}/pages/professor/observacoesProfessor.jsp"><button>Fazer
+                                                href="${pageContext.request.contextPath}/professor/observacoesProfessor"><button>Fazer
                                                     comentário</button></a>
-                                            <a href="${pageContext.request.contextPath}/pages/professor/perfil.jsp"><button>Ir
+                                            <a href="${pageContext.request.contextPath}/professor/perfil"><button>Ir
                                                     para página de perfil</button></a>
                                         </div>
 
@@ -172,7 +171,7 @@
 
                                         <div class="nao-encontrado">
                                             <center>
-                                                <img src="/src/main/webapp/assets/imgs/aluno-nao-achado 1.jpg"
+                                                <img src="${pageContext.request.contextPath}/assets/imgs/aluno-nao-achado%201.png"
                                                     width="200">
                                             </center>
                                             <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado, <br> 

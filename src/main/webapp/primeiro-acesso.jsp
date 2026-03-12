@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/primeiro-acesso.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
     <title>Primeiro Acesso</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
@@ -11,18 +11,16 @@
 <body>
     <a href="${pageContext.request.contextPath}/index.jsp">
         <div class="voltar">
-            <img src="${pageContext.request.contextPath}/assets/imgs/seta.png" alt="seta">
-            <p>Voltar para home</p>
+            <img src="${pageContext.request.contextPath}/assets/imgs/seta.png">
         </div>
     </a>
     <div class="largest-container">
         <div class="title">
             <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-            <h1>Instituto Linus</h1>
+            <h1>Instituto <br> Linus</h1>
         </div>
-        <div class="main-container">
+        <div class="main-container" id="mc2">
             <form action="${pageContext.request.contextPath}/aluno/primeiro-acesso" method="POST">
-                <h2>Primeiro Acesso</h2>
                 <label for="email">Email</label>
                 <input type="email" name="email" placeholder="Digite seu email">
                 <label for="senha">Senha</label>
