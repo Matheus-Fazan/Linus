@@ -12,19 +12,7 @@
 
 <body>
 
-<header>
-    <div class="logo">
-        <div class="icon"></div>
-        <span>Instituto<br><strong>Linus</strong></span>
-    </div>
-
-    <nav>
-        <a href="#">Pág. inicial</a>
-        <a href="#">Criar acesso</a>
-        <a href="#">Perfil</a>
-        <a href="${pageContext.request.contextPath}/logout">Logout →</a>
-    </nav>
-</header>
+<jsp:include page="headerAdmin.jsp"/>
 
 <main>
 

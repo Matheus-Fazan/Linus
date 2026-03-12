@@ -12,7 +12,7 @@ function fecharPopupEdicao() {
     document.getElementById('popup-edicao').style.display = 'none';
 }
 
-function calcularPrevia() {
+function calcularPreviaEdicao() {
     const n1 = parseFloat(document.getElementById('popup-n1').value);
     const n2 = parseFloat(document.getElementById('popup-n2').value);
     const mediaEl = document.getElementById('popup-media');
@@ -22,7 +22,7 @@ function calcularPrevia() {
         mediaEl.textContent = media;
         mediaEl.style.color = media >= 7 ? '#21B558' : '#81009f';
     } else {
-        mediaEl.textContent = '—';
+        mediaEl.textContent = '-';
         mediaEl.style.color = 'inherit';
     }
 }

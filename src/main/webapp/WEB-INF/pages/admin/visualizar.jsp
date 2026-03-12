@@ -21,21 +21,7 @@
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3>Instituto <br>Linus</h3>
-    </div>
-    <nav class="nav-header">
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/admin/dashboard.jsp">Página inicial</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/visualizar.jsp">Visualização</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/criarAcesso.jsp">Criar Acesso</a></li>
-            <li><a href="${pageContext.request.contextPath}/admin/perfil.jsp">Perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/index.jsp">Logout</a></li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="headerAdmin.jsp"/>
 
 <div class="page-container">
     <main class="main-content">

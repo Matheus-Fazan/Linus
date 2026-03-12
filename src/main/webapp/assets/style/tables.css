@@ -68,7 +68,7 @@ header {
 }
 
 .main-content {
-    max-width: 1300px;
+    max-width: 1360px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -131,8 +131,9 @@ header {
     background: white;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    overflow: hidden;
     box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    height: 400px;
+    overflow: scroll;
 }
 
 table {
