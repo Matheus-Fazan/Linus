@@ -40,13 +40,13 @@
 
                 <% if (estatistica != null) { %>
                 <div class="informacao">
-                    <h3>Notas baixas:</h3>
+                    <h3>Notas baixas: </h3>
                     <p><%= estatistica.notasBaixas %>
                     </p>
                 </div>
 
                 <div class="informacao">
-                    <h3>Situação:</h3>
+                    <h3>Situação: </h3>
                     <p><%= estatistica.situacao %>
                     </p>
                 </div>
