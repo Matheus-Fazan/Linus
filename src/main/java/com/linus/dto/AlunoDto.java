@@ -21,6 +21,6 @@ public class AlunoDto {
         this.senha = requestParams.get("senha");
         this.cpf = requestParams.get("cpf");
         this.matricula = requestParams.get("matricula");
-        this.idTurma = requestParams.get("id_turma");
+        this.idTurma = requestParams.get("turma");
     }
 }

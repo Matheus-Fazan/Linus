@@ -43,8 +43,8 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
     private static final String SQL_UPDATE_PASSWORD = """
         UPDATE aluno SET hash_senha = ? WHERE matricula = ?
         """;
-
-    private static final String SQL_FIRST_ACCESS_UPDATE_COMMAND = "UPDATE aluno SET email=?, hash_senha=? WHERE matricula=? AND nome=? AND cpf=?";
+    private static final String SQL_PREVIOUS_SAVE = "INSERT INTO aluno(nome, cpf, id_turma) VALUES(?, ?, ?) RETURNING matricula";
+    private static final String SQL_FIRST_ACCESS_UPDATE_COMMAND = "UPDATE aluno SET email=?, hash_senha=? WHERE matricula=? AND (email IS NULL OR hash_senha IS NULL)";
 
     @Override
     public Aluno save(AlunoDto dto) throws SQLException, ConnectionException {
@@ -79,7 +79,7 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
         String generatedMatricula = null;
 
         try (Connection con = ConnectionManager.connect()) {
-            ps = con.prepareStatement(SQL_SAVE_COMMAND);
+            ps = con.prepareStatement(SQL_PREVIOUS_SAVE);
 
             ps.setString(1, dto.nome);
             ps.setString(2, dto.cpf);
@@ -87,7 +87,6 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
 
             queryResult = ps.executeQuery();
 
-            Aluno aluno = null;
             if (queryResult.next()) {
                 generatedMatricula = queryResult.getString("matricula");
             }
@@ -280,8 +279,6 @@ public class AlunoDao implements GenericDaoInterface<Aluno, AlunoDto> {
             ps.setString(1, dto.email);
             ps.setString(2, DaoUtil.toBCryptHash(dto.senha));
             ps.setLong(3, Long.parseLong(dto.matricula));
-            ps.setString(4, dto.nome);
-            ps.setString(5, dto.cpf);
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
