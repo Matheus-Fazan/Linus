@@ -62,6 +62,7 @@
                         <th>Nome</th>
                         <th>Email</th>
                         <th>Disciplina</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -98,6 +99,7 @@
                         <th>Matrícula</th>
                         <th>Nome</th>
                         <th>Email</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>

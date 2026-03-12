@@ -25,13 +25,13 @@
   <nav class="nav-header">
     <ul>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/pagPrincipal">Página inicial</a>
+        <a href="${pageContext.request.contextPath}/admin/dashboard">Página inicial</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/dashboard">Visualização</a>
+        <a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a>
       </li>
       <li>
-        <a href="${pageContext.request.contextPath}/admin/adicionar-aluno">Criar Acesso</a>
+        <a href="${pageContext.request.contextPath}/admin/criar-acesso">Criar Acesso</a>
       </li>
       <li>
         <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
