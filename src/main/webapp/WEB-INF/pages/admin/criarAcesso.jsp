@@ -4,12 +4,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Materia> materias = (List<Materia>) request.getAttribute("materias"); %>
 <% List<Turma> turmas = (List<Turma>) request.getAttribute("turmas"); %>
+<% 
+    String successMessage = (String) session.getAttribute("successMessage");
+    String errorMessage = (String) session.getAttribute("errorMessage");
+    String matricula = (String) session.getAttribute("matricula");
+    
+    session.removeAttribute("successMessage");
+    session.removeAttribute("errorMessage");
+    session.removeAttribute("matricula");
+%>
 
 <html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/criarAcesso.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/popup.css">
     <title>Criar Acesso</title>
 </head>
 <body>
@@ -83,5 +93,36 @@
             </div>
         </div>
     </div>
+
+    <% if (successMessage != null) { %>
+    <div class="overlay" id="popup">
+        <div class="popup-container">
+            <h1><%= successMessage %></h1>
+            <% if (matricula != null) { %>
+            <div class="popup-previa">
+                <span>Matrícula gerada:</span>
+                <strong><%= matricula %></strong>
+            </div>
+            <% } %>
+            <button class="btn btn-primary" onclick="closePopup()" style="background-color: #9b5de5; color: white;">OK</button>
+        </div>
+    </div>
+    <% } %>
+
+    <% if (errorMessage != null) { %>
+    <div class="overlay" id="popup">
+        <div class="popup-container">
+            <h1 style="color: #d32f2f;">Erro</h1>
+            <p><%= errorMessage %></p>
+            <button class="btn btn-primary" onclick="closePopup()" style="background-color: #9b5de5; color: white;">OK</button>
+        </div>
+    </div>
+    <% } %>
+
+    <script>
+        function closePopup() {
+            document.getElementById('popup').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
