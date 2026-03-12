@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-    <%@ page import="com.linus.dto.AdminDto" %>
+    <%@ page import="com.linus.dto.AdminPerfilDto" %>
 
-        <% AdminDto perfil=(AdminDto) request.getAttribute("perfil"); %>
+        <% AdminPerfilDto perfil=(AdminPerfilDto) request.getAttribute("perfil"); %>
 
 
             <html lang="pt-br">
@@ -73,7 +73,7 @@
                                                 id="email"
                                                 name="email"
                                                 class="perfil-input"
-                                                value="<%= perfil.email %>"
+                                                value="<%= perfil.getEmail() %>"
                                                 required
                                         >
                                     </div>

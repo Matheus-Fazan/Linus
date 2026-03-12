@@ -22,21 +22,8 @@
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3>Instituto <br>Linus</h3>
-    </div>
-    <nav class="nav-header">
-        <ul>
-            <li><a href="${pageContext.request.contextPath}/professor/inicio">Página Inicial</a></li>
-            <li><a href="${pageContext.request.contextPath}/professor/notas/adicionar">Adicionar Notas</a></li>
-            <li><a href="${pageContext.request.contextPath}/professor/notas/alterar">Editar Notas</a></li>
-            <li><a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a></li>
-            <li><a href="${pageContext.request.contextPath}/logout">Logout</a></li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="headerProfessor.jsp"/>
+
 
 <div class="page-container">
     <main class="main-content">
