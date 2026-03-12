@@ -39,7 +39,7 @@ public class PaginaInicialServlet extends HttpServlet {
                 notas = dao.findAlunosByProfessor(idProfessor);
             } else {
                 long matricula = Long.parseLong(matriculaParam);
-                notas = dao.findByMatriculaEProfessor(matricula, idProfessor);
+                notas = dao.findByMatricula(matricula, idProfessor);
             }
 
             if (notas.isEmpty()) {

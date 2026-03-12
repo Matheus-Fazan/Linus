@@ -1,7 +1,6 @@
 package com.linus.servlet.professor;
 
 import com.linus.dao.ProfessorDao;
-import com.linus.dto.ProfessorDto;
 import com.linus.dto.ProfessorPerfilDto;
 import com.linus.exception.dao.ConnectionException;
 import com.linus.model.servlet.RequestReponse;

@@ -16,7 +16,7 @@ import java.util.List;
 
 public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
 
-    private final String SQL_SAVE_COMMAND = "INSERT INTO nota(n1, n2, media, id_professor, id_aluno) VALUES(?, ?, ?, ?, ?) RETURNING id";
+    private final String SQL_SAVE_COMMAND = "INSERT INTO nota(n1, n2, media, id_professor, id_aluno, observacao) VALUES(?, ?, ?, ?, ?, ?)";
     private final String SQL_INSERT_BY_PROFESSOR = "INSERT INTO nota(n1, n2, id_professor, id_aluno) SELECT ?, ?, ?, ? WHERE EXISTS (SELECT 1 FROM professor WHERE id = ? AND id_materia = (SELECT id_materia FROM aluno WHERE matricula = ?))";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM nota WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM nota";
@@ -162,6 +162,29 @@ public class NotaDao implements GenericDaoInterface<Nota, NotaDto> {
             ps.setString(5, observacao);
             ps.setLong(6, idNota);
             ps.executeUpdate();
+
+        } finally {
+            DaoUtil.closeResources(ps);
+        }
+    }
+
+    public void save(long idProfessor, long idMatricula, double n1, double n2, String observacao) throws SQLException, ConnectionException, NoRegistersAlteredException {
+        PreparedStatement ps = null;
+
+        double media = (n1 + n2) / 2;
+
+        try (Connection con = ConnectionManager.connect()) {
+            ps = con.prepareStatement(SQL_SAVE_COMMAND);
+            ps.setDouble(1, n1);
+            ps.setDouble(2, n2);
+            ps.setDouble(3, media);
+            ps.setLong(4, idProfessor);
+            ps.setLong(5, idMatricula);
+            ps.setString(6, observacao);
+
+            if (ps.executeUpdate() < 1) {
+                throw new NoRegistersAlteredException();
+            }
 
         } finally {
             DaoUtil.closeResources(ps);

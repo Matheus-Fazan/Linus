@@ -3,7 +3,7 @@ function abrirPopupEdicao(idNota, nomeAluno, n1, n2, observacao) {
     document.getElementById('popup-nome-aluno').textContent = 'Aluno: ' + nomeAluno;
     document.getElementById('popup-n1').value = n1;
     document.getElementById('popup-n2').value = n2;
-    document.getElementById('popup-observacao').value = observacao;
+    document.getElementById('popup-observacao-nota').value = observacao;
     calcularPrevia();
     document.getElementById('popup-edicao').style.display = 'flex';
 }

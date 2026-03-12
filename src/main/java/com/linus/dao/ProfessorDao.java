@@ -1,7 +1,6 @@
 package com.linus.dao;
 
 import com.linus.dto.AlunoProfessorDto;
-import com.linus.dto.ListarAlunosDto;
 import com.linus.dto.ProfessorDto;
 import com.linus.dto.ProfessorPerfilDto;
 import com.linus.exception.dao.ConnectionException;
@@ -28,34 +27,38 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                 WHERE p.id = ?
                 """;
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM professor";
-    private static final String SQL_FIND_ALUNOS_BY_PROFESSOR = """
+    private static final String SQL_FIND_ALUNOS = """
             SELECT
-                    n.id AS id_nota,
-                    a.matricula,
-                    a.nome,
-                    COALESCE(t.nome, 'Sem turma') AS turma,
-                    n.n1,
-                    n.n2,
-                    n.media,
-                    n.observacao,
-                    CASE
-                         WHEN avg(n.media) IS NULL  THEN 'Em processo'
-                         WHEN avg(n.media) >= 7      THEN 'Aprovado'
-                         ELSE                             'Reprovado'
-                    END AS situacao
-                FROM nota n
-                JOIN aluno    a ON a.matricula = n.id_aluno
-                LEFT JOIN turma t ON t.id      = a.id_turma
-                WHERE n.id_professor = ?
-                GROUP BY a.matricula,
-                    a.nome,
-                    n.id,
-                    turma,
-                    n.n1,
-                    n.n2,
-                    n.media,
-                    n.observacao
-               ORDER by a.nome
+              n.id AS id_nota,
+              a.matricula,
+              m.nome as materia,
+              a.nome,
+              COALESCE(t.nome, 'Sem turma') AS turma,
+              n.n1,
+              n.n2,
+              n.media,
+              n.observacao,
+              CASE
+                   WHEN avg(n.media) IS NULL  THEN 'Em processo'
+                   WHEN avg(n.media) >= 7      THEN 'Aprovado'
+                   ELSE                             'Reprovado'
+              END AS situacao,
+             (n.id_professor = ?) AS pertence_ao_professor
+          FROM nota n
+          JOIN aluno    a ON a.matricula = n.id_aluno
+          LEFT JOIN turma t ON t.id      = a.id_turma
+          left join professor p on p.id = n.id_professor
+          left join materia m on p.id_materia = m.id
+          GROUP BY a.matricula,
+              a.nome,
+              n.id,
+              materia,
+              turma,
+              n.n1,
+              n.n2,
+              n.media,
+              n.observacao
+         ORDER by a.nome;
             """;
     private final String SQL_UPDATE_COMMAND = "UPDATE professor SET nome = ?, email = ?, hash_senha = ?, usuario = ?, id_materia = ? WHERE id = ?";
     private final String SQL_DELETE_COMMAND = "DELETE FROM professor WHERE id = ?";
@@ -67,6 +70,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                     n.id AS id_nota,
                     a.matricula,
                     a.nome,
+                    m.nome as materia,
                     COALESCE(t.nome, 'Sem turma') AS turma,
                     n.n1,
                     n.n2,
@@ -76,16 +80,19 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
                          WHEN avg(n.media) IS NULL  THEN 'Em processo'
                          WHEN avg(n.media) >= 7      THEN 'Aprovado'
                          ELSE                             'Reprovado'
-                    END AS situacao
+                    END AS situacao,
+                    (n.id_professor = ?) AS pertence_ao_professor
                 FROM nota n
                 JOIN aluno    a ON a.matricula = n.id_aluno
                 LEFT JOIN turma t ON t.id      = a.id_turma
-                WHERE n.id_aluno    = ?
-                  AND n.id_professor = ?
+                LEFT JOIN professor p ON p.id = n.id_professor
+                LEFT JOIN materia m ON p.id_materia = m.id
+                WHERE n.id_aluno    = ?    
                 GROUP BY a.matricula,
                     a.nome,
                     n.id,
                     n.media,
+                    materia,
                     turma,
                     n.n1,
                     n.n2,
@@ -121,11 +128,6 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         }
     }
 
-    @Override
-    public Professor findById(ProfessorDto professorDto) throws SQLException, ConnectionException {
-        // Método não implementado
-        return null;
-    }
 
     public String saveReturningId(ProfessorDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
@@ -152,6 +154,11 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         } finally {
             DaoUtil.closeResources(ps, queryResult);
         }
+    }
+
+    @Override
+    public Professor findById(ProfessorDto dto) throws SQLException, ConnectionException {
+        return null;
     }
 
     public ProfessorPerfilDto findById(long idProfessor) throws SQLException, ConnectionException {
@@ -202,7 +209,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         ResultSet queryResult = null;
 
         try (Connection con = ConnectionManager.connect()) {
-            ps = con.prepareStatement(SQL_FIND_ALUNOS_BY_PROFESSOR);
+            ps = con.prepareStatement(SQL_FIND_ALUNOS);
             ps.setLong(1, idProfessor);
             queryResult = ps.executeQuery();
 
@@ -255,7 +262,7 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
         }
     }
 
-    public List<AlunoProfessorDto> findByMatriculaEProfessor(long matricula, long idProfessor)
+    public List<AlunoProfessorDto> findByMatricula(long matricula, long idProfessor)
             throws ConnectionException, SQLException {
 
         PreparedStatement ps = null;
