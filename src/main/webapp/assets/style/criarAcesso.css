@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat', sans-serif;
+}
+
+body{
+    background:#ececec;
+}
+
+/* HEADER */
+
+header {
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-header a {
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-header a:hover {
+    color: #A25DDF;
+}
+
+.nav-header ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:50px;
+}
+
+.logout{
+    text-decoration:none;
+    color:#444;
+}
+
+/* TOPO */
+
+.topo{
+    padding:40px 80px 20px 80px;
+}
+
+.topo h1{
+    font-size:42px;
+    color:#9b5de5;
+}
+
+.topo p{
+    color:#555;
+    margin-top:5px;
+}
+
+.acess {
+    display: flex;
+    justify-content: center;
+}
+
+.acess_title {
+    color: #9b5de5;
+}
+
+.form-perfil {
+    background-color: white;
+    width: 350px;
+    height: 80%;
+    padding: 40px;
+    margin: 20px;
+    border-radius: 20px;
+    gap: 40px;
+}
+
+.main-container{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.main-container form{
+    display:flex;
+    flex-direction:column;
+    gap: 6px;
+
+}
+
+input,
+select{
+    padding:5px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:14px;
+}
+
+button{
+    margin-top:15px;
+    padding:8px;
+    border:none;
+    background:#9b5de5;
+    color:white;
+    border-radius:10px;
+    width: 100%;
+}
