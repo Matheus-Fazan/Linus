@@ -1,10 +1,10 @@
 <%@ page import="java.util.List" %>
-<%@ page import="com.linus.model.dao.Aluno" %>
-<%@ page import="com.linus.model.dao.Professor" %>
+<%@ page import="com.linus.dto.AlunoVisualizarDto" %>
+<%@ page import="com.linus.dto.ProfessorVisualizarDto" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    List<Professor> professores = (List<Professor>) request.getAttribute("professores");
-    List<Aluno> alunos = (List<Aluno>) request.getAttribute("alunos");
+    List<ProfessorVisualizarDto> professores = (List<ProfessorVisualizarDto>) request.getAttribute("professores");
+    List<AlunoVisualizarDto> alunos = (List<AlunoVisualizarDto>) request.getAttribute("alunos");
     Boolean encontrado                  = (Boolean) request.getAttribute("encontrado");
     String  error                       = (String)  request.getAttribute("error");
     String  success                     = (String)  request.getAttribute("success");
@@ -61,17 +61,15 @@
                     <tr>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>CPF</th>
                         <th>Disciplina</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Professor p : professores) { %>
+                    <% for (ProfessorVisualizarDto p : professores) { %>
                     <tr>
                         <td><%= p.getNome() %></td>
                         <td><%= p.getEmail() %></td>
-                        <td><%= p.getCpf() %></td>
-                        <td><%= p.getIdMateria() %></td>
+                        <td><%= p.getDisciplina() %></td>
 
                         <td class="action-buttons">
                             <a href="${pageContext.request.contextPath}/admin/alterar-email-professor?id=<%= p.getId() %>"
@@ -100,16 +98,14 @@
                         <th>Matrícula</th>
                         <th>Nome</th>
                         <th>Email</th>
-                        <th>CPF</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <% for (Aluno a : alunos) { %>
+                    <% for (AlunoVisualizarDto a : alunos) { %>
                     <tr>
                         <td><%= a.getMatricula() %></td>
                         <td><%= a.getNome() %></td>
                         <td><%= a.getEmail() %></td>
-                        <td><%= a.getCpf() %></td>
 
                         <td class="action-buttons">
                             <a href="${pageContext.request.contextPath}/admin/alterar-email-aluno?matricula=<%= a.getMatricula() %>"
