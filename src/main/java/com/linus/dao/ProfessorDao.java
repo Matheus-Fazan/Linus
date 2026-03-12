@@ -273,8 +273,8 @@ public class ProfessorDao implements GenericDaoInterface<Professor, ProfessorDto
 
         try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FIND_ALUNOS_BY_MATRICULA_E_PROFESSOR);
-            ps.setLong(1, matricula);
-            ps.setLong(2, idProfessor);
+            ps.setLong(1, idProfessor);
+            ps.setLong(2, matricula);
 
             rs = ps.executeQuery();
 
