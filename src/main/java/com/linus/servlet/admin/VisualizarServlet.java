@@ -2,8 +2,8 @@ package com.linus.servlet.admin;
 
 import com.linus.dao.AlunoDao;
 import com.linus.dao.ProfessorDao;
-import com.linus.model.dao.Aluno;
-import com.linus.model.dao.Professor;
+import com.linus.dto.AlunoVisualizarDto;
+import com.linus.dto.ProfessorVisualizarDto;
 import com.linus.model.servlet.RequestReponse;
 
 import jakarta.servlet.ServletException;
@@ -13,7 +13,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/admin/visualizar")
@@ -27,8 +26,8 @@ public class VisualizarServlet extends HttpServlet {
         RequestReponse requestReponse = new RequestReponse(req, resp);
 
         try {
-            List<Aluno> alunos = alunoDao.findAll();
-            List<Professor> professores = professorDao.findAll();
+            List<AlunoVisualizarDto> alunos = alunoDao.findAllForVisualizacao();
+            List<ProfessorVisualizarDto> professores = professorDao.findAllForVisualizacao();
 
             requestReponse.addRequestAttribute("alunos", alunos);
             requestReponse.addRequestAttribute("professores", professores);
