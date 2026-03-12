@@ -22,10 +22,7 @@
     <nav class="nav-header">
         <ul>
             <li>
-                <a href="${pageContext.request.contextPath}/professor/tabelaNotas">Página inicial</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/professor/observacoesProfessor">Observação</a>
+                <a href="${pageContext.request.contextPath}/professor/inicio">Página inicial</a>
             </li>
             <li>
                 <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
