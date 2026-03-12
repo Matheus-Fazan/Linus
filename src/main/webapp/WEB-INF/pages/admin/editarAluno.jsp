@@ -19,12 +19,13 @@
 <jsp:include page="headerAdmin.jsp"/>
 
 <div class="largest-container">
-  <div class="subtitle">
-    <h2>Edite o perfil do aluno</h2>
-    <p>Visualize suas informações e as edite.</p>
+  <div class="barra-inicial">
+      <h2>Edite o perfil do aluno</h2>
+      <p>Visualize suas informações e as edite.</p>
+    <input type="text" class="search-bar"
+           placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
   </div>
-  <input type="text" class="search-bar"
-         placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
+
   <% Boolean encontrado=(Boolean) request.getAttribute("encontrado"); %>
   <% if(encontrado !=null && encontrado){ %>
   <div class="main-container">

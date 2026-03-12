@@ -44,12 +44,13 @@
 </header>
 
 <div class="largest-container">
-    <div class="subtitle">
+    <div class="barra-inicial" id="s1">
         <h2>Edite o perfil do professor</h2>
         <p>Visualize suas informações e as edite.</p>
-    </div>
-    <input type="text" class="search-bar"
+        <input type="text" class="search-bar"
            placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
+    </div>
+
     <% Boolean encontrado = (Boolean) request.getAttribute("encontrado"); %>
     <% if (encontrado != null && encontrado) { %>
     <div class="main-container">

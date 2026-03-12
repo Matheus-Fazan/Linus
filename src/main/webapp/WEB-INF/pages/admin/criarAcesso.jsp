@@ -9,8 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/criarAcesso.css">
     <title>Criar Acesso</title>
 </head>
 <body>
@@ -21,9 +20,10 @@
         <p>Visualize suas informações e as edite.</p>
     </div>
 
-    <div class="grid-inferior">
-        <div class="card-form">
-            <h2>Crie um novo aluno</h2>
+    <div class="acess">
+        <div class="form-perfil">
+            <div class="main-container">
+            <h2 class="acess_title">Crie um novo aluno</h2>
             <form action="${pageContext.request.contextPath}/admin/adicionar-aluno" method="post">
                 <label for="nome-aluno">Nome:</label>
                 <input type="text" id="nome-aluno" name="nome" placeholder="Digite o nome do aluno" required>
@@ -44,10 +44,12 @@
 
                 <button type="submit" class="btn-roxo">Salvar</button>
             </form>
+            </div>
         </div>
 
-        <div class="card-form">
-            <h2>Crie um novo professor</h2>
+        <div class="form-perfil">
+            <div class="main-container">
+            <h2 class="acess_title">Crie um novo professor</h2>
             <form action="${pageContext.request.contextPath}/admin/adicionar-professor" method="post">
 
                 <label for="nome">Nome:</label>
@@ -78,6 +80,8 @@
 
                 <button type="submit" class="btn-roxo">Salvar</button>
             </form>
+            </div>
         </div>
-    </div></body>
+    </div>
+</body>
 </html>
