@@ -185,7 +185,7 @@
                 <input type="number" id="popup-n1" name="n1"
                        min="0" max="10" step="0.1"
                        placeholder="0.0"
-                       oninput="calcularPrevia()">
+                       oninput="calcularPreviaEdicao()">
             </div>
 
             <div class="popup-field">
@@ -193,7 +193,7 @@
                 <input type="number" id="popup-n2" name="n2"
                        min="0" max="10" step="0.1"
                        placeholder="0.0"
-                       oninput="calcularPrevia()">
+                       oninput="calcularPreviaEdicao()">
             </div>
 
             <div class="popup-field">
@@ -204,7 +204,7 @@
 
             <div class="popup-previa">
                 <span>Média:</span>
-                <strong id="popup-media">-</strong>
+                <strong id="popup-media"></strong>
             </div>
 
             <div class="popup-actions">
