@@ -13,33 +13,57 @@
 <% AlunoPerfilDto aluno=(AlunoPerfilDto) request.getAttribute("aluno");%>
 
 <body>
-<jsp:include page="headerAdmin.jsp"/>
+<header>
+  <div class="logo">
+    <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
+    <h3>Instituto Linus</h3>
+  </div>
 
+  <nav class="nav-header">
+    <ul>
+      <li>
+        <a href="${pageContext.request.contextPath}/admin/dashboard">Página inicial</a>
+      </li>
+      <li>
+        <a href="${pageContext.request.contextPath}/admin/visualizar">Visualização</a>
+      </li>
+      <li>
+        <a href="${pageContext.request.contextPath}/admin/criar-acesso">Criar Acesso</a>
+      </li>
+      <li>
+        <a href="${pageContext.request.contextPath}/admin/perfil">Perfil</a>
+      </li>
+      <li>
+        <a href="${pageContext.request.contextPath}/logout">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+</header>
 <div class="largest-container">
   <div class="barra-inicial">
       <h2>Edite o perfil do aluno</h2>
       <p>Visualize suas informações e as edite.</p>
-    <input type="text" class="search-bar"
-           placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
   </div>
 
   <% Boolean encontrado=(Boolean) request.getAttribute("encontrado"); %>
   <% if(encontrado !=null && encontrado){ %>
   <div class="main-container">
     <div class="info-aluno">
-      <p><strong>Matrícula:</strong> <%= aluno.getMatricula() %></p>
-      <p><strong>Nome:</strong> <%= aluno.getNome() %></p>
-      <p><strong>CPF:</strong> <%= aluno.getCpf() %></p>
-      <p><strong>Turma:</strong> <%= aluno.getTurma() %></p>
-      <p><strong>Email Atual:</strong> <%= aluno.getEmail() %></p>
-    </div>
+      <p class="linha"><strong>Matrícula:</strong> <%= aluno.getMatricula() %></p>
+      <p class="linha"><strong>Nome:</strong> <%= aluno.getNome() %></p>
+      <p class="linha"><strong>CPF:</strong> <%= aluno.getCpf() %></p>
+      <p class="linha"><strong>Turma:</strong> <%= aluno.getTurma() %></p>
+      <p class="linha"><strong>Email Atual:</strong> <%= aluno.getEmail() %></p>
+
     
-    <form action="${pageContext.request.contextPath}/admin/alterar-email-aluno" method="POST" class="form-perfil">
-      <input type="hidden" name="matricula" value="<%= aluno.getMatricula() %>">
-      <label>Novo Email:</label>
-      <input type="email" name="email" placeholder="Digite o novo email" required>
-      <button type="submit">Alterar Email</button>
-    </form>
+      <form action="${pageContext.request.contextPath}/admin/alterar-email-aluno" method="POST" class="form-perfil">
+        <input type="hidden" name="matricula" value="<%= aluno.getMatricula() %>">
+        <label>Novo Email:</label>
+        <input type="email" name="email" placeholder="Digite o novo email" required>
+        <button type="submit">Alterar Email</button>
+      </form>
+    </div>
   </div>
   <% } else if(encontrado !=null && !encontrado){ %>
 

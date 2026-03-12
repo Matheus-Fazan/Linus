@@ -71,31 +71,28 @@ header{
     margin-bottom:40px;
 }
 
-.search-bar{
-    width:80%;
-    height: 40px;
-    max-width:400px;
-    padding:12px;
-    border-radius:25px;
-    border:1px solid #ccc;
-    margin-bottom:40px;
-}
-
 .main-container{
     display:flex;
     justify-content:center;
 }
 
 .info-aluno {
-    background:#fff;
-    border:1.5px solid #828282;
-    border-radius:18px;
-    padding:35px 45px;
-    width:400px;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
+    margin-top:30px;
+    background:#ffffff;
+    padding:30px;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    max-width:600px;
+    margin: -15px;
 }
+
+.linha {
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
 
 .info-aluno input{
     border:none;
