@@ -36,15 +36,16 @@ public class AdicionarAlunoServlet extends HttpServlet {
 
             String generatedMatricula = dao.previousSave(dto);
 
-            requestReponse.addRequestAttribute("success", "Pré-cadastro realizado com sucesso! Matricula gerada: " + generatedMatricula + ".");
+            req.getSession().setAttribute("successMessage", "Pré-cadastro realizado com sucesso!");
+            req.getSession().setAttribute("matricula", generatedMatricula);
         } catch (ParamException cause) {
-            requestReponse.addRequestAttribute("error", cause.getMessage());
+            req.getSession().setAttribute("errorMessage", cause.getMessage());
 
         } catch (SQLException | ConnectionException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+            req.getSession().setAttribute("errorMessage", "Falha ao consultar o servidor. Por favor, tente novamente.");
 
         } catch (NoRegistersAlteredException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao adicionar pré-cadastro. Por favor, tente novamente.");
+            req.getSession().setAttribute("errorMessage", "Falha ao adicionar pré-cadastro. Por favor, tente novamente.");
 
         } finally {
             resp.sendRedirect(req.getContextPath() + "/admin/criar-acesso");
