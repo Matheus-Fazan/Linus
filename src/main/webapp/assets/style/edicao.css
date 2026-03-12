@@ -10,44 +10,40 @@ body{
     color:#333;
 }
 
-header{
-    width:100%;
-    background:#ffffff;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:15px 60px;
+header {
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-header a {
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-header a:hover {
+    color: var(--primary-color);
+}
+
+.nav-header ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
 }
 
 .logo{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:15px;
 }
 
 .logo img{
-    width:45px;
-}
-
-.logo h3{
-    font-weight:600;
-}
-
-.nav-header ul{
-    display:flex;
-    list-style:none;
-    gap:35px;
-}
-
-.nav-header a{
-    text-decoration:none;
-    color:#000;
-    font-size:15px;
-    transition:0.2s;
-}
-
-.nav-header a:hover{
-    color:#9b5de5;
+    width:50px;
 }
 
 .perfil-card{

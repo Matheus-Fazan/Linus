@@ -3,7 +3,7 @@
 
 .perfil-card{
     margin-top:30px;
-    background:#ffffff;
+    background: var(--bg-main);
     padding:30px;
     border-radius:15px;
     border:1px solid #bcd0ea;
