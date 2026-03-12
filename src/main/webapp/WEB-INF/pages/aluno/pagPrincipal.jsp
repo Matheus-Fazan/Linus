@@ -13,8 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aluno | Tela Inicial</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/tables.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/pagPrincipal.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/crud_geral.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
@@ -22,7 +22,7 @@
 <header>
     <div class="logo">
         <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3>Instituto Linus</h3>
+        <h3>Instituto <br> Linus</h3>
     </div>
 
     <nav class="nav-header">
@@ -77,7 +77,7 @@
 
         <div class="tabela_usuarios">
             <hr>
-            <section class="card-tabela">
+            <section class="table-container" style="width: 90%; margin: 20px auto 0;">
                 <table border="0">
                     <tr id="titulo_tabela">
                         <th>Matéria</th>

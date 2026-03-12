@@ -8,9 +8,10 @@
 }
 
 body {
-    background-color: #F0FBFF;
+    background-color: #F1F1F1;
     height: 750px;
-    font-family: 'Montserrat';;
+    font-family: 'Montserrat';
+    overflow: hidden;
 }
 
 .voltar {
@@ -21,8 +22,14 @@ body {
 }
 
 .voltar img {
-    width: 15px;
-    margin-top: 30px;
+    width: 35px;
+    margin: 30px 0 30px 30px;
+}
+
+.voltar a {
+    text-decoration: none;
+    color: black;
+    text-align: left;
 }
 
 .largest-container {
@@ -30,7 +37,7 @@ body {
     flex-direction: column;
     align-items: center;
     height: 700px;
-    margin-top: 100px;
+    margin-top: 30px;
 }
 
 .title {
@@ -47,7 +54,7 @@ body {
 }
 
 .title img {
-    width: 125px;
+    width: 100px;
 }
 
 .main-container {
@@ -67,7 +74,6 @@ body {
 .main-container input {
     border: none;
     background-color: #F3F3F3;
-    /* outline: none; */
     width: 100%;
     padding: 10px 10px;
     border-radius: 10px;
@@ -122,4 +128,12 @@ p {
     text-align: center;
     margin: 10px;
     font-size: 14px;
+}
+
+#mc2 {
+    height: 55%;
+}
+
+#mc2 h2 {
+    margin-bottom: 20px;
 }
