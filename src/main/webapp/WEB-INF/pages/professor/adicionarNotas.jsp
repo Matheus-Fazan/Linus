@@ -11,29 +11,8 @@
 
 </head>
 <body>
-<header>
-    <div class="logo">
-        <img src="${pageContext.request.contextPath}/assets/imgs/logo.png" alt="logo colegio">
-        <h3> Instituto Linus </h3>
-    </div>
-    <nav class="nav-header">
-        <ul>
-            <li>
-                <a href="${pageContext.request.contextPath}/professor/adicionarNotas">Adicionar
-                    Notas</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/professor/editarNotas">Editar Notas</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/professor/perfil">Perfil</a>
-            </li>
-            <li>
-                <a href="${pageContext.request.contextPath}/logout">Logout</a>
-            </li>
-        </ul>
-    </nav>
-</header>
+<jsp:include page="headerProfessor.jsp"/>
+
 <div class="largest-container">
     <div class="subtitle" id="s1">
         <h2>Adicionar notas</h2>

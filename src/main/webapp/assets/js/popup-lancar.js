@@ -24,7 +24,7 @@ function calcularPrevia() {
         mediaEl.textContent = media;
         mediaEl.style.color = media >= 7 ? '#21B558' : '#81009f';
     } else {
-        mediaEl.textContent = '—';
+        mediaEl.textContent = '-';
         mediaEl.style.color = 'inherit';
     }
 }
