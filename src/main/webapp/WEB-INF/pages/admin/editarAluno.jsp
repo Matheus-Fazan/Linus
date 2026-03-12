@@ -6,10 +6,7 @@
 
 <head>
   <title>Editar aluno</title>
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
   <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
