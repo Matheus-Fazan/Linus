@@ -8,13 +8,13 @@
 }
 
 body{
-    background: var(--bg-main);
+    background: #efefef;
 }
 
 /* HEADER */
 
 header {
-    background: #ffffff;
+    background: white;
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -87,6 +87,7 @@ header {
     margin: 20px;
     border-radius: 20px;
     gap: 40px;
+    border: #2C3036 2px;
 }
 
 .main-container{

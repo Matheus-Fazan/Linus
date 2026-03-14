@@ -4,6 +4,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Materia> materias = (List<Materia>) request.getAttribute("materias"); %>
 <% List<Turma> turmas = (List<Turma>) request.getAttribute("turmas"); %>
+<%
+    String success                          = (String)  request.getAttribute("success");
+%>
 
 <html>
 <head>
@@ -12,7 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/criarAcesso.css">
     <title>Criar Acesso</title>
 </head>
-<body>
+<body style="background-color: #efefef">
     <jsp:include page="headerAdmin.jsp"/>
 
     <div class="topo">
@@ -43,6 +46,11 @@
                 </select>
 
                 <button type="submit" class="btn-roxo">Salvar</button>
+                <% if (success != null) { %>
+                <div class="matricula-gerada">
+                    <p style="color: #4FB2D9;"><%= success   %>%></p>
+                </div>
+                <% } %>
             </form>
             </div>
         </div>

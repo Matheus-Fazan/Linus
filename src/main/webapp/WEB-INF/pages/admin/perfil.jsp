@@ -16,7 +16,7 @@
                 <title>Perfil Aluno</title>
             </head>
 
-            <body>
+            <body style="background-color: #efefef">
 
             <jsp:include page="headerAdmin.jsp"/>
 
@@ -38,7 +38,7 @@
                         <% } else if (perfil !=null) { %>
 
                             <center>
-                                <form action="atualizarPerfil" method="post" class="perfil-card">
+                                <form action="atualizarPerfil" method="post" class="perfil-card" >
 
                                     <div class="perfil-linha">
                                         <label class="perfil-label" for="email">Email</label>

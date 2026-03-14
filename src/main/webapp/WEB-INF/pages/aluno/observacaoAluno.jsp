@@ -14,7 +14,7 @@
 <jsp:include page="headerAluno.jsp"/>
 <main>
     <div class="subtitle">
-        <h2>Observações</h2>
+        <h2 style="color:#b26ff3;">Observações</h2>
         <p>Visualize os comentários de seus professores</p>
     </div>
     <%
