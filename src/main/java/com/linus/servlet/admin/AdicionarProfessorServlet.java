@@ -35,15 +35,15 @@ public class AdicionarProfessorServlet extends HttpServlet {
 
             String generatedId = dao.saveReturningId(dto);
 
-            requestReponse.addRequestAttribute("success", "Cadastro realizado com sucesso! Matricula gerada: " + generatedId + ".");
+            req.getSession().setAttribute("successMessage", "Cadastro realizado com sucesso!");
         } catch (ParamException cause) {
-            requestReponse.addRequestAttribute("error", cause.getMessage());
+            req.getSession().setAttribute("errorMessage", cause.getMessage());
 
         } catch (SQLException | ConnectionException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao consultar o servidor. Por favor, tente novamente.");
+            req.getSession().setAttribute("errorMessage", "Falha ao consultar o servidor. Por favor, tente novamente.");
 
         } catch (NoRegistersAlteredException cause) {
-            requestReponse.addRequestAttribute("error", "Falha ao adicionar. Por favor, tente novamente.");
+            req.getSession().setAttribute("errorMessage", "Falha ao adicionar. Por favor, tente novamente.");
 
         } finally {
             resp.sendRedirect(req.getContextPath() + "/admin/criar-acesso");
