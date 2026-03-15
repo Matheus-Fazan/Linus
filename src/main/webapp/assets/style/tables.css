@@ -53,14 +53,14 @@ header {
     list-style: none;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.logo img{
-    width:50px;
+.logo img {
+    width: 50px;
 }
 
 .page-container {
@@ -131,9 +131,15 @@ header {
     background: white;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
     height: 400px;
-    overflow: scroll;
+    width: 90%;
+    margin: 20px auto 0;
+    overflow: hidden
+}
+
+.table-section {
+    margin-top: 32px;
 }
 
 table {
@@ -176,8 +182,17 @@ tbody tr:hover {
     transition: opacity 0.2s;
 }
 
-.btn-gray { background-color: #E2E8F0; color: #475569; border: none; }
-.btn-edit { background-color: #DCFCE7; color: #166534; border: none; }
+.btn-gray {
+    background-color: #E2E8F0;
+    color: #475569;
+    border: none;
+}
+
+.btn-edit {
+    background-color: #DCFCE7;
+    color: #166534;
+    border: none;
+}
 
 .btn-action:hover {
     opacity: 0.8;
@@ -202,8 +217,24 @@ tbody tr:hover {
     background-color: var(--bg-alt);
     border-radius: 12px;
     margin-top: 20px;
+    color: #4FB2D9;
 }
 
 .nao-encontrado h2 {
     font-weight: 500;
+    color: #4FB2D9;
+}
+
+#toast-erro {
+    position: fixed;
+    bottom: 20px;
+    left: -400px;
+    width: 350px;
+    background: #ff4d4f;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: left 0.4s ease;
+    z-index: 9999;
 }

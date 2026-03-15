@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/popup.css">
     <title>Criar Acesso</title>
 </head>
-<body style="background-color: #efefef">
+<body>
     <jsp:include page="headerAdmin.jsp"/>
 
     <div class="topo">
@@ -42,7 +42,7 @@
                 <input type="text" id="cpf-aluno" name="cpf" placeholder="Digite o cpf do aluno" required>
 
                 <label for="turma">Turma:</label>
-                <select id="turma" name="turma" required style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; margin-top:5px;">
+                <select id="turma" name="turma" required>
                     <% if (turmas != null) {
                         for (Turma turma : turmas) { %>
                     <option value="<%= turma.getId() %>">
@@ -69,7 +69,7 @@
                 <input type="text" id="usuario" name="usuario" placeholder="Digite o nome do usuário" required>
 
                 <label for="disciplina">Disciplina:</label>
-                <select id="disciplina" name="id_materia" required style="width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; margin-top:5px;">
+                <select id="disciplina" name="id_materia" required>
                     <% if (materias != null) {
                         for (Materia materia : materias) { %>
                     <option value="<%= materia.getId() %>">
@@ -104,7 +104,7 @@
                 <strong><%= matricula %></strong>
             </div>
             <% } %>
-            <button class="btn btn-primary" onclick="closePopup()" style="background-color: #9b5de5; color: white;">OK</button>
+            <button class="btn btn-primary" onclick="closePopup()">OK</button>
         </div>
     </div>
     <% } %>
@@ -112,9 +112,9 @@
     <% if (errorMessage != null) { %>
     <div class="overlay" id="popup">
         <div class="popup-container">
-            <h1 style="color: #d32f2f;">Erro</h1>
+            <h1>Erro</h1>
             <p><%= errorMessage %></p>
-            <button class="btn btn-primary" onclick="closePopup()" style="background-color: #9b5de5; color: white;">OK</button>
+            <button class="btn btn-primary" onclick="closePopup()">OK</button>
         </div>
     </div>
     <% } %>

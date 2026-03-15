@@ -7,10 +7,11 @@
     <meta charset="UTF-8">
     <title>Instituto Linus - Admin</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/styleDashboard.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body style="background-color: #efefef">
+<body>
 
 <jsp:include page="headerAdmin.jsp"/>
 
