@@ -5,10 +5,7 @@
 
 <head>
     <title>Editar Professor</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/perfil.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/style.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/edicao.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/observacoesProfessor.css">
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
 </head>
 
@@ -47,27 +44,26 @@
     <div class="barra-inicial" id="s1">
         <h2>Edite o perfil do professor</h2>
         <p>Visualize suas informações e as edite.</p>
-        <input type="text" class="search-bar"
-           placeholder="Pesquise para ver se já tem um aluno/professor cadastrado:">
     </div>
 
     <% Boolean encontrado = (Boolean) request.getAttribute("encontrado"); %>
     <% if (encontrado != null && encontrado) { %>
     <div class="main-container">
         <div class="info-aluno">
-            <p><strong>ID:</strong> <%= professor.getId() %></p>
-            <p><strong>Nome:</strong> <%= professor.nome %></p>
-            <p><strong>Usuário:</strong> <%= professor.usuario %></p>
-            <p><strong>Disciplina:</strong> <%= professor.getDisciplina() %></p>
-            <p><strong>Email Atual:</strong> <%= professor.email %></p>
+            <p class="linha"><strong>ID:</strong> <%= professor.getId() %></p>
+            <p class="linha"><strong>Nome:</strong> <%= professor.nome %></p>
+            <p class="linha"><strong>Usuário:</strong> <%= professor.usuario %></p>
+            <p class="linha"><strong>Disciplina:</strong> <%= professor.getDisciplina() %></p>
+            <p class="linha"><strong>Email Atual:</strong> <%= professor.email %></p>
+
+
+            <form action="${pageContext.request.contextPath}/admin/alterar-email-professor" method="POST" class="form-perfil">
+                <input type="hidden" name="id" value="<%= professor.getId() %>">
+                <label>Novo Email:</label>
+                <input type="email" name="email" placeholder="Digite o novo email" required>
+                <button type="submit">Alterar Email</button>
+            </form>
         </div>
-        
-        <form action="${pageContext.request.contextPath}/admin/alterar-email-professor" method="POST" class="form-perfil">
-            <input type="hidden" name="id" value="<%= professor.getId() %>">
-            <label>Novo Email:</label>
-            <input type="email" name="email" placeholder="Digite o novo email" required>
-            <button type="submit">Alterar Email</button>
-        </form>
     </div>
     <% } else if (encontrado != null && !encontrado) { %>
 

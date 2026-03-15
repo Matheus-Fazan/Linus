@@ -8,7 +8,7 @@
 }
 
 body{
-    background:#ececec;
+    background:var(--bg-main);
     overflow-x: hidden;
 }
 
@@ -103,8 +103,11 @@ header {
     padding: 15px;
     height: 75px;
     width: 175px;
-    display: flex;
-    justify-content: center;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.informacao h3 {
     align-items: center;
 }
 
@@ -114,7 +117,8 @@ a {
 }    
 
 .informacao p {
-    font-size: 18px;
+    font-size: 15px;
+    align-items: center;
 }
 
 /* TABELA CARD */

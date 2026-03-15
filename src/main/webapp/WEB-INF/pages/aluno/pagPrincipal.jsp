@@ -59,7 +59,7 @@
     <div class="tela_principal">
 
         <div class="tabela_usuarios">
-            <section class="table-container" style="width: 90%; margin: 20px auto 0;">
+            <section class="table-container" style="width: 90%; margin: 20px auto 0; overflow: hidden">
                 <table border="0">
                     <tr id="titulo_tabela">
                         <th>Matéria</th>

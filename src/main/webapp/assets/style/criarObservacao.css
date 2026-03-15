@@ -9,7 +9,7 @@
 }
 
 body {
-    background-color: #F0FBFF;
+    background-color: var(--bg-main);
     color: #333;
     display: flex;
     justify-content: center;
@@ -63,7 +63,7 @@ textarea {
 }
 
 button {
-    background-color: #A25DDF;
+    background-color: var(--primary-color);
     color: #ffffff;
     padding: 15px;
     border: none;

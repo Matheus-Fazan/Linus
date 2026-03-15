@@ -54,7 +54,7 @@ main {
 
 .subtitle h2 {
     font-size: 36px;
-    color: #A25DDF;
+    color: var(--primary-color);
     font-weight: bold;
 }
 
@@ -96,7 +96,7 @@ main {
 }
 
 .buttons button {
-    background-color: #A25DDF;
+    background-color: var(--primary-color);
     color: #ffffff;
     padding: 15px;
     border: none;

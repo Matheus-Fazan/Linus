@@ -4,11 +4,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% List<Materia> materias = (List<Materia>) request.getAttribute("materias"); %>
 <% List<Turma> turmas = (List<Turma>) request.getAttribute("turmas"); %>
-<% 
+<%
     String successMessage = (String) session.getAttribute("successMessage");
     String errorMessage = (String) session.getAttribute("errorMessage");
     String matricula = (String) session.getAttribute("matricula");
-    
+
     session.removeAttribute("successMessage");
     session.removeAttribute("errorMessage");
     session.removeAttribute("matricula");
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/popup.css">
     <title>Criar Acesso</title>
 </head>
-<body>
+<body style="background-color: #efefef">
     <jsp:include page="headerAdmin.jsp"/>
 
     <div class="topo">

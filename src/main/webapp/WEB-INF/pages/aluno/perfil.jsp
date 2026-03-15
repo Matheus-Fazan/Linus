@@ -16,7 +16,7 @@
                 <title>Perfil Aluno</title>
             </head>
 
-            <body>
+            <body style="background-color: #efefef">
             <jsp:include page="headerAluno.jsp"/>
 
                 <div class="container">
@@ -37,7 +37,7 @@
                         <% } else if (perfil !=null) { %>
 
                             <center>
-                                <section class="perfil-card">
+                                <section class="perfil-card" style="background-color: white">
                                     <h2>Perfil</h2>
 
                                     <div class="perfil-linha">

@@ -8,13 +8,13 @@
 }
 
 body{
-    background:#ececec;
+    background: #efefef;
 }
 
 /* HEADER */
 
 header {
-    background: #ffffff;
+    background: white;
     padding: 30px;
     display: flex;
     justify-content: space-between;
@@ -87,6 +87,7 @@ header {
     margin: 20px;
     border-radius: 20px;
     gap: 40px;
+    border: #2C3036 2px;
 }
 
 .main-container{
@@ -118,7 +119,7 @@ button{
     margin-top:15px;
     padding:8px;
     border:none;
-    background:#9b5de5;
+    background: var(--primary-color);
     color:white;
     border-radius:10px;
     width: 100%;

@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-color: #efefef">
 
 <jsp:include page="headerAdmin.jsp"/>
 
