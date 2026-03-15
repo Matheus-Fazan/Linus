@@ -14,7 +14,7 @@
 <jsp:include page="headerAluno.jsp"/>
 <main>
     <div class="subtitle">
-        <h2 style="color:#b26ff3;">Observações</h2>
+        <h2>Observações</h2>
         <p>Visualize os comentários de seus professores</p>
     </div>
     <%
@@ -54,7 +54,7 @@
     String messege = (String) request.getAttribute("error");
     request.setAttribute("error", null);
 %>
-<div id="toast-erro" style="position: fixed; bottom: 20px; left: -400px; width: 350px; background: #ff4d4f; color: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: left 0.4s ease; z-index: 9999;">
+<div id="toast-erro">
     <%= messege %>
     <script>setTimeout(() => document.getElementById('toast-erro').style.left = '20px', 100);</script>
 </div>

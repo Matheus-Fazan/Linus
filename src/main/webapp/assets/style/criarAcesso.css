@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Montserrat', sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
 }
 
-body{
-    background: #efefef;
+body {
+    background-color: #F1F1F1;
 }
 
 /* HEADER */
@@ -39,35 +39,35 @@ header {
     list-style: none;
 }
 
-.logo{
-    display:flex;
-    align-items:center;
-    gap:15px;
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
-.logo img{
-    width:50px;
+.logo img {
+    width: 50px;
 }
 
-.logout{
-    text-decoration:none;
-    color:#444;
+.logout {
+    text-decoration: none;
+    color: #444;
 }
 
 /* TOPO */
 
-.topo{
-    padding:40px 80px 20px 80px;
+.topo {
+    padding: 40px 80px 20px 80px;
 }
 
-.topo h1{
-    font-size:42px;
+.topo h1 {
+    font-size: 42px;
     color: var(--primary-color);
 }
 
-.topo p{
-    color:#555;
-    margin-top:5px;
+.topo p {
+    color: #555;
+    margin-top: 5px;
 }
 
 .acess {
@@ -90,15 +90,15 @@ header {
     border: #2C3036 2px;
 }
 
-.main-container{
-    display:flex;
-    flex-direction:column;
-    gap:12px;
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.main-container form{
-    display:flex;
-    flex-direction:column;
+.main-container form {
+    display: flex;
+    flex-direction: column;
     gap: 6px;
 
 }
@@ -108,20 +108,27 @@ header {
 }
 
 input,
-select{
-    padding:5px;
-    border:1px solid #ccc;
-    border-radius:6px;
-    font-size:14px;
+select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
 }
 
-button{
-    margin-top:15px;
-    padding:8px;
-    border:none;
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    margin-top: 5px;
+}
+
+button {
+    margin-top: 15px;
+    padding: 8px;
+    border: none;
     background: var(--primary-color);
-    color:white;
-    border-radius:10px;
+    color: white;
+    border-radius: 10px;
     width: 100%;
 }
 

@@ -18,11 +18,12 @@
     padding: 24px;
     width: 100%;
     max-width: 400px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
 }
 
 .popup-container h1 {
+    color: #d32f2f;
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 4px;
@@ -90,10 +91,19 @@
 }
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background-color: #9b5de5;
+    color: white;
 }
 
 .btn-secondary {
     color: var(--text-primary);
 }
 
+.popup-container button {
+    background-color: #9b5de5;
+    color: white;
+}
+
+#popup-lancar, #popup-edicao, #popup-observacao {
+    display: none;
+}

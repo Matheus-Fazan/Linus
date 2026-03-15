@@ -117,12 +117,12 @@
 
             <% } else if (encontrado != null && !encontrado) { %>
             <div class="nao-encontrado">
-                <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado,<br>pesquise novamente.</h2>
+                <h2>Nenhum aluno foi encontrado,<br>pesquise novamente.</h2>
             </div>
             <% } %>
         </section>
 
-        <section class="table-section" style="margin-top: 32px;">
+        <section class="table-section">
             <header class="table-header">
                 <h2>Observações</h2>
                 <div class="table-actions">
@@ -161,7 +161,7 @@
             </div>
             <% } else { %>
             <div class="nao-encontrado">
-                <h2 style="color: #4FB2D9;">Nenhuma observação registrada ainda.</h2>
+                <h2>Nenhuma observação registrada ainda.</h2>
             </div>
             <% } %>
         </section>
@@ -169,7 +169,7 @@
     </main>
 </div>
 
-<div class="overlay" id="popup-edicao" style="display: none;">
+<div class="overlay" id="popup-edicao">
     <div class="popup-container">
         <h1>Editar Nota</h1>
         <p id="popup-nome-aluno"></p>
@@ -215,7 +215,7 @@
     </div>
 </div>
 
-<div class="overlay" id="popup-observacao" style="display: none;">
+<div class="overlay" id="popup-observacao">
     <div class="popup-container">
         <h1>Adicionar Observação</h1>
         <p>Informe a matrícula do aluno e escreva a observação.</p>
@@ -246,7 +246,7 @@
     </div>
 </div>
 
-<div class="overlay" id="popup-lancar" style="display: none;">
+<div class="overlay" id="popup-lancar">
     <div class="popup-container">
         <h1>Lançar Nota</h1>
         <form id="form-lancar-nota"

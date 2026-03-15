@@ -158,7 +158,7 @@
             <img src="${pageContext.request.contextPath}/assets/imgs/aluno-nao-achado%201.png"
                  width="200">
         </center>
-        <h2 style="color: #4FB2D9;">Nenhum aluno foi encontrado, <br>
+        <h2>Nenhum aluno foi encontrado, <br>
             Pesquise novamente</h2>
     </div>
 

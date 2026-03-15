@@ -36,7 +36,7 @@
         String messege = (String) request.getAttribute("error");
         request.setAttribute("error", null);
     %>
-    <div id="toast-erro" style="position: fixed; bottom: 20px; left: -400px; width: 350px; background: #ff4d4f; color: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: left 0.4s ease; z-index: 9999;">
+    <div id="toast-erro">
         <%= messege %>
         <script>setTimeout(() => document.getElementById('toast-erro').style.left = '20px', 100);</script>
     </div>
@@ -46,7 +46,7 @@
         String messege = (String) request.getAttribute("sucess");
         request.setAttribute("sucess", null);
     %>
-    <div id="toast-erro" style="position: fixed; bottom: 20px; left: -400px; width: 350px; background: darkgreen; color: white; padding: 16px 20px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: left 0.4s ease; z-index: 9999;">
+    <div id="toast-erro">
         <%= messege %>
         <script>setTimeout(() => document.getElementById('toast-erro').style.left = '20px', 100);</script>
     </div>

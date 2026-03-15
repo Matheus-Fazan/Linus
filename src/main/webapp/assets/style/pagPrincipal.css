@@ -8,7 +8,7 @@
 }
 
 body{
-    background:var(--bg-main);
+    background-color: #F1F1F1;
     overflow-x: hidden;
 }
 
@@ -238,6 +238,10 @@ hr {
     font-size: 40px;
     margin-left: 60px;
     text-align: left;
+}
+
+.nao-encontrado h2 {
+    color: #4FB2D9;
 }
 
 #perfil{

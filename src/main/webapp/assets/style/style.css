@@ -115,7 +115,7 @@ p {
     text-decoration: underline;
 }
 
-.login-forget{
+.login-forget {
     color: #aa7fd7;
     font-size: 15px;
     margin-top: 5px;
@@ -136,4 +136,18 @@ p {
 
 #mc2 h2 {
     margin-bottom: 20px;
+}
+
+#toast-erro {
+    position: fixed;
+    bottom: 20px;
+    left: -400px;
+    width: 350px;
+    background: #ff4d4f;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: left 0.4s ease;
+    z-index: 9999;
 }
