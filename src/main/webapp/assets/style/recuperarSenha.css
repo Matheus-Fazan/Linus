@@ -68,7 +68,7 @@ body {
 
 .login-button {
     width: 80%;
-    background-color: var(--primary-color);
+    background-color: #b26ff3;
     color: #FFFFFF;
     border: none;
     border-radius: 6px;
