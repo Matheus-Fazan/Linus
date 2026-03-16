@@ -1,8 +1,9 @@
 package com.linus.dao;
 
-import com.linus.exception.ConnectionException;
-import com.linus.exception.NoRegistersAlteredException;
-import com.linus.infra.ConnectionManager;
+import com.linus.dto.TurmaDto;
+import com.linus.exception.dao.ConnectionException;
+import com.linus.exception.dao.NoRegistersAlteredException;
+import com.linus.infra.connection.ConnectionManager;
 import com.linus.model.dao.Turma;
 import com.linus.utils.DaoUtil;
 
@@ -10,9 +11,8 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TurmaDao implements GenericDaoInterface<Turma> {
+public class TurmaDao implements GenericDaoInterface<Turma, TurmaDto> {
 
-    // sql statements
     private final String SQL_SAVE_COMMAND = "INSERT INTO turma(nome) VALUES(?) RETURNING id";
     private final String SQL_FINDBYID_COMMAND = "SELECT * FROM turma WHERE id = ?";
     private final String SQL_FINDALL_COMMAND = "SELECT * FROM turma";
@@ -20,19 +20,20 @@ public class TurmaDao implements GenericDaoInterface<Turma> {
     private final String SQL_DELETE_COMMAND = "DELETE FROM turma WHERE id = ?";
 
     @Override
-    public Turma save(Turma turma) throws SQLException, ConnectionException {
+    public Turma save(TurmaDto dto) throws SQLException, ConnectionException {
         ResultSet queryResult = null;
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_SAVE_COMMAND);
 
-            ps.setString(1, turma.getNome());
+            ps.setString(1, dto.nome);
 
             queryResult = ps.executeQuery();
 
+            Turma turma = null;
             if (queryResult.next()) {
-                turma.setId(queryResult.getLong("id"));
+                turma = new Turma(queryResult);
             }
 
             return turma;
@@ -42,18 +43,18 @@ public class TurmaDao implements GenericDaoInterface<Turma> {
     }
 
     @Override
-    public Turma findById(long id) throws SQLException, ConnectionException {
-        Turma turma = null;
+    public Turma findById(TurmaDto dto) throws SQLException, ConnectionException {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDBYID_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             queryResult = ps.executeQuery();
 
+            Turma turma = null;
             if (queryResult.next()) {
                 turma = new Turma(queryResult);
             }
@@ -70,7 +71,7 @@ public class TurmaDao implements GenericDaoInterface<Turma> {
         PreparedStatement ps = null;
         ResultSet queryResult = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_FINDALL_COMMAND);
 
             queryResult = ps.executeQuery();
@@ -86,14 +87,14 @@ public class TurmaDao implements GenericDaoInterface<Turma> {
     }
 
     @Override
-    public void update(Turma turma) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void update(TurmaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_UPDATE_COMMAND);
 
-            ps.setString(1, turma.getNome());
-            ps.setLong(2, turma.getId());
+            ps.setString(1, dto.nome);
+            ps.setLong(2, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();
@@ -104,13 +105,13 @@ public class TurmaDao implements GenericDaoInterface<Turma> {
     }
 
     @Override
-    public void delete(long id) throws SQLException, ConnectionException, NoRegistersAlteredException {
+    public void delete(TurmaDto dto) throws SQLException, ConnectionException, NoRegistersAlteredException {
         PreparedStatement ps = null;
 
-        try(Connection con = ConnectionManager.connect()) {
+        try (Connection con = ConnectionManager.connect()) {
             ps = con.prepareStatement(SQL_DELETE_COMMAND);
 
-            ps.setLong(1, id);
+            ps.setLong(1, Long.parseLong(dto.id));
 
             if (ps.executeUpdate() < 1) {
                 throw new NoRegistersAlteredException();

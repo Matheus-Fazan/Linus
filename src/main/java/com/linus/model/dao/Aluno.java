@@ -28,7 +28,16 @@ public class Aluno {
         this.email = rs.getString("email");
         this.nome = rs.getString("nome");
         this.cpf = rs.getString("cpf");
-        this.hashSenha = rs.getString("hash_senha");
         this.id_turma = rs.getLong("id_turma");
+    }
+
+    /**
+     * Construtor da classe que omite id_turma
+     */
+    public Aluno(long matricula, String email, String nome, String cpf, String hashSenha) {
+        this.matricula = matricula;
+        this.email = email;
+        this.nome = nome;
+        this.cpf = cpf;
     }
 }

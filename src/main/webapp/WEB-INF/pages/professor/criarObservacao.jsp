@@ -1,0 +1,40 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+
+<head>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/style/criarObservacao.css">
+    <link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/imgs/logo.png" type="image/x-icon">
+    <title>Criar Observação</title>
+</head>
+
+<body>
+<form action="">
+    <div class="sb">
+        <div>
+            <label for="disciplina">Disciplina: </label>
+            <input type="text" name="disciplina" placeholder="coloque sua disciplina">
+        </div>
+        <div>
+            <label for="professor">Professor: </label>
+            <input type="text" name="professor" placeholder="coloque seu nome">
+        </div>
+    </div>
+    <hr>
+    <div class="sb">
+        <div>
+            <label for="aluno">Aluno: </label>
+            <input type="text" name="aluno" placeholder="nome do aluno">
+        </div>
+        <div>
+            <label for="turma">Turma: </label>
+            <input type="text" name="turma" placeholder="turma do aluno">
+        </div>
+    </div>
+    <label for="anotacao" id="mb">Anotação: </label>
+    <div class="sb">
+        <textarea name="anotacao" placeholder="Coloque sua anotação"></textarea>
+        <button>Criar</button>
+    </div>
+</form>
+</body>
+</html>

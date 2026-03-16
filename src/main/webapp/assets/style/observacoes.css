@@ -1,0 +1,115 @@
+header {
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo img {
+    width: 50px;
+}
+
+.logo h3 {
+    font-weight: 600;
+    font-size: 18px;
+    color: #333;
+}
+
+.nav-header ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+}
+
+.nav-header a {
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-header a:hover {
+    color: #A25DDF;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.subtitle {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    margin-left: 190px;
+}
+
+.subtitle h2 {
+    font-size: 36px;
+    color: #b26ff3;
+    font-weight: bold;
+}
+
+.subtitle p {
+    color: #666;
+    font-size: 14px;
+    margin-top: -1px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.card {
+    background-color: #ffffff;
+    width: 75%;
+    padding: 10px;
+    border-radius: 14px;
+    border: 1px solid #5588A3;
+    margin: 0 auto 20px;
+}
+
+.card p {
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.card strong {
+    color: #3da5ff;
+    font-weight: 600;
+}
+
+.topo {
+    width: 75%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttons button {
+    background-color: var(--primary-color);
+    color: #ffffff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}
+
+button:hover {
+    background-color: #bb86e9;
+    transition: all 0.3s ease;
+    transform: scale(1.05);
+}
+
+#sb2 {
+    margin-left: 0px;
+}

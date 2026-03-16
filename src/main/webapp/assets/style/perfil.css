@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    background-color: #F1F1F1;
+}
+
+.perfil-card{
+    margin-top:30px;
+    background-color: white;
+    padding:30px;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    max-width:600px;
+}
+
+.perfil-card h2 {
+    text-align: left;
+    color: #9b5de5;
+}
+
+.perfil-linha{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 0;
+    border-bottom:1px solid #eee;
+}
+
+.perfil-linha:last-child{
+    border-bottom:none;
+}
+
+.perfil-label{
+    font-weight:600;
+    color:#555;
+}
+
+.perfil-valor{
+    color:#222;
+}
+
+.error-box{
+    padding:15px;
+    border-radius:10px;
+    color:#a00000;
+    margin-top:20px;
+}
+
+.btn-salvar {
+    background-color: #A25DDF;
+    color: #ffffff;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+}

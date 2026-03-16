@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Montserrat', sans-serif;
+}
+
+body{
+    background-color: #F1F1F1;
+    overflow-x: hidden;
+}
+
+/* HEADER */
+
+header {
+    background: #ffffff;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+}
+
+.nav-header a {
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.nav-header a:hover {
+    color: #A25DDF;
+}
+
+.nav-header ul {
+    display: flex;
+    gap: 50px;
+    list-style: none;
+}
+
+.logo{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.logo img{
+    width:50px;
+}
+
+.logout{
+    text-decoration:none;
+    color:#444;
+}
+
+/* TOPO */
+
+.topo{
+    padding:40px 80px 20px 80px;
+}
+
+.topo h1{
+    font-size:42px;
+    color:#9b5de5;
+}
+
+.topo p{
+    color:#555;
+    margin-top:5px;
+}
+
+.search{
+    margin-top:20px;
+    width:100%;
+    padding:12px;
+    border-radius:12px;
+    border:1px solid #ccc;
+}
+
+/* CARDS DE INFORMAÇÃO */
+
+.top-part {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.informacoes_gerais {
+    display: flex;
+    justify-content: left;
+    gap: 15px;
+    margin-top: 10px;
+    margin-right: 70px;
+}
+
+.informacao {
+    background: #ffffff;
+    font-size: smaller;
+    border: 1.5px solid #cfd8e3;
+    border-radius: 12px;
+    padding: 15px;
+    height: 75px;
+    width: 175px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.informacao h3 {
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}    
+
+.informacao p {
+    font-size: 15px;
+    align-items: center;
+}
+
+/* TABELA CARD */
+
+.card-tabela{
+    width:90%;
+    margin:20px auto;
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:25px;
+}
+
+.info-aluno{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:15px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    text-align:left;
+    color:#9b5de5;
+    padding:12px 10px;
+    border-bottom:1px solid #ddd;
+}
+
+td{
+    padding:12px 10px;
+    border-bottom:1px solid #eee;
+}
+
+hr {
+    width: 90%;
+    margin-top: 25px;
+    margin-left: auto;
+    margin-right: auto;
+}
+/* GRID INFERIOR */
+
+.grid-inferior{
+    width:90%;
+    margin:30px auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+/* CARD FORM */
+
+.card-form{
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:20px;
+}
+
+.card-form h2{
+    color:#4FB2D9;
+    margin-bottom:10px;
+}
+
+.card-form label{
+    display:block;
+    margin-top:10px;
+}
+
+.card-form input{
+    width:100%;
+    padding:8px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    margin-top:5px;
+}
+
+.btn-roxo{
+    margin-top:15px;
+    width:100%;
+    padding:10px;
+    background:linear-gradient(90deg,#9d4edd,#7b2cbf);
+    border:none;
+    border-radius:10px;
+    color:white;
+    cursor:pointer;
+}
+
+/* CARD AÇÕES */
+
+.card-acoes{
+    background:white;
+    border-radius:15px;
+    border:1px solid #bcd0ea;
+    padding:20px;
+}
+
+.card-acoes button {
+    width:100%;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    background:white;
+    cursor:pointer;
+}
+
+.nao-encontrado img{
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: auto;
+}
+.nao-encontrado h1 {
+    font-size: 40px;
+    margin-left: 60px;
+    text-align: left;
+}
+
+.nao-encontrado h2 {
+    color: #4FB2D9;
+}
+
+#perfil{
+    width: 50px;
+    height: 50px;
+}
+
+.tabela_usuarios{
+    overflow-x: auto;
+    overflow-y: auto;
+}
+
+button.btn-filtro:hover{
+    border-bottom-color: #2d6689;
+}
+
+#limpaFiltro:hover{
+    background-color: #2d6689;
+}
+
+#cadastrar:hover{
+    background-color: #2d6689;
+}
